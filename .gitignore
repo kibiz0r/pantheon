@@ -1,4 +1,5 @@
 *.userprefs
 *.pidb
 *.swp
-bin/*
+**/bin/*
+TestResult.xml
