@@ -3,12 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon", "Pantheon\Pantheon.csproj", "{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}"
 EndProject
+Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Boo", "Pantheon.Boo\Pantheon.Boo.booproj", "{831F5FAE-30C4-4EA1-8890-9742019793CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Test", "Pantheon.Test\Pantheon.Test.csproj", "{B260AD2E-243B-4C2E-B278-D76C176335D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{831F5FAE-30C4-4EA1-8890-9742019793CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{831F5FAE-30C4-4EA1-8890-9742019793CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{831F5FAE-30C4-4EA1-8890-9742019793CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{831F5FAE-30C4-4EA1-8890-9742019793CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B260AD2E-243B-4C2E-B278-D76C176335D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B260AD2E-243B-4C2E-B278-D76C176335D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B260AD2E-243B-4C2E-B278-D76C176335D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B260AD2E-243B-4C2E-B278-D76C176335D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}.Release|Any CPU.ActiveCfg = Release|Any CPU
