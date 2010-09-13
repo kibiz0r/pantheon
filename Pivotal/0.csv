@@ -1,6 +1,6 @@
 Id,Story,Labels,Iteration,Iteration Start,Iteration End,Story Type,Estimate,Current State,Created at,Accepted at,Deadline,Requested By,Owned By,Description,URL
-5134255,Messages should be serializable,"",1,"Sep 13, 2010","Sep 19, 2010",feature,4,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134255
-5134252,"Messages should be handled concurrently, preserving order","",1,"Sep 13, 2010","Sep 19, 2010",feature,4,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134252
+5134231,User should be able to define messages,"",1,"Sep 13, 2010","Sep 19, 2010",feature,2,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134231
+5134244,User should be able to send messages,"",1,"Sep 13, 2010","Sep 19, 2010",feature,2,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134244
 5134250,User should be able to receive messages,"",1,"Sep 13, 2010","Sep 19, 2010",feature,2,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134250
-5134244,User should be able to send messages,"",2,"Sep 20, 2010","Sep 26, 2010",feature,2,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134244
-5134231,User should be able to define messages,"",2,"Sep 20, 2010","Sep 26, 2010",feature,2,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134231
+5134252,"Messages should be handled concurrently, preserving order","",1,"Sep 13, 2010","Sep 19, 2010",feature,4,unstarted,"Sep 12, 2010",,,Michael Harrington,,,http://www.pivotaltracker.com/story/show/5134252
+5134255,Messages should be serializable,"",2,"Sep 20, 2010","Sep 26, 2010",feature,4,unstarted,"Sep 12, 2010",,,Michael Harrington,Michael Harrington,,http://www.pivotaltracker.com/story/show/5134255

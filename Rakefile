@@ -23,6 +23,8 @@ task :status_report, :iteration do |t, args|
   next_stories = []
   new_stories = []
 
+  overview = Haml::Engine.new(File.read("StatusOverviews/#{iteration}.html.haml")).render
+
   FasterCSV.open "Pivotal/#{iteration}.csv", :headers => :first_row do |csv|
     csv.each do |row|
       story = OpenStruct.new :iteration => row['Iteration'].to_i,
@@ -84,7 +86,8 @@ task :status_report, :iteration do |t, args|
     :end_date => end_date,
     :expected_stories => expected_stories,
     :next_stories => next_stories,
-    :new_stories => new_stories
+    :new_stories => new_stories,
+    :overview => overview
 
   File.open "Iterations/#{iteration}.html", 'w' do |file|
     file.write output

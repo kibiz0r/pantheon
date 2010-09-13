@@ -1,5 +1,5 @@
 - format = '%m/%d'
-Status Report from Engineering
+
 %h2 Terminology
 %ul
   %li Points: Abstract units of time, risk, uncertainty; complex things have high point values
@@ -7,14 +7,15 @@ Status Report from Engineering
   %li Story: A small feature, usually something that takes less than a day; estimated in terms of points
   %li Iteration: Unit of time used for project management; one week
 
-%h1 Overview
-%p *Give brief overview of the current status here.*
+%h2 URLs
+%ul
+  %li Website: <a href="http://pantheon.kibiz0r.com">http://pantheon.kibiz0r.com</a>
+  %li Pivotal Tracker: <a href="http://www.pivotaltracker.com/projects/116948">http://www.pivotaltracker.com/projects/116948</a>
+  %li Github: <a href="http://github.com/kibiz0r/Pantheon">http://github.com/kibiz0r/Pantheon</a>
 
-%h2 The Good
-%p *Discuss victory moments here.*
+%h1= "Iteration #{iteration}"
 
-%h2 The Bad
-%p *Discuss defeats here.*
+= overview
 
 %h2 The Metrics
 %ul
@@ -34,7 +35,7 @@ Status Report from Engineering
   - next_stories.each do |story|
     %li= "#{story.title} (#{story.points} points)"
 
-%h1 Scope Creep
+%h1 New Stories
 %ul
   - new_stories.each do |story|
     %li= "#{story.title} (#{story.points} points, planned for iteration #{story.iteration})"
