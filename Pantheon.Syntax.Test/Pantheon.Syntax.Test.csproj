@@ -44,10 +44,6 @@
       <Project>{C3198FE6-6B38-492E-94D0-BD03925E43BF}</Project>
       <Name>Pantheon.Syntax.Test.Boo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pantheon.Boo\Pantheon.Boo.booproj">
-      <Project>{831F5FAE-30C4-4EA1-8890-9742019793CE}</Project>
-      <Name>Pantheon.Boo</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
       <Project>{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}</Project>
       <Name>Pantheon</Name>

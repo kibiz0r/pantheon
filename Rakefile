@@ -4,8 +4,17 @@ require 'haml'
 require 'ostruct'
 require 'active_support/all'
 
-# task :default do
-# end
+task :default => [:'test:syntax', :'test:system']
+
+namespace :test do
+  task :syntax do
+    sh 'mono NUnit/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll'
+  end
+
+  task :system do
+    sh 'mono NUnit/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll'
+  end
+end
 
 desc 'Generate a status report based on project data from Pivotal Tracker'
 task :status_report, :iteration do |t, args|

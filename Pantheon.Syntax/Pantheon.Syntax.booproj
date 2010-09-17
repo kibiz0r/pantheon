@@ -31,7 +31,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyClass.boo" />
     <Compile Include="ControllerMacro.boo" />
   </ItemGroup>
 </Project>
