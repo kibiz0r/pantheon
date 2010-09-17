@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using Pantheon.Syntax.Test.Boo;
+using Pantheon.Syntax.Test.Definitions;
 
 namespace Pantheon.Syntax.Test
 {
@@ -10,22 +10,25 @@ namespace Pantheon.Syntax.Test
         [Test]
         public void ShouldExist()
         {
-            Assert.That(typeof(ShouldExistController), Is.Not.Null);
+            Assert.That(typeof(controller_ShouldExist), Is.Not.Null);
         }
 
         [Test]
         public void ShouldBeAController()
         {
-            Assert.That(typeof(ShouldExistController).BaseType, Is.EqualTo(typeof(Pantheon.Controller)));
+            Assert.That(typeof(controller_ShouldExist).BaseType, Is.EqualTo(typeof(Pantheon.Controller)));
         }
 
         [Test]
         public void ShouldHaveAMessage()
         {
-            var method = typeof(ShouldHaveAMessageController).GetMethod("BlahMessage");
-            Assert.That(method, Is.Not.Null);
-            Assert.That((method.GetCustomAttributes(typeof(Pantheon.MessageAttribute), true)[0] as Pantheon.MessageAttribute).Name,
-                Is.EqualTo("Blah"));
+            Assert.That(typeof(controller_ShouldHaveAMessage), Definitely.HasMessages("AMessage"));
+        }
+
+        [Test]
+        public void ShouldHaveTwoMessages()
+        {
+            Assert.That(typeof(controller_ShouldHaveTwoMessages), Definitely.HasMessages("MessageOne", "MessageTwo"));
         }
     }
 }

@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Test", "Pantheon.T
 EndProject
 Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax", "Pantheon.Syntax\Pantheon.Syntax.booproj", "{1359CA21-5EF2-46ED-A46E-8498DCC99334}"
 EndProject
-Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax.Test.Boo", "Pantheon.Syntax.Test.Boo\Pantheon.Syntax.Test.Boo.booproj", "{C3198FE6-6B38-492E-94D0-BD03925E43BF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Syntax.Test", "Pantheon.Syntax.Test\Pantheon.Syntax.Test.csproj", "{1547C523-5179-4D6F-91AB-493308C1F73D}"
+EndProject
+Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax.Test.Definitions", "Pantheon.Syntax.Test.Definitions\Pantheon.Syntax.Test.Definitions.booproj", "{C3198FE6-6B38-492E-94D0-BD03925E43BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
