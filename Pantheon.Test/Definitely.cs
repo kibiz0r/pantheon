@@ -15,6 +15,11 @@ namespace Pantheon.Test
         {
             return new HasMessagesConstraint(messages);
         }
+
+        public static IResolveConstraint IsATest()
+        {
+            return new IsATestConstraint();
+        }
     }
 }
 

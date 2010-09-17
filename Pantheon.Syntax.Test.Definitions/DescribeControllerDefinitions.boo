@@ -2,8 +2,14 @@ namespace Pantheon.Syntax.Test.Definitions
 import NUnit.Framework
 
 controller DescribedController:
-    message SomeMessage
+    message FailMessage
 
 describe_controller DescribedController:
-    when SomeMessage:
+    when FailMessage:
         Assert.Fail()
+
+    when MessageWithParens():
+        pass
+
+    when MessageWithArgs(i as int, s as string):
+        pass
