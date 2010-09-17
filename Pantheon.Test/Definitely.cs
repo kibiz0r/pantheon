@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Pantheon.Syntax.Test
+namespace Pantheon.Test
 {
     public static class Definitely
     {

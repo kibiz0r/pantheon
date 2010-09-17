@@ -33,13 +33,11 @@
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <Package>/Users/kibiyama/MonoAssemblies/nunit.framework.dll</Package>
     </Reference>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControllerMacroTest.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Definitely.cs" />
-    <Compile Include="HasMessagesConstraint.cs" />
+    <Compile Include="DescribeControllerMacroTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
@@ -49,6 +47,10 @@
     <ProjectReference Include="..\Pantheon.Syntax.Test.Definitions\Pantheon.Syntax.Test.Definitions.booproj">
       <Project>{C3198FE6-6B38-492E-94D0-BD03925E43BF}</Project>
       <Name>Pantheon.Syntax.Test.Definitions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pantheon.Test\Pantheon.Test.csproj">
+      <Project>{B260AD2E-243B-4C2E-B278-D76C176335D5}</Project>
+      <Name>Pantheon.Test</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

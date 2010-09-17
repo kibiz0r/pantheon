@@ -32,5 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ControllerMacro.boo" />
+    <Compile Include="DescribeControllerMacro.boo" />
   </ItemGroup>
 </Project>

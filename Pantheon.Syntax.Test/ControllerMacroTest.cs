@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using Pantheon.Test;
 using Pantheon.Syntax.Test.Definitions;
 
 namespace Pantheon.Syntax.Test

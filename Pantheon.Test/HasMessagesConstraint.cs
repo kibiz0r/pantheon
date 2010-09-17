@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework.Constraints;
 using NUnit.Framework;
 
-namespace Pantheon.Syntax.Test
+namespace Pantheon.Test
 {
     public class HasMessagesConstraint : Constraint
     {
