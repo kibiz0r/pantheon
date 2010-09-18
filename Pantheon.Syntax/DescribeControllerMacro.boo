@@ -8,39 +8,31 @@ macro describe_controller(name as ReferenceExpression):
     |]
     if describe_controller["whens"]:
         for when in describe_controller["whens"]:
-            print(when)
             klass.Members.Add(when)
     yield klass
 
     macro when:
         case [|when $(ReferenceExpression(Name: name))|]:
+            messageName = "message_${name}"
             methodName = "when_${name}"
             method = [|
                 [NUnit.Framework.Test]
                 def $(methodName)():
+                    $(MethodInvocationExpression(MemberReferenceExpression(ReferenceExpression("Controller"), messageName)))
                     $(when.Body)
             |]
             describe_controller["whens"] = describe_controller["whens"] or []
             (describe_controller["whens"] as List[of object]).Add(method)
         case [|when $signature|]:
-            whenName = nameFromSignature(signature)
-            methodName = "when_${whenName}"
+            arguments = ArgumentsFromSignature(signature)
+            name = NameFromSignature(signature)
+            messageName = "message_${name}"
+            methodName = "when_${name}"
             method = [|
                 [NUnit.Framework.Test]
                 def $(methodName)():
+                    $(MethodInvocationExpression(Target: MemberReferenceExpression(ReferenceExpression("Controller"), messageName), Arguments: arguments))
                     $(when.Body)
             |]
-            method.Parameters.Extend(parametersFromSignature(signature))
             describe_controller["whens"] = describe_controller["whens"] or []
             (describe_controller["whens"] as List[of object]).Add(method)
-
-def nameFromSignature(signature as MethodInvocationExpression):
-    match signature.Target:
-        case ReferenceExpression(Name: name):
-            return name
-
-def parametersFromSignature(signature as MethodInvocationExpression):
-    for arg in signature.Arguments:
-        match arg:
-            case [| $(ReferenceExpression(Name: name)) as $type |]:
-                yield ParameterDeclaration(Name: name, Type: type)

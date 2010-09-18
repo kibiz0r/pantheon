@@ -37,15 +37,25 @@ namespace Pantheon.Syntax.Test
         }
 
         [Test]
-        public void WhenMessageWithArgsShouldBeATest()
+        public void WhenMessageWithArgShouldBeATest()
         {
-            Assert.That(typeof(describe_controller_DescribedController).GetMethod("when_MessageWithArgs"), Definitely.IsATest());
+            Assert.That(typeof(describe_controller_DescribedController).GetMethod("when_MessageWithArg"), Definitely.IsATest());
         }
 
         [Test]
-        public void WhenMessageWithArgsMustExist()
+        public void WhenMessageWithArgIsCalledWithArg()
         {
-            Assert.That(typeof(controller_DescribedController).GetMethod("message_MessageWithArgs"), Is.Not.Null);
+            var controller = new describe_controller_DescribedController();
+            Assert.DoesNotThrow(() => controller.Controller.message_MessageWithArg(4));
+            Assert.That(Assert.Throws<Exception>(() => controller.when_MessageWithArg()).Message, Is.EqualTo("got 5"));
+        }
+
+        [Test]
+        public void WhenMessageWithArgsIsCalledWithArgs()
+        {
+            var controller = new describe_controller_DescribedController();
+            Assert.DoesNotThrow(() => controller.Controller.message_MessageWithArgs(12, "bar"));
+            Assert.That(Assert.Throws<Exception>(() => controller.when_MessageWithArgs()).Message, Is.EqualTo("got 42-foo"));
         }
     }
 }
