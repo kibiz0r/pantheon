@@ -1,3 +1,5 @@
+import System.Linq.Enumerable
+
 macro describe_controller(name as ReferenceExpression):
     klassName = "describe_controller_${name}"
     controllerName = "controller_${name}"
@@ -27,7 +29,10 @@ macro describe_controller(name as ReferenceExpression):
             arguments = ArgumentsFromSignature(signature)
             name = NameFromSignature(signature)
             messageName = "message_${name}"
-            methodName = "when_${name}"
+            argumentSuffix = ""
+            if arguments.Any():
+                argumentSuffix = "_" + String.Join("_", array(string, (argument as LiteralExpression).ValueObject.ToString() for argument in arguments))
+            methodName = "when_${name}${argumentSuffix}"
             method = [|
                 [NUnit.Framework.Test]
                 def $(methodName)():
