@@ -13,6 +13,10 @@ controller DescribedController:
 
     message MessageWithArgs(i as int, s as string):
         raise "got 42-foo" if i == 42 and s == "foo"
+        raise "got 99-bar" if i == 99 and s == "bar"
+
+    message MessageWithCoincidentalArg(o as object):
+        pass
 
 describe_controller DescribedController:
     when FailMessage:
@@ -25,4 +29,13 @@ describe_controller DescribedController:
         pass
 
     when MessageWithArgs(42, "foo"):
+        pass
+
+    when MessageWithArgs(99, "bar"):
+        pass
+
+    when MessageWithCoincidentalArg(8):
+        pass
+
+    when MessageWithCoincidentalArg("8"):
         pass

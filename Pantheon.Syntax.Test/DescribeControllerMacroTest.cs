@@ -66,8 +66,15 @@ namespace Pantheon.Syntax.Test
         public void WhenMessageWithArgsIsCalledWithArgs()
         {
             var controller = new describe_controller_DescribedController();
-            Assert.DoesNotThrow(() => controller.Controller.message_MessageWithArgs(12, "bar"));
+            Assert.DoesNotThrow(() => controller.Controller.message_MessageWithArgs(12, "blah"));
             Assert.That(Assert.Throws<Exception>(() => controller.when_MessageWithArgs_42_foo()).Message, Is.EqualTo("got 42-foo"));
+        }
+
+        [Test]
+        public void WhenMessageWithArgsIsCalledWithOtherArgs()
+        {
+            var controller = new describe_controller_DescribedController();
+            Assert.That(Assert.Throws<Exception>(() => controller.when_MessageWithArgs_99_bar()).Message, Is.EqualTo("got 99-bar"));
         }
     }
 }
