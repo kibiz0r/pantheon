@@ -33,6 +33,14 @@ macro describe_controller(name as ReferenceExpression):
             if arguments.Any():
                 argumentSuffix = "_" + String.Join("_", array(string, (argument as LiteralExpression).ValueObject.ToString() for argument in arguments))
             methodName = "when_${name}${argumentSuffix}"
+            // Make sure we don't collide
+            describe_controller["when_names"] = describe_controller["when_names"] or []
+            originalMethodName = methodName
+            collisionIndex = 0
+            while (describe_controller["when_names"] as List[of object]).Contains(methodName):
+                collisionIndex++
+                methodName = "${originalMethodName}_${collisionIndex}"
+            (describe_controller["when_names"] as List[of object]).Add(methodName)
             method = [|
                 [NUnit.Framework.Test]
                 def $(methodName)():

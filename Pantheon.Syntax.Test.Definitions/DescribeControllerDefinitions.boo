@@ -22,8 +22,7 @@ describe_controller DescribedController:
     when FailMessage:
         Assert.Fail()
 
-    when MessageWithParens():
-        pass
+    when MessageWithParens()
 
     when MessageWithArg(5):
         pass
@@ -38,4 +37,10 @@ describe_controller DescribedController:
         pass
 
     when MessageWithCoincidentalArg("8"):
+        pass
+
+    when MessageWithCoincidentalArg(8.0):
+        pass
+
+    when MessageWithCoincidentalArg("8_1"):
         pass
