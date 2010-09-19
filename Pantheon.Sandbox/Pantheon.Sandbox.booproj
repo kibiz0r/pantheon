@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CAF2D36A-5E0A-4A75-81C2-C0540D2AF403}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Pantheon.Sandbox</RootNamespace>
     <AssemblyName>Pantheon.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -49,11 +49,18 @@
     <Folder Include="Modes\" />
     <Folder Include="Views\" />
     <Folder Include="ControlSchemes\" />
+    <Folder Include="Screens\" />
+    <Folder Include="Worlds\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\PacMan.boo" />
     <Compile Include="Modes\Normal.boo" />
     <Compile Include="Views\Player.boo" />
     <Compile Include="ControlSchemes\Default.boo" />
+    <Compile Include="Screens\Game.boo" />
+    <Compile Include="Worlds\World.boo" />
+    <Compile Include="Main.boo" />
+    <Compile Include="Screens\Start.boo" />
   </ItemGroup>
 </Project>

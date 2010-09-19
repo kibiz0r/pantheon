@@ -1,0 +1,2 @@
+screen Game:
+    world World
