@@ -41,8 +41,13 @@ namespace Pantheon
                 Console.WriteLine("Entry assembly is {0}", Assembly.GetEntryAssembly());
                 var startScreenType = Assembly.GetEntryAssembly().GetType("screen_Start");
                 var startScreen = Activator.CreateInstance(startScreenType) as Screen;
+                Event @event = new Event();
                 while (true)
                 {
+                    if (eventQueue.GetNextEvent(ref @event))
+                    {
+                        break;
+                    }
                     startScreen.Render();
                     Display.Flip();
                 }
