@@ -63,4 +63,10 @@
     <Compile Include="Main.boo" />
     <Compile Include="Screens\Start.boo" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\AllegroSharp\AllegroSharp\AllegroSharp.dll.config">
+      <Link>AllegroSharp.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

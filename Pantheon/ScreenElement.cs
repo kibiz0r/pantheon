@@ -6,6 +6,11 @@ namespace Pantheon
         public ScreenElement()
         {
         }
+
+        public virtual void Render()
+        {
+
+        }
     }
 }
 

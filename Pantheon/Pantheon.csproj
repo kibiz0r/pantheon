@@ -43,4 +43,21 @@
     <Compile Include="ScreenElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\AllegroSharp\AllegroSharp\AllegroSharp.csproj">
+      <Project>{10ABA2F6-4BE0-498A-93AF-8762939DA553}</Project>
+      <Name>AllegroSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Arial.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AllegroSharp\AllegroSharp\AllegroSharp.dll.config">
+      <Link>AllegroSharp.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

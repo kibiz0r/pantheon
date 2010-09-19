@@ -11,6 +11,14 @@ namespace Pantheon
         {
             Elements = new List<ScreenElement>();
         }
+
+        public void Render()
+        {
+            foreach (var element in Elements)
+            {
+                element.Render();
+            }
+        }
     }
 }
 
