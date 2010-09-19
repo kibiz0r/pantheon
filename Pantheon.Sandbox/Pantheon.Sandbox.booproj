@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1359CA21-5EF2-46ED-A46E-8498DCC99334}</ProjectGuid>
+    <ProjectGuid>{CAF2D36A-5E0A-4A75-81C2-C0540D2AF403}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Pantheon.Syntax</RootNamespace>
-    <AssemblyName>Pantheon.Syntax</AssemblyName>
+    <RootNamespace>Pantheon.Sandbox</RootNamespace>
+    <AssemblyName>Pantheon.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,17 +31,29 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ControllerMacro.boo" />
-    <Compile Include="DescribeControllerMacro.boo" />
-    <Compile Include="SignatureHelpers.boo" />
-    <Compile Include="ControlSchemeMacro.boo" />
-    <Compile Include="ViewMacro.boo" />
-    <Compile Include="ModeMacro.boo" />
-    <Compile Include="ActorMacro.boo" />
+    <ProjectReference Include="..\Pantheon\Pantheon.csproj">
+      <Project>{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}</Project>
+      <Name>Pantheon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pantheon.Boo\Pantheon.Boo.booproj">
+      <Project>{263B1BF0-D677-4030-B9FF-64341C8A4A3F}</Project>
+      <Name>Pantheon.Boo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Pantheon.Syntax\Pantheon.Syntax.booproj">
+      <Project>{1359CA21-5EF2-46ED-A46E-8498DCC99334}</Project>
+      <Name>Pantheon.Syntax</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Boo.Lang.Compiler, Version=2.0.9.2, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
-    <Reference Include="Boo.Lang, Version=2.0.9.2, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
-    <Reference Include="System.Core" />
+    <Folder Include="Actors\" />
+    <Folder Include="Modes\" />
+    <Folder Include="Views\" />
+    <Folder Include="ControlSchemes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actors\PacMan.boo" />
+    <Compile Include="Modes\Normal.boo" />
+    <Compile Include="Views\Player.boo" />
+    <Compile Include="ControlSchemes\Default.boo" />
   </ItemGroup>
 </Project>

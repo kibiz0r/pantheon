@@ -15,20 +15,20 @@ macro controller(name as ReferenceExpression):
 
     macro message:
         case [|message $(ReferenceExpression(Name: name))|]:
-            messageName = "message_${name}"
+            methodName = "message_${name}"
             method = [|
                 [Pantheon.MessageAttribute(Name: $(name))]
-                def $(messageName)():
+                def $(methodName)():
                     $(message.Body)
             |]
             controller["messages"] = controller["messages"] or []
             (controller["messages"] as List[of object]).Add(method)
         case [|message $signature|]:
             name = NameFromSignature(signature)
-            messageName = "message_${name}"
+            methodName = "message_${name}"
             method = [|
                 [Pantheon.MessageAttribute(Name: $(name))]
-                def $(messageName)():
+                def $(methodName)():
                     $(message.Body)
             |]
             method.Parameters.Extend(ParametersFromSignature(signature))

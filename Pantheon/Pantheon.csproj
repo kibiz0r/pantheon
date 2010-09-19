@@ -36,6 +36,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="MessageAttribute.cs" />
     <Compile Include="ControllerTest.cs" />
+    <Compile Include="ControlScheme.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
