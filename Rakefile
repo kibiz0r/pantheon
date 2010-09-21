@@ -56,7 +56,7 @@ task :status_report, :iteration do |t, args|
     end
   end
 
-  velocity = 1.0 / 3.0 * (all_stories.select do |story|
+  velocity = 1.0 / 1.0 * (all_stories.select do |story| # change 1.0 / 1.0 to 1.0 / 2.0 for Iteration 2, 1.0 / 3.0 for Iteration 3, then leave it alone...
     story.status == 'accepted' and story.iteration > iteration - 3 and story.iteration <= iteration
   end.inject 0 do |memo, story|
     memo + story.points

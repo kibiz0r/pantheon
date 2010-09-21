@@ -11,7 +11,7 @@
 
 %h2 URLs
 %ul
-  %li Website: <a href="http://pantheon.kibiz0r.com">http://pantheon.kibiz0r.com</a>
+  %li Website: <a href="http://pantheon.kibiz0r.com">http://pantheon.kibiz0r.com</a> (Note: Site isn't up yet!)
   %li Pivotal Tracker: <a href="http://www.pivotaltracker.com/projects/116948">http://www.pivotaltracker.com/projects/116948</a>
   %li Github: <a href="http://github.com/kibiz0r/Pantheon">http://github.com/kibiz0r/Pantheon</a>
 
@@ -38,4 +38,4 @@
 %h1 New Stories
 %ul
   - new_stories.each do |story|
-    %li= "#{story.title} (#{story.points} points, planned for iteration #{story.iteration})"
+    %li= "#{story.title} (#{story.points} points, planned for iteration #{story.iteration} (#{(start_date + story.iteration.weeks).strftime format} - #{(end_date + story.iteration.weeks).strftime format}))"
