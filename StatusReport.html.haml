@@ -1,17 +1,18 @@
 - format = '%m/%d'
 
 %h1= "Iteration #{iteration}"
+%a(href="http://www.agilesherpa.org/agile_coach/index.php") (A handy reference to agile project management.)
 
-%h2 Terminology
-%ul
-  %li Points: Abstract units of time, risk, uncertainty; complex things have high point values
-  %li Velocity: How many points are completed per iteration, on average
-  %li Story: A small feature, usually something that takes less than a day; estimated in terms of points
-  %li Iteration: Unit of time used for project management; one week
+%h2 About
+
+%p
+  Pantheon is a game framework that does something radically simple: it describes game worlds in game terms rather than code terms.
+  It has a special emphasis on expressive language, and testability. Pantheon runs on Mono, and therefore can be used by any CLR
+  language, including C#, but the most powerful features require Boo -- a CLR dialect of Python (used by Unity) with powerful macro
+  system that allows the language to be taught new things.
 
 %h2 URLs
 %ul
-  %li Website: <a href="http://pantheon.kibiz0r.com">http://pantheon.kibiz0r.com</a> (Note: Site isn't up yet!)
   %li Pivotal Tracker: <a href="http://www.pivotaltracker.com/projects/116948">http://www.pivotaltracker.com/projects/116948</a>
   %li Github: <a href="http://github.com/kibiz0r/Pantheon">http://github.com/kibiz0r/Pantheon</a>
 
@@ -35,7 +36,7 @@
   - next_stories.each do |story|
     %li= "#{story.title} (#{story.points} points)"
 
-%h1 New Stories
-%ul
-  - new_stories.each do |story|
-    %li= "#{story.title} (#{story.points} points, planned for iteration #{story.iteration} (#{(start_date + story.iteration.weeks).strftime format} - #{(end_date + story.iteration.weeks).strftime format}))"
+-# %h1 New Stories
+-# %ul
+-#   - new_stories.each do |story|
+-#     %li= "#{story.title} (#{story.points} points, planned for iteration #{story.iteration} (#{(start_date + story.iteration.weeks).strftime format} - #{(end_date + story.iteration.weeks).strftime format}))"
