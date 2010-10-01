@@ -41,6 +41,7 @@
     <Compile Include="Definitely.cs" />
     <Compile Include="HasMessagesConstraint.cs" />
     <Compile Include="IsATestConstraint.cs" />
+    <Compile Include="StringExtensionsTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

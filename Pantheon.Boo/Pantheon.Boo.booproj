@@ -42,9 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="ScreenElements\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Physics.boo" />
     <Compile Include="Controllers\Actor.boo" />
+    <Compile Include="ScreenElements\Graphic.boo" />
+    <Compile Include="ScreenElements\Label.boo" />
+    <Compile Include="ScreenElements\World.boo" />
   </ItemGroup>
 </Project>

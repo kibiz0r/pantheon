@@ -1,3 +1,5 @@
+import Pantheon
+
 screen Start:
-    graphic "Pac-Man" at(x, y)
     label "Hello World!"
+    #graphic "Pac-Man"

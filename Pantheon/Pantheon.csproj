@@ -39,8 +39,10 @@
     <Compile Include="ControlScheme.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Screen.cs" />
-    <Compile Include="Label.cs" />
     <Compile Include="ScreenElement.cs" />
+    <Compile Include="screen_element_Label.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="World.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -59,5 +61,9 @@
       <Link>AllegroSharp.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
   </ItemGroup>
 </Project>

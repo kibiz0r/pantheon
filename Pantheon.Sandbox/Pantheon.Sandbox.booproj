@@ -52,6 +52,7 @@
     <Folder Include="Screens\" />
     <Folder Include="Worlds\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Graphics\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\PacMan.boo" />
@@ -68,5 +69,10 @@
       <Link>AllegroSharp.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Graphics\Pac-Man.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

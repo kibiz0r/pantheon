@@ -3,7 +3,7 @@ using AllegroSharp;
 
 namespace Pantheon
 {
-    public class Label : ScreenElement
+    public class screen_element_Label : ScreenElement
     {
         public string Text
         {
@@ -11,7 +11,7 @@ namespace Pantheon
             set;
         }
 
-        public Label(string text)
+        public screen_element_Label(string text)
         {
             Text = text;
         }

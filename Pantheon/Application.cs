@@ -26,6 +26,10 @@ namespace Pantheon
                 {
                     Console.WriteLine("Allegro.InstallSystem failed");
                 }
+                if (!Image.Init())
+                {
+                    Console.WriteLine("Image.Init failed");
+                }
                 Font = Ttf.LoadFont("Arial.ttf", 12, TtfFlags.None);
                 if (Font == null)
                 {

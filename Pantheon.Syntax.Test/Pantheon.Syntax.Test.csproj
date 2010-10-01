@@ -53,6 +53,10 @@
       <Project>{B260AD2E-243B-4C2E-B278-D76C176335D5}</Project>
       <Name>Pantheon.Test</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pantheon.Syntax\Pantheon.Syntax.booproj">
+      <Project>{1359CA21-5EF2-46ED-A46E-8498DCC99334}</Project>
+      <Name>Pantheon.Syntax</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

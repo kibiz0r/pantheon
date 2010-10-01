@@ -1,3 +1,5 @@
+import Pantheon.StringExtensions
+
 macro screen(name as ReferenceExpression):
     klassName = "screen_${name}"
     klass = [|
@@ -5,15 +7,17 @@ macro screen(name as ReferenceExpression):
             def constructor():
                 pass
     |]
-    for element in screen.Get("elements"):
-        klass.GetConstructor(0).Body.Add(element as Expression)
+    for statement in screen.Body.Statements:
+        match statement:
+            case [|$(ExpressionStatement(Expression: expression))|]:
+                match expression:
+                    case [|$(MethodInvocationExpression(Target: target, Arguments: arguments))|]:
+                        addStatement = [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("screen_element_${target.ToString().PascalCase()}"), *arguments.ToArray()))) |]
+                        klass.GetConstructor(0).Body.Add(addStatement)
     yield klass
 
     macro world(name as ReferenceExpression):
-        pass
+        screen.Add("elements", ElementAdderFromNameAndArgs("World", name))
 
-    macro label(text as string):
-        element = [|
-            Elements.Add(Pantheon.Label($(text)))
-        |]
-        screen.Add("elements", element)
+def ElementAdderFromNameAndArgs(name as string, *args as (ReferenceExpression)):
+    return [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("screen_element_${name}"), *args))) |]
