@@ -7,17 +7,22 @@ macro screen(name as ReferenceExpression):
             def constructor():
                 pass
     |]
-    for statement in screen.Body.Statements:
-        match statement:
-            case [|$(ExpressionStatement(Expression: expression))|]:
-                match expression:
-                    case [|$(MethodInvocationExpression(Target: target, Arguments: arguments))|]:
-                        addStatement = [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("screen_element_${target.ToString().PascalCase()}"), *arguments.ToArray()))) |]
-                        klass.GetConstructor(0).Body.Add(addStatement)
+    for elementAdder in screen.Get("elements"):
+        klass.GetConstructor(0).Body.Add(elementAdder as Expression)
+    for elementAdder in ElementAddersFromStatements(screen.Body.Statements):
+        klass.GetConstructor(0).Body.Add(elementAdder)
     yield klass
 
     macro world(name as ReferenceExpression):
         screen.Add("elements", ElementAdderFromNameAndArgs("World", name))
 
+def ElementAddersFromStatements(statements as Statement*):
+    for statement in statements:
+        match statement:
+            case [|$(ExpressionStatement(Expression: expression))|]:
+                match expression:
+                    case [|$(MethodInvocationExpression(Target: target, Arguments: arguments))|]:
+                        yield [| Elements.Add($(MethodInvocationExpression(ReferenceExpression(target.ToString().PascalCase()), *arguments.ToArray()))) |]
+
 def ElementAdderFromNameAndArgs(name as string, *args as (ReferenceExpression)):
-    return [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("screen_element_${name}"), *args))) |]
+    return [| Elements.Add($(MethodInvocationExpression(ReferenceExpression(name), *args))) |]

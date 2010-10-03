@@ -6,5 +6,5 @@ screen_element Graphic:
     def Graphic(path as string):
         Bitmap = Image.LoadBitmap("Graphics/${path}.png")
 
-    #override def Render():
-        #Bitmap.Draw(Left, Top, DrawFlags.None)
+    def Render():
+        Bitmap.Draw(Left, Top, DrawFlags.None)

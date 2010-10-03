@@ -9,7 +9,18 @@ namespace Pantheon
 
         public virtual void Render()
         {
+        }
 
+        public float Top
+        {
+            get;
+            set;
+        }
+
+        public float Left
+        {
+            get;
+            set;
         }
     }
 }
