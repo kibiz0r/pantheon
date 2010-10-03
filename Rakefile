@@ -1,32 +1,123 @@
+require 'ftools'
 require 'rubygems'
 require 'faster_csv'
 require 'haml'
 require 'ostruct'
 require 'active_support/all'
 
-BooAssemblies = %W|Boo.Lang.CodeDom
-Boo.Lang.Compiler
-Boo.Lang
-Boo.Lang.Extensions
-Boo.Lang.Interpreter
-Boo.Lang.Parser
-Boo.Lang.PatternMatching
-Boo.Lang.Useful|
+module Mono
+  def self.install_assembly(assembly_file)
+    system "sudo gacutil -i '#{assembly_file}'"
+  end
+
+  def self.uninstall_assembly(assembly_name)
+    system "sudo gacutil -u '#{assembly_name}'"
+  end
+end
+
+module Boo
+  Root = 'Dependencies/boo'
+  Lib = '/Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/'
+  Assemblies = %W|Boo.Lang.CodeDom
+    Boo.Lang.Compiler
+    Boo.Lang
+    Boo.Lang.Extensions
+    Boo.Lang.Interpreter
+    Boo.Lang.Parser
+    Boo.Lang.PatternMatching
+    Boo.Lang.Useful|
+end
+
+module MonoDevelop
+  Root = 'Dependencies/monodevelop'
+  Application = '/Applications/MonoDevelop.app/Contents/MacOS'
+  Assemblies = %W|MonoDevelop.GtkCore|
+
+  module Core
+    Build = "#{MonoDevelop::Root}/main/build/bin"
+    Assemblies = %W|Mono.TextEditor|
+  end
+
+  module AddIns
+    Build = "#{MonoDevelop::Root}/main/build/AddIns"
+    Lib = "#{MonoDevelop::Application}/lib/monodevelop/AddIns"
+    Assemblies = %W|MonoDevelop.Gettext
+    MonoDevelop.GtkCore|
+  end
+
+  module BooBinding
+    Source = "#{MonoDevelop::Root}/extras/BooBinding"
+  end
+
+  def self.build(solution, options)
+    configuration = options[:configuration]
+    project = options[:project]
+    system "#{Application}/mdtool build #{"-c:#{configuration}" if configuration} #{"-p:#{project}" if project} #{solution}"
+  end
+end
+
+def sudo_cp_r(source, destination)
+  unless File.directory? File.dirname(destination)
+    File.makedirs File.dirname(destination)
+  end
+  system "sudo cp -r #{source} #{destination}"
+end
+
+def sudo_rm(path)
+  system "sudo rm #{path}"
+end
+
+def sudo_ln_s(real, symlink)
+  system "sudo ln -s #{real} #{symlink}"
+end
 
 task :default => [:'test:syntax', :'test:system']
 
 desc 'Build Pantheon'
 task :build do
-  system '/Applications/MonoDevelop.app/Contents/MacOS/mdtool build -c:Release Pantheon.sln'
+  MonoDevelop::build 'Pantheon.sln', :release
+end
+
+namespace :build do
+  desc 'Build MonoDevelop'
+  task :monodevelop do
+    MonoDevelop::Assemblies.each do |assembly|
+      MonoDevelop::build "#{MonoDevelop::Root}/main/Main.sln", :configuration => 'release', :project => assembly
+    end
+  end
 end
 
 namespace :install do
+  desc 'Install MonoDevelop'
+  task :monodevelop => [:'build:monodevelop'] do
+    MonoDevelop::Core::Assemblies.each do |core_assembly|
+      Mono::install_assembly "#{MonoDevelop::Core::Build}/#{core_assembly}.dll"
+    end
+  end
+
+  namespace :monodevelop do
+    desc 'Install addins'
+    task :addins do
+      MonoDevelop::AddIns::Assemblies.each do |addin|
+        sudo_cp_r "#{MonoDevelop::AddIns::Build}/#{addin}/*", "#{MonoDevelop::AddIns::Lib}/#{addin}/"
+      end
+    end
+
+    desc 'Install Boo binding'
+    task :boo_binding => [:'install:monodevelop:addins'] do
+      cd MonoDevelop::BooBinding::Source do
+        system './configure'
+        system 'make'
+      end
+    end
+  end
+
   desc 'Install Boo'
   task :boo => [:'uninstall:boo'] do
-    system "sudo cp Dependencies/boo/bin/*.exe* /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/"
-    BooAssemblies.each do |assembly_name|
-      Dir.glob "Dependencies/boo/bin/#{assembly_name}*.dll" do |assembly_file|
-        system "sudo gacutil -i '#{assembly_file}'"
+    sudo_cp "#{Dependencies::Boo}/bin/*.exe*", Boo::Lib 
+    Boo::Assemblies.each do |assembly_name|
+      Dir.glob "#{Boo}/bin/#{assembly_name}*.dll" do |assembly_file|
+        Mono::install_assembly assembly_file
       end
     end
   end
@@ -34,9 +125,9 @@ namespace :install do
   namespace :boo do
     desc 'Fix Boo symlinks'
     task :fix_symlinks do
-      BooAssemblies.each do |assembly_name|
-        system "sudo rm /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/boo/#{assembly_name}.dll"
-        system "sudo ln -s /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/gac/#{assembly_name}/*/#{assembly_name}.dll /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/boo/#{assembly_name}.dll"
+      Boo::Assemblies.each do |assembly_name|
+        sudo_rm "#{Boo::Lib}/#{assembly_name}.dll"
+        sudo_ln_s "#{Mono::Gac}/#{assembly_name}/*/#{assembly_name}.dll", "#{Boo::Lib}/#{assembly_name}.dll"
       end
     end
   end
@@ -49,9 +140,9 @@ end
 namespace :uninstall do
   desc 'Uninstall Boo'
   task :boo do
-    system "sudo rm /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/*"
-    BooAssemblies.each do |assembly_name|
-      system "sudo gacutil -u '#{assembly_name}'"
+    sudo_rm "#{Boo::Lib}/*"
+    Boo::Assemblies.each do |assembly_name|
+      Mono::uninstall_assembly assembly_name
     end
   end
 end
@@ -61,10 +152,12 @@ task :uninstall do
 end
 
 namespace :test do
+  desc 'Test syntax'
   task :syntax do
     sh 'mono NUnit/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll'
   end
 
+  desc 'Test system'
   task :system do
     sh 'mono NUnit/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll'
   end
