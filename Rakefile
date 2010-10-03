@@ -6,6 +6,9 @@ require 'ostruct'
 require 'active_support/all'
 
 module Mono
+  Root = "/Libraries/Frameworks/Mono.framework"
+  Gac = "#{Root}/Libraries/mono/gac"
+
   def self.install_assembly(assembly_file)
     system "sudo gacutil -i '#{assembly_file}'"
   end
@@ -17,6 +20,7 @@ end
 
 module Boo
   Root = 'Dependencies/boo'
+  Bin = "#{Root}/bin"
   Lib = '/Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/'
   Assemblies = %W|Boo.Lang.CodeDom
     Boo.Lang.Compiler
@@ -46,7 +50,8 @@ module MonoDevelop
   end
 
   module BooBinding
-    Source = "#{MonoDevelop::Root}/extras/BooBinding"
+    Root = "#{MonoDevelop::Root}/extras/BooBinding"
+    Build = "#{Root}/build"
   end
 
   def self.build(solution, options)
@@ -56,11 +61,15 @@ module MonoDevelop
   end
 end
 
-def sudo_cp_r(source, destination)
+def sudo_cp(source, destination, *flags)
   unless File.directory? File.dirname(destination)
     File.makedirs File.dirname(destination)
   end
-  system "sudo cp -r #{source} #{destination}"
+  system "sudo cp #{flags.join ' '} #{source} #{destination}"
+end
+
+def sudo_cp_r(source, destination)
+  sudo_cp source, destination, '-r'
 end
 
 def sudo_rm(path)
@@ -75,7 +84,7 @@ task :default => [:'test:syntax', :'test:system']
 
 desc 'Build Pantheon'
 task :build do
-  MonoDevelop::build 'Pantheon.sln', :release
+  MonoDevelop::build 'Pantheon.sln', :configuration => 'release'
 end
 
 namespace :build do
@@ -105,18 +114,19 @@ namespace :install do
 
     desc 'Install Boo binding'
     task :boo_binding => [:'install:monodevelop:addins'] do
-      cd MonoDevelop::BooBinding::Source do
+      cd MonoDevelop::BooBinding::Root do
         system './configure'
         system 'make'
       end
+      sudo_cp_r "#{MonoDevelop::BooBinding::Build}/*", "#{MonoDevelop::AddIns::Lib}/BooBinding/"
     end
   end
 
   desc 'Install Boo'
   task :boo => [:'uninstall:boo'] do
-    sudo_cp "#{Dependencies::Boo}/bin/*.exe*", Boo::Lib 
+    sudo_cp "#{Boo::Root}/bin/*.exe*", Boo::Lib 
     Boo::Assemblies.each do |assembly_name|
-      Dir.glob "#{Boo}/bin/#{assembly_name}*.dll" do |assembly_file|
+      Dir.glob "#{Boo::Bin}/#{assembly_name}.dll" do |assembly_file|
         Mono::install_assembly assembly_file
       end
     end
@@ -134,7 +144,7 @@ namespace :install do
 end
 
 desc 'Install Pantheon'
-task :install => [:'install:boo', :build] do
+task :install => [:'install:boo', :'install:boo:fix_symlinks', :'install:monodevelop:boo_binding', :build] do
 end
 
 namespace :uninstall do
