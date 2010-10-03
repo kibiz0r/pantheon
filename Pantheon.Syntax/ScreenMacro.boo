@@ -13,8 +13,8 @@ macro screen(name as ReferenceExpression):
         klass.GetConstructor(0).Body.Add(elementAdder)
     yield klass
 
-    macro world(name as ReferenceExpression):
-        screen.Add("elements", ElementAdderFromNameAndArgs("World", name))
+    macro world(name as string):
+        pass
 
 def ElementAddersFromStatements(statements as Statement*):
     for statement in statements:
@@ -22,7 +22,7 @@ def ElementAddersFromStatements(statements as Statement*):
             case [|$(ExpressionStatement(Expression: expression))|]:
                 match expression:
                     case [|$(MethodInvocationExpression(Target: target, Arguments: arguments))|]:
-                        yield [| Elements.Add($(MethodInvocationExpression(ReferenceExpression(target.ToString().PascalCase()), *arguments.ToArray()))) |]
+                        yield [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("${target.ToString().PascalCase()}ScreenElement"), *arguments.ToArray()))) |]
 
 def ElementAdderFromNameAndArgs(name as string, *args as (ReferenceExpression)):
-    return [| Elements.Add($(MethodInvocationExpression(ReferenceExpression(name), *args))) |]
+    return [| Elements.Add($(MethodInvocationExpression(ReferenceExpression("${name}ScreenElement}"), *args))) |]

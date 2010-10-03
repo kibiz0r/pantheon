@@ -20,8 +20,8 @@ end
 
 module Boo
   Root = 'Dependencies/boo'
-  Bin = "#{Root}/bin"
-  Lib = '/Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/'
+  Build = "#{Root}/build"
+  Lib = '/Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo'
   Assemblies = %W|Boo.Lang.CodeDom
     Boo.Lang.Compiler
     Boo.Lang
@@ -63,17 +63,24 @@ end
 
 def sudo_cp(source, destination, *flags)
   unless File.directory? File.dirname(destination)
+    puts "Making directories for #{File.dirname(destination)}"
     File.makedirs File.dirname(destination)
   end
-  system "sudo cp #{flags.join ' '} #{source} #{destination}"
+  cmd = "sudo cp #{flags.join ' '} #{source} #{destination}"
+  puts cmd
+  system cmd
 end
 
 def sudo_cp_r(source, destination)
   sudo_cp source, destination, '-r'
 end
 
-def sudo_rm(path)
-  system "sudo rm #{path}"
+def sudo_rm(path, *flags)
+  system "sudo rm #{flags.join ' '} #{path}"
+end
+
+def sudo_rm_rf(path, *flags)
+  sudo_rm path, '-rf'
 end
 
 def sudo_ln_s(real, symlink)
@@ -92,6 +99,13 @@ namespace :build do
   task :monodevelop do
     MonoDevelop::Assemblies.each do |assembly|
       MonoDevelop::build "#{MonoDevelop::Root}/main/Main.sln", :configuration => 'release', :project => assembly
+    end
+  end
+
+  desc 'Build Boo'
+  task :boo do
+    cd Boo::Root do
+      system 'nant'
     end
   end
 end
@@ -123,10 +137,10 @@ namespace :install do
   end
 
   desc 'Install Boo'
-  task :boo => [:'uninstall:boo'] do
-    sudo_cp "#{Boo::Root}/bin/*.exe*", Boo::Lib 
+  task :boo => [:'uninstall:boo', :'build:boo'] do
+    sudo_cp "#{Boo::Build}/*.exe*", "#{Boo::Lib}/."
     Boo::Assemblies.each do |assembly_name|
-      Dir.glob "#{Boo::Bin}/#{assembly_name}.dll" do |assembly_file|
+      Dir.glob "#{Boo::Build}/#{assembly_name}.dll" do |assembly_file|
         Mono::install_assembly assembly_file
       end
     end
@@ -144,13 +158,13 @@ namespace :install do
 end
 
 desc 'Install Pantheon'
-task :install => [:'install:boo', :'install:boo:fix_symlinks', :'install:monodevelop:boo_binding', :build] do
+task :install => [:'install:boo', :'install:monodevelop:boo_binding', :build] do
 end
 
 namespace :uninstall do
   desc 'Uninstall Boo'
   task :boo do
-    sudo_rm "#{Boo::Lib}/*"
+    sudo_rm_rf "#{Boo::Lib}"
     Boo::Assemblies.each do |assembly_name|
       Mono::uninstall_assembly assembly_name
     end

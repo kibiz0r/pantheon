@@ -1,9 +1,9 @@
 using System;
 namespace Pantheon
 {
-    public class type_World
+    public class World
     {
-        public type_World()
+        public World()
         {
         }
     }

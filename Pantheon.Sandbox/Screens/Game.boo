@@ -1,2 +1,2 @@
 screen Game:
-    world World
+    world "World"

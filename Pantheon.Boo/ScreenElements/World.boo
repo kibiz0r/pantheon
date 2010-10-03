@@ -1,5 +1,5 @@
 import Pantheon
 
 screen_element World:
-    def World(world as World):
+    def constructor(world as string):
         pass
