@@ -4,7 +4,61 @@ require 'haml'
 require 'ostruct'
 require 'active_support/all'
 
+BooAssemblies = %W|Boo.Lang.CodeDom
+Boo.Lang.Compiler
+Boo.Lang
+Boo.Lang.Extensions
+Boo.Lang.Interpreter
+Boo.Lang.Parser
+Boo.Lang.PatternMatching
+Boo.Lang.Useful|
+
 task :default => [:'test:syntax', :'test:system']
+
+desc 'Build Pantheon'
+task :build do
+  system '/Applications/MonoDevelop.app/Contents/MacOS/mdtool build -c:Release Pantheon.sln'
+end
+
+namespace :install do
+  desc 'Install Boo'
+  task :boo => [:'uninstall:boo'] do
+    system "sudo cp Dependencies/boo/bin/*.exe* /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/"
+    BooAssemblies.each do |assembly_name|
+      Dir.glob "Dependencies/boo/bin/#{assembly_name}*.dll" do |assembly_file|
+        system "sudo gacutil -i '#{assembly_file}'"
+      end
+    end
+  end
+
+  namespace :boo do
+    desc 'Fix Boo symlinks'
+    task :fix_symlinks do
+      BooAssemblies.each do |assembly_name|
+        system "sudo rm /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/boo/#{assembly_name}.dll"
+        system "sudo ln -s /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/gac/#{assembly_name}/*/#{assembly_name}.dll /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/mono/boo/#{assembly_name}.dll"
+      end
+    end
+  end
+end
+
+desc 'Install Pantheon'
+task :install => [:'install:boo', :build] do
+end
+
+namespace :uninstall do
+  desc 'Uninstall Boo'
+  task :boo do
+    system "sudo rm /Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo/*"
+    BooAssemblies.each do |assembly_name|
+      system "sudo gacutil -u '#{assembly_name}'"
+    end
+  end
+end
+
+desc 'Uninstall Pantheon'
+task :uninstall do
+end
 
 namespace :test do
   task :syntax do
