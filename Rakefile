@@ -1,4 +1,3 @@
-require 'ftools'
 require 'rubygems'
 require 'faster_csv'
 require 'haml'
@@ -61,32 +60,6 @@ module MonoDevelop
   end
 end
 
-def sudo_cp(source, destination, *flags)
-  unless File.directory? File.dirname(destination)
-    puts "Making directories for #{File.dirname(destination)}"
-    File.makedirs File.dirname(destination)
-  end
-  cmd = "sudo cp #{flags.join ' '} #{source} #{destination}"
-  puts cmd
-  system cmd
-end
-
-def sudo_cp_r(source, destination)
-  sudo_cp source, destination, '-r'
-end
-
-def sudo_rm(path, *flags)
-  system "sudo rm #{flags.join ' '} #{path}"
-end
-
-def sudo_rm_rf(path, *flags)
-  sudo_rm path, '-rf'
-end
-
-def sudo_ln_s(real, symlink)
-  system "sudo ln -s #{real} #{symlink}"
-end
-
 task :default => [:'test:syntax', :'test:system']
 
 desc 'Build Pantheon'
@@ -122,7 +95,7 @@ namespace :install do
     desc 'Install addins'
     task :addins do
       MonoDevelop::AddIns::Assemblies.each do |addin|
-        sudo_cp_r "#{MonoDevelop::AddIns::Build}/#{addin}/*", "#{MonoDevelop::AddIns::Lib}/#{addin}/"
+        system "sudo cp -r #{MonoDevelop::AddIns::Build}/#{addin}/* '#{MonoDevelop::AddIns::Lib}/#{addin}/'"
       end
     end
 
@@ -132,13 +105,15 @@ namespace :install do
         system './configure'
         system 'make'
       end
-      sudo_cp_r "#{MonoDevelop::BooBinding::Build}/*", "#{MonoDevelop::AddIns::Lib}/BooBinding/"
+      system "sudo mkdir -p '#{MonoDevelop::AddIns::Lib}/BooBinding/'"
+      system "sudo cp -r #{MonoDevelop::BooBinding::Build}/* '#{MonoDevelop::AddIns::Lib}/BooBinding/'"
     end
   end
 
   desc 'Install Boo'
   task :boo => [:'uninstall:boo', :'build:boo'] do
-    sudo_cp "#{Boo::Build}/*.exe*", "#{Boo::Lib}/."
+    system "sudo mkdir -p '#{Boo::Lib}'"
+    system "sudo cp #{Boo::Build}/*.exe* '#{Boo::Lib}/'"
     Boo::Assemblies.each do |assembly_name|
       Dir.glob "#{Boo::Build}/#{assembly_name}.dll" do |assembly_file|
         Mono::install_assembly assembly_file
@@ -150,8 +125,8 @@ namespace :install do
     desc 'Fix Boo symlinks'
     task :fix_symlinks do
       Boo::Assemblies.each do |assembly_name|
-        sudo_rm "#{Boo::Lib}/#{assembly_name}.dll"
-        sudo_ln_s "#{Mono::Gac}/#{assembly_name}/*/#{assembly_name}.dll", "#{Boo::Lib}/#{assembly_name}.dll"
+        rm "#{Boo::Lib}/#{assembly_name}.dll"
+        ln_s "#{Mono::Gac}/#{assembly_name}/*/#{assembly_name}.dll", "#{Boo::Lib}/#{assembly_name}.dll"
       end
     end
   end
@@ -164,7 +139,7 @@ end
 namespace :uninstall do
   desc 'Uninstall Boo'
   task :boo do
-    sudo_rm_rf "#{Boo::Lib}"
+    rm_rf "#{Boo::Lib}"
     Boo::Assemblies.each do |assembly_name|
       Mono::uninstall_assembly assembly_name
     end
