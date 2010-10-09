@@ -162,6 +162,9 @@ namespace :test do
   end
 end
 
+desc 'Run all tests'
+task :test => [:'test:syntax', :'test:system']
+
 desc 'Generate a status report based on project data from Pivotal Tracker'
 task :status_report, :iteration do |t, args|
   iteration = args[:iteration].to_i

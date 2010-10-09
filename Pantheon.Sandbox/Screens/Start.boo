@@ -1,3 +1,7 @@
-screen Start:
-    label "Hello World!"
-    graphic "Pac-Man"
+screen StartScreen:
+    label:
+        pass
+        #text: "Hello World!"
+    graphic:
+        pass
+        #text: "Pac-Man"

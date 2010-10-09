@@ -18,5 +18,5 @@ macro control_scheme(name as ReferenceExpression):
             control_scheme["inputs"] = control_scheme["inputs"] or []
             (control_scheme["inputs"] as List[of object]).Add(method)
 
-            macro action:
-                pass
+        macro action:
+            pass

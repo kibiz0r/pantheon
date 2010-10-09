@@ -1,15 +1,13 @@
 using System;
 namespace Pantheon
 {
-    public class ScreenElement
+    public abstract class Widget
     {
-        public ScreenElement()
+        public Widget()
         {
         }
 
-        public virtual void Render()
-        {
-        }
+        public abstract void Render();
 
         public float Top
         {

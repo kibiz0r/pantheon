@@ -5,18 +5,18 @@ namespace Pantheon
 {
     public class Screen
     {
-        public List<ScreenElement> Elements { get; set; }
+        public List<Widget> Widgets { get; set; }
 
         public Screen()
         {
-            Elements = new List<ScreenElement>();
+            Widgets = new List<Widget>();
         }
 
         public void Render()
         {
-            foreach (var element in Elements)
+            foreach (var widget in Widgets)
             {
-                element.Render();
+                widget.Render();
             }
         }
     }

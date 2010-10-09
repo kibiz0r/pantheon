@@ -1,0 +1,96 @@
+<h1>Iteration 3</h1>
+<p>
+  <a href='http://www.agilesherpa.org/agile_coach/index.php'>(A handy reference to agile project management.)</a>
+</p>
+<h2>About</h2>
+<p>
+  Pantheon is a game framework that does something radically simple: it describes game worlds in game terms rather than code terms.
+  It has a special emphasis on expressive language, and testability. Pantheon runs on Mono, and therefore can be used by any CLR
+  language, including C#, but the most powerful features require Boo. Boo is a CLR dialect of Python, used by Unity, with a powerful
+  macro system that allows the language to be taught new things.
+</p>
+<h2>URLs</h2>
+<ul>
+  <li>Pivotal Tracker: <a href="http://www.pivotaltracker.com/projects/116948">http://www.pivotaltracker.com/projects/116948</a></li>
+  <li>Github: <a href="http://github.com/kibiz0r/Pantheon">http://github.com/kibiz0r/Pantheon</a></li>
+</ul>
+<h2>Burndown Chart</h2>
+<img src='http://github.com/kibiz0r/Pantheon/raw/master/Burndowns/Burndown 3.png' />
+<h1>Overview</h1>
+<p>A pretty good week, although it was totally not what I expected. Project management data coming soon.</p>
+<h2>Boo Adventure</h2>
+<p>
+  To design the programming language part of the project, I'm using an existing language called Boo. It's open source, pre-1.0, and under active development, so things are fairly volatile.
+  I ran into an issue in the latest official release that probably would've prevented me from doing some of the cooler language features I was planning. I spent a day developing a workaround,
+  but it still wasn't quite what I needed. I asked the Boo mailing list, and the main Boo developer replied in a few hours with a new version that does exactly what I wanted.
+</p>
+<p>
+  That was great, but it's not in an official release yet, so that also meant that I had to update my project to target the latest Boo. Changing dependencies is always a pain, and targeting
+  bleeding-edge Boo also introduces risk into my project, so I have mixed feelings, but I don't really have a choice until an official release comes out.
+</p>
+<h2>Architectural Whiteboard Fun Time</h2>
+<a href='http://github.com/kibiz0r/Pantheon/raw/master/StatusOverviews/Architectural%20Fun%20Time%201.jpg'>
+  <img height='400px' src='http://github.com/kibiz0r/Pantheon/raw/master/StatusOverviews/Architectural%20Fun%20Time%201.jpg' width='300px' />
+</a>
+<a href='http://github.com/kibiz0r/Pantheon/raw/master/StatusOverviews/Architectural%20Fun%20Time%202.jpg'>
+  <img height='400px' src='http://github.com/kibiz0r/Pantheon/raw/master/StatusOverviews/Architectural%20Fun%20Time%202.jpg' width='300px' />
+</a>
+<p>
+  In an effort to be more "visual", and to work out an unknown that's been bothering me since the start of the project, I diagrammed the framework on a whiteboard.
+</p>
+<p>
+  Pantheon keeps the game logic and the visual representation of the game state as two separate domains. It does this because of a common design principle known as Model-View-Controller.
+  I could go into detail about what MVC is, and why it's a good thing, but essentially it's a way of simplifying a problem by cutting along clear boundaries.
+</p>
+<p>
+  Traditionally, in MVC, the view is essentially a wrapper around one or more models, and it presents information about the model to the user. There are two pitfalls with MVC as it relates
+  to game development. One is that it is too easy to "cheat" and mix your view in with your model. The other is that you need a controller to coordinate their interaction otherwise the relationship
+  is hard to maintain. But the controller itself can be hard to maintain, and a lot of extra work for no gain in functionality.
+</p>
+<p>
+  So Pantheon does away with the controller, replacing it with a message system in which views and models both speak the same language but can't cheat by peeking at each other's information.
+</p>
+<p>
+  The problem was in how to connect this low-level philosophical toy into a rendering system in a way that made sense. I had figured out that I wanted to model the UI separately and have the
+  only cross-over point be a special kind of widget called a Viewport, but then I realized that other UI components often tie into the game state. Something as simple as a score counter needs to
+  have privileged knowledge of the game rules, and while that could technically be solved by hooking into the message system directly, I wanted a better solution.
+</p>
+<p>
+  After I drew up this diagram and talked it over with Josh Morgan for at least an hour, I had a Eureka moment: I've got a widget (the Viewport) that I'm saying is special because it's
+  responsible for the visual representation of game objects... but can't any widget represent game data, even if it's something intangible like the player's score? Clearly, the UI can't be
+  isolated from Pantheon's inner workings -- the two are just intrinsically connected.
+</p>
+<h2>The Good</h2>
+<ul>
+  <li>Figured out a sweet way to describe UI elements that allows the user to easily define their own.</li>
+  <li>Implemented some basic widgets using the new UI system.</li>
+  <li>Automated building and installation of Pantheon and its dependencies.</li>
+  <li>Solved a pretty big architectural question.</li>
+</ul>
+<h2>The Bad</h2>
+<ul>
+  <li>
+    Ran into a limitation in how Boo handles macros that use class keywords like "override", which I spent a day trying to work around but ultimately asked the Boo mailing list for help.
+    The main Boo developer responded and implemented exactly the functionality I was looking for in just a few hours.
+  </li>
+  <li>
+    That new Boo functionality meant that I had to switch to using the latest Boo, which ate a lot of time, but I automated the process as I went so it's not a pain if I have to do the
+    same thing again later.
+  </li>
+  <li>I finally broke down and tried Minecraft: The Productivity Killer.</li>
+  <li>Also I'm sick, and trying to finish a project at work.</li>
+</ul>
+<h2>The Metrics</h2>
+<ul>
+  <li>Velocity: 0.0</li>
+  <li>Points Completed This Iteration: 0</li>
+  <li>Points Defined This Iteration: 0</li>
+  <li>Total Points Completed: 0</li>
+  <li>Total Points Defined: 0</li>
+</ul>
+<h1>Iteration 3: 09/27 - 10/04</h1>
+<ul>
+</ul>
+<h1>Iteration 4: 10/04 - 10/11</h1>
+<ul>
+</ul>

@@ -42,14 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="ScreenElements\" />
+    <Folder Include="Widgets\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Physics.boo" />
     <Compile Include="Controllers\Actor.boo" />
-    <Compile Include="ScreenElements\Graphic.boo" />
-    <Compile Include="ScreenElements\Label.boo" />
-    <Compile Include="ScreenElements\World.boo" />
+    <Compile Include="Widgets\Graphic.boo" />
+    <Compile Include="Widgets\Label.boo" />
+    <Compile Include="Widgets\Viewport.boo" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Boo.Lang.Compiler, Version=2.0.9.2, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />

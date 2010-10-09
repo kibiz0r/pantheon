@@ -1,4 +1,4 @@
-view Player:
+view Human (Game):
     action MoveUp:
         send MoveUp
 
@@ -10,3 +10,5 @@ view Player:
 
     action MoveRight:
         send MoveRight
+
+    Score as int

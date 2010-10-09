@@ -1,2 +1,0 @@
-screen Game:
-    world "World"

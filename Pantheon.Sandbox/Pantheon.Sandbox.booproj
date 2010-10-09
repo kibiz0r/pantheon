@@ -57,12 +57,12 @@
   <ItemGroup>
     <Compile Include="Actors\PacMan.boo" />
     <Compile Include="Modes\Normal.boo" />
-    <Compile Include="Views\Player.boo" />
     <Compile Include="ControlSchemes\Default.boo" />
-    <Compile Include="Screens\Game.boo" />
-    <Compile Include="Worlds\World.boo" />
     <Compile Include="Main.boo" />
     <Compile Include="Screens\Start.boo" />
+    <Compile Include="Views\Human.boo" />
+    <Compile Include="Screens\Play.boo" />
+    <Compile Include="Worlds\Game.boo" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\AllegroSharp\AllegroSharp\AllegroSharp.dll.config">
