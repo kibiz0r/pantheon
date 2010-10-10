@@ -5,8 +5,9 @@ require 'ostruct'
 require 'active_support/all'
 
 module Mono
-  Root = "/Libraries/Frameworks/Mono.framework"
-  Gac = "#{Root}/Libraries/mono/gac"
+  Root = "/Library/Frameworks/Mono.framework"
+  Lib = "#{Root}/Libraries"
+  Gac = "#{Lib}/mono/gac"
 
   def self.install_assembly(assembly_file)
     system "sudo gacutil -i '#{assembly_file}'"
@@ -20,7 +21,7 @@ end
 module Boo
   Root = 'Dependencies/boo'
   Build = "#{Root}/build"
-  Lib = '/Library/Frameworks/Mono.framework/Versions/2.6.7/lib/boo'
+  Lib = "#{Mono::Lib}/boo"
   Assemblies = %W|Boo.Lang.CodeDom
     Boo.Lang.Compiler
     Boo.Lang
@@ -34,7 +35,15 @@ end
 module MonoDevelop
   Root = 'Dependencies/monodevelop'
   Application = '/Applications/MonoDevelop.app/Contents/MacOS'
-  Assemblies = %W|MonoDevelop.GtkCore|
+  Assemblies = %W|Mono.TextEditor
+  MonoDevelop.Core
+  MonoDevelop.Ide
+  MonoDevelop.DesignerSupport
+  MonoDevelop.Deployment
+  Mono.Cecil
+  libstetic
+  libsteticui
+  MonoDevelop.GtkCore|
 
   module Core
     Build = "#{MonoDevelop::Root}/main/build/bin"
@@ -46,11 +55,18 @@ module MonoDevelop
     Lib = "#{MonoDevelop::Application}/lib/monodevelop/AddIns"
     Assemblies = %W|MonoDevelop.Gettext
     MonoDevelop.GtkCore|
+
+    def self.assembly_files
+      Assemblies.map do |assembly|
+        "#{MonoDevelop::AddIns::Build}/#{assembly}/#{assembly}.dll"
+      end
+    end
   end
 
   module BooBinding
     Root = "#{MonoDevelop::Root}/extras/BooBinding"
     Build = "#{Root}/build"
+    Binary = "#{Build}/BooBinding.dll"
   end
 
   def self.build(solution, options)
@@ -62,16 +78,49 @@ end
 
 task :default => [:test]
 
+MonoDevelop::AddIns::assembly_files.each do |assembly_file|
+  file assembly_file do
+    Rake::Task[:'build:monodevelop'].invoke
+  end
+end
+
+file MonoDevelop::BooBinding::Binary do
+  Rake::Task[:'build:monodevelop:boo_binding'].invoke
+end
+
 desc 'Build Pantheon'
 task :build do
   MonoDevelop::build 'Pantheon.sln', :configuration => 'release'
 end
 
+namespace :clean do
+  namespace :monodevelop do
+    desc 'Clean Boo binding'
+    task :boo_binding do
+      cd MonoDevelop::BooBinding::Root do
+        system 'make clean'
+      end
+    end
+  end
+end
+
 namespace :build do
   desc 'Build MonoDevelop'
   task :monodevelop do
-    MonoDevelop::Assemblies.each do |assembly|
-      MonoDevelop::build "#{MonoDevelop::Root}/main/Main.sln", :configuration => 'release', :project => assembly
+    cd MonoDevelop::Root do
+      cp '../monodevelop_profile', "profiles/pantheon"
+      system './configure --profile=pantheon'
+      system 'make'
+    end
+  end
+
+  namespace :monodevelop do
+    desc 'Build Boo binding'
+    task :boo_binding do
+      cd MonoDevelop::BooBinding::Root do
+        system './configure'
+        system 'make'
+      end
     end
   end
 
@@ -85,26 +134,29 @@ end
 
 namespace :install do
   desc 'Install MonoDevelop'
-  task :monodevelop => [:'build:monodevelop'] do
-    MonoDevelop::Core::Assemblies.each do |core_assembly|
-      Mono::install_assembly "#{MonoDevelop::Core::Build}/#{core_assembly}.dll"
-    end
+  task :monodevelop do
+    system "open -W Dependencies/MonoDevelop-2.4-r159698.dmg"
+    system "sudo cp -r '/Volumes/MonoDevelop/MonoDevelop.app' '/Applications/MonoDevelop.app'"
   end
 
   namespace :monodevelop do
+    desc 'Install MonoDevelop core assemblies'
+    task :core => [:'build:monodevelop'] do
+      MonoDevelop::Core::Assemblies.each do |core_assembly|
+        Mono::install_assembly "#{MonoDevelop::Core::Build}/#{core_assembly}.dll"
+      end
+    end
+
     desc 'Install addins'
-    task :addins do
+    task :addins => MonoDevelop::AddIns::assembly_files do
       MonoDevelop::AddIns::Assemblies.each do |addin|
+        system "sudo mkdir -p '#{MonoDevelop::AddIns::Lib}/#{addin}/'"
         system "sudo cp -r #{MonoDevelop::AddIns::Build}/#{addin}/* '#{MonoDevelop::AddIns::Lib}/#{addin}/'"
       end
     end
 
     desc 'Install Boo binding'
-    task :boo_binding => [:'install:monodevelop:addins'] do
-      cd MonoDevelop::BooBinding::Root do
-        system './configure'
-        system 'make'
-      end
+    task :boo_binding => [MonoDevelop::BooBinding::Binary, :'install:monodevelop:addins'] do
       system "sudo mkdir -p '#{MonoDevelop::AddIns::Lib}/BooBinding/'"
       system "sudo cp -r #{MonoDevelop::BooBinding::Build}/* '#{MonoDevelop::AddIns::Lib}/BooBinding/'"
     end
@@ -117,6 +169,9 @@ namespace :install do
     Boo::Assemblies.each do |assembly_name|
       Dir.glob "#{Boo::Build}/#{assembly_name}.dll" do |assembly_file|
         Mono::install_assembly assembly_file
+        Dir.glob "#{Mono::Gac}/#{assembly_name}/*/#{assembly_name}.dll" do |gac_file|
+          system "sudo ln -fs '#{gac_file}' '#{Mono::Lib}/mono/boo/#{assembly_name}.dll'"
+        end
       end
     end
   end

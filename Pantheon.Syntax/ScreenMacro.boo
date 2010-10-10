@@ -69,5 +69,5 @@ def WidgetAddersFromStatements(statements as Statement*):
 def WidgetAdderFromNameAndArgs(name as string, *args as (ReferenceExpression)):
     return [| Widgets.Add($(MethodInvocationExpression(ReferenceExpression(MakeWidgetType(name)), *args))) |]
 
-def WidgetPropertyLinksFromBlockExpression(blockExpression as BlockExpression):
+def WidgetPropertyLinksFromBlock(block as Block):
     return null

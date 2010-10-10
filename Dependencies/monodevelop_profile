@@ -1,0 +1,8 @@
+main --disable-update-mimedb --disable-update-desktopdb --disable-gnomeplatform --enable-macplatform --enable-tests
+extras/JavaBinding
+extras/BooBinding
+extras/MonoDevelop.Database
+extras/MonoDevelop.Profiling
+extras/MonoDevelop.CodeAnalysis
+extras/PyBinding
+extras/MonoDevelop.IPhone
