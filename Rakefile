@@ -60,7 +60,7 @@ module MonoDevelop
   end
 end
 
-task :default => [:'test:syntax', :'test:system']
+task :default => [:test]
 
 desc 'Build Pantheon'
 task :build do

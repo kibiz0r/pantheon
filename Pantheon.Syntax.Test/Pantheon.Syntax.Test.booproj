@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1547C523-5179-4D6F-91AB-493308C1F73D}</ProjectGuid>
+    <ProjectGuid>{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Pantheon.Syntax.Test</RootNamespace>
     <AssemblyName>Pantheon.Syntax.Test</AssemblyName>
@@ -14,49 +14,37 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <ducky>false</ducky>
+    <culture />
+    <genwarnings>false</genwarnings>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <ducky>false</ducky>
+    <culture />
+    <genwarnings>false</genwarnings>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <Package>/Users/kibiyama/MonoAssemblies/nunit.framework.dll</Package>
-    </Reference>
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ControllerMacroTest.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="DescribeControllerMacroTest.cs" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
       <Project>{D0AD2270-FFEF-41DF-AA2C-24CB45DF3079}</Project>
       <Name>Pantheon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Pantheon.Syntax.Test.Definitions\Pantheon.Syntax.Test.Definitions.booproj">
-      <Project>{C3198FE6-6B38-492E-94D0-BD03925E43BF}</Project>
-      <Name>Pantheon.Syntax.Test.Definitions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pantheon.Test\Pantheon.Test.csproj">
-      <Project>{B260AD2E-243B-4C2E-B278-D76C176335D5}</Project>
-      <Name>Pantheon.Test</Name>
+    <ProjectReference Include="..\Pantheon.Boo\Pantheon.Boo.booproj">
+      <Project>{263B1BF0-D677-4030-B9FF-64341C8A4A3F}</Project>
+      <Name>Pantheon.Boo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pantheon.Syntax\Pantheon.Syntax.booproj">
       <Project>{1359CA21-5EF2-46ED-A46E-8498DCC99334}</Project>
       <Name>Pantheon.Syntax</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="ScreenMacroTest.boo" />
+  </ItemGroup>
 </Project>

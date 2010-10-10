@@ -1,7 +1,7 @@
 screen StartScreen:
-    label:
+    label HelloWorld:
         pass
         #text: "Hello World!"
-    graphic:
+    graphic PacMan:
         pass
         #text: "Pac-Man"

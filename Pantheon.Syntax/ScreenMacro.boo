@@ -1,4 +1,5 @@
 import Pantheon.StringExtensions
+import System.Linq.Enumerable
 
 macro screen(name as ReferenceExpression):
     klassName = MakeScreenType(name.Name)
@@ -7,15 +8,47 @@ macro screen(name as ReferenceExpression):
             def constructor():
                 pass
     |]
-    for widgetAdder in screen.Get("widgets"):
-        klass.GetConstructor(0).Body.Add(widgetAdder as Expression)
-    for widgetAdder in WidgetAddersFromStatements(screen.Body.Statements):
-        klass.GetConstructor(0).Body.Add(widgetAdder)
+    konstructor = klass.GetConstructor(0)
+    for statement in screen.Body.Statements:
+        match statement:
+            case [| $(ExpressionStatement(Expression: expression)) |]:
+                match expression:
+                    case [| $(MethodInvocationExpression(Target: ReferenceExpression(Name: target), Arguments: arguments)) |]:
+                        name = arguments[0]
+                        type = MakeWidgetType(target.PascalCase())
+                        field = [|
+                            public $(name) as $(type)
+                        |]
+                        klass.Members.Add(field)
+                        addWidget = [|
+                            $(name) = $(ReferenceExpression(type))()
+                            Widgets.Add($(name))
+                        |]
+                        konstructor.Body.Add(addWidget)
+    for widgetField in screen.Get("widget_fields"):
+        klass.Members.Add(widgetField)
+    for widgetAdder as Block in screen.Get("widget_adders"):
+        konstructor.Body.Add(widgetAdder)
     yield klass
 
     macro view_context(name as ReferenceExpression):
-        for widgetAdder in WidgetAddersWithViewContextFromStatements(name.Name, view_context.Body.Statements):
-            screen.Add("widgets", widgetAdder)
+        for statement in view_context.Body.Statements:
+            match statement:
+                case [| $(ExpressionStatement(Expression: expression)) |]:
+                    match expression:
+                        case [| $(MethodInvocationExpression(Target: ReferenceExpression(Name: target), Arguments: arguments)) |]:
+                            name = arguments[0]
+                            print(arguments[1].GetType()) if arguments.Count > 1
+                            type = MakeWidgetType(target.PascalCase())
+                            field = [|
+                                public $(name) as $(type)
+                            |]
+                            screen.Add("widget_fields", field)
+                            addWidget = [|
+                                $(name) = $(ReferenceExpression(type))()
+                                Widgets.Add($(name))
+                            |]
+                            screen.Add("widget_adders", addWidget)
 
 def WidgetAddersWithViewContextFromStatements(viewContext as string, statements as Statement*):
     for statement in statements:
@@ -35,3 +68,6 @@ def WidgetAddersFromStatements(statements as Statement*):
 
 def WidgetAdderFromNameAndArgs(name as string, *args as (ReferenceExpression)):
     return [| Widgets.Add($(MethodInvocationExpression(ReferenceExpression(MakeWidgetType(name)), *args))) |]
+
+def WidgetPropertyLinksFromBlockExpression(blockExpression as BlockExpression):
+    return null

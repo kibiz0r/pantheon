@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Test", "Pantheon.T
 EndProject
 Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax", "Pantheon.Syntax\Pantheon.Syntax.booproj", "{1359CA21-5EF2-46ED-A46E-8498DCC99334}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Syntax.Test", "Pantheon.Syntax.Test\Pantheon.Syntax.Test.csproj", "{1547C523-5179-4D6F-91AB-493308C1F73D}"
-EndProject
 Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax.Test.Definitions", "Pantheon.Syntax.Test.Definitions\Pantheon.Syntax.Test.Definitions.booproj", "{C3198FE6-6B38-492E-94D0-BD03925E43BF}"
 EndProject
 Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Boo", "Pantheon.Boo\Pantheon.Boo.booproj", "{263B1BF0-D677-4030-B9FF-64341C8A4A3F}"
@@ -18,6 +16,8 @@ EndProject
 Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Sandbox", "Pantheon.Sandbox\Pantheon.Sandbox.booproj", "{CAF2D36A-5E0A-4A75-81C2-C0540D2AF403}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllegroSharp", "AllegroSharp\AllegroSharp\AllegroSharp.csproj", "{10ABA2F6-4BE0-498A-93AF-8762939DA553}"
+EndProject
+Project("{B3672514-7503-4B01-B4B4-B44E87061EA2}") = "Pantheon.Syntax.Test", "Pantheon.Syntax.Test\Pantheon.Syntax.Test.booproj", "{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +33,14 @@ Global
 		{1359CA21-5EF2-46ED-A46E-8498DCC99334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1359CA21-5EF2-46ED-A46E-8498DCC99334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1359CA21-5EF2-46ED-A46E-8498DCC99334}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1547C523-5179-4D6F-91AB-493308C1F73D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1547C523-5179-4D6F-91AB-493308C1F73D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1547C523-5179-4D6F-91AB-493308C1F73D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1547C523-5179-4D6F-91AB-493308C1F73D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{263B1BF0-D677-4030-B9FF-64341C8A4A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{263B1BF0-D677-4030-B9FF-64341C8A4A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{263B1BF0-D677-4030-B9FF-64341C8A4A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{263B1BF0-D677-4030-B9FF-64341C8A4A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5AE3BC-964D-43B4-B81B-08C936EA53A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E34ABF6-7D47-415E-AC08-42F302CB0FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E34ABF6-7D47-415E-AC08-42F302CB0FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E34ABF6-7D47-415E-AC08-42F302CB0FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -43,6 +43,7 @@
     <Compile Include="World.cs" />
     <Compile Include="Widget.cs" />
     <Compile Include="View.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
