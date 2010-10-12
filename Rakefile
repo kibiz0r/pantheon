@@ -76,6 +76,12 @@ module MonoDevelop
   end
 end
 
+module NUnit
+  Root = "Dependencies/NUnit"
+  Framework = "#{Root}/framework"
+  Assemblies = %W|nunit.framework|
+end
+
 task :default => [:test]
 
 MonoDevelop::AddIns::assembly_files.each do |assembly_file|
@@ -137,6 +143,13 @@ namespace :install do
   task :monodevelop do
     system "open -W Dependencies/MonoDevelop-2.4-r159698.dmg"
     system "sudo cp -r '/Volumes/MonoDevelop/MonoDevelop.app' '/Applications/MonoDevelop.app'"
+  end
+
+  desc 'Install NUnit'
+  task :nunit do
+    NUnit::Assemblies.each do |assembly|
+      Mono::install_assembly "#{NUnit::Framework}/#{assembly}.dll"
+    end
   end
 
   namespace :monodevelop do
@@ -208,12 +221,12 @@ end
 namespace :test do
   desc 'Test syntax'
   task :syntax do
-    sh 'mono NUnit/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll'
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll"
   end
 
   desc 'Test system'
   task :system do
-    sh 'mono NUnit/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll'
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll"
   end
 end
 

@@ -5,11 +5,11 @@ namespace Pantheon
 {
     public class Screen
     {
-        public List<Widget> Widgets { get; set; }
+        public List<IWidget> Widgets { get; set; }
 
         public Screen()
         {
-            Widgets = new List<Widget>();
+            Widgets = new List<IWidget>();
         }
 
         public void Render()

@@ -6,3 +6,6 @@ def MakeWidgetType(name as string):
 
 def MakeScreenType(name as string):
     return "${name}Screen"
+
+def MakeViewType(name as string):
+    return "${name}View"

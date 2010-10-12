@@ -4,6 +4,9 @@ import Pantheon.EnumerableExtensions
 
 [TestFixture]
 class ScreenMacroTest:
+    view SomeView:
+        pass
+
     screen My:
         label Wat
 
@@ -29,3 +32,4 @@ class ScreenMacroTest:
         widgets = (GraphicWidget,)
         Assert.That(screenWithViewContext.InSomeView isa GraphicWidget)
         Assert.That(screenWithViewContext.Widgets.Types(), Is.EquivalentTo(widgets))
+        #Assert.That(screenWithViewContext.InSomeView.View isa SomeViewView)
