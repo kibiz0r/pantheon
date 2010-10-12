@@ -27,18 +27,26 @@ macro screen(name as ReferenceExpression):
                         konstructor.Body.Add(addWidget)
     for widgetField in screen.Get("widget_fields"):
         klass.Members.Add(widgetField)
+    for viewContext as Block in screen.Get("view_contexts"):
+        konstructor.Body.Add(viewContext)
     for widgetAdder as Block in screen.Get("widget_adders"):
         konstructor.Body.Add(widgetAdder)
     yield klass
 
-    macro view_context(name as ReferenceExpression):
+    macro view_context(viewName as ReferenceExpression):
+        viewType = MakeViewType(viewName.Name)
+        viewInstance = ReferenceExpression(viewName.Name)
+        viewContext = [|
+            block:
+                $(viewInstance) = $(ReferenceExpression(viewType))()
+        |].Body
+        screen.Add("view_contexts", viewContext)
         for statement in view_context.Body.Statements:
             match statement:
                 case [| $(ExpressionStatement(Expression: expression)) |]:
                     match expression:
                         case [| $(MethodInvocationExpression(Target: ReferenceExpression(Name: target), Arguments: arguments)) |]:
                             name = arguments[0]
-                            print(arguments[1].GetType()) if arguments.Count > 1
                             type = MakeWidgetType(target.PascalCase())
                             field = [|
                                 public $(name) as $(type)
@@ -46,6 +54,7 @@ macro screen(name as ReferenceExpression):
                             screen.Add("widget_fields", field)
                             addWidget = [|
                                 $(name) = $(ReferenceExpression(type))()
+                                $(name).View = $(viewInstance)
                                 Widgets.Add($(name))
                             |]
                             screen.Add("widget_adders", addWidget)

@@ -7,11 +7,12 @@ macro view:
         |]
         yield klass
 
-    case [| view $(MethodInvocationExpression(Target: target, Arguments: arguments)) |]:
+    case [| view $(MethodInvocationExpression(Target: ReferenceExpression(Name: name), Arguments: arguments)) |]:
+        viewType = MakeViewType(name)
         worldTypeName = (arguments[0] as ReferenceExpression).Name
         worldType = MakeWorldType(worldTypeName)
         klass = [|
-            class $(target) (Pantheon.View[of $(worldType)]):
+            class $(viewType) (Pantheon.View[of $(worldType)]):
                 $(view.Body)
         |]
         yield klass

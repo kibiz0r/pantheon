@@ -20,6 +20,7 @@ class ScreenMacroTest:
     [SetUp]
     def SetUp():
         screen = MyScreen()
+        screenWithViewContext = MyWithViewContextScreen()
 
     [Test]
     def DeclaringWidget():
@@ -32,4 +33,4 @@ class ScreenMacroTest:
         widgets = (GraphicWidget,)
         Assert.That(screenWithViewContext.InSomeView isa GraphicWidget)
         Assert.That(screenWithViewContext.Widgets.Types(), Is.EquivalentTo(widgets))
-        #Assert.That(screenWithViewContext.InSomeView.View isa SomeViewView)
+        Assert.That(screenWithViewContext.InSomeView.View isa SomeViewView)
