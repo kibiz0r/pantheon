@@ -46,6 +46,9 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="IWidget.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="ISprite.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="IWorld.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

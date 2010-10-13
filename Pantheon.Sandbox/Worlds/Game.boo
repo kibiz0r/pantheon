@@ -1,2 +1,2 @@
-class GameWorld (Pantheon.World):
+world Game:
     pass

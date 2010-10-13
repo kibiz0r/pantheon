@@ -1,7 +1,8 @@
-macro wat(name as ReferenceExpression):
-    typeName = MakeWorldType(name.Name)
-    klass = [|
-        class $(typeName) (Pantheon.World):
-            $(wat.Body)
-    |]
-    yield klass
+macro world:
+    case [| world $(ReferenceExpression(Name: name)) |]:
+        worldType = MakeWorldType(name)
+        klass = [|
+            class $(worldType) (Pantheon.World):
+                pass
+        |]
+        yield klass

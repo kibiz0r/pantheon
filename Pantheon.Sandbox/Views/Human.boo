@@ -1,4 +1,4 @@
-view Human (Game):
+view Human:
     action MoveUp:
         send MoveUp
 

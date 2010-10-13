@@ -1,8 +1,6 @@
 import Pantheon
 
 widget Viewport:
-    def constructor(view as View):
-        pass
-
     override def Render():
-        pass
+        for sprite in View.Sprites:
+            sprite.Render()

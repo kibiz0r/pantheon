@@ -6,7 +6,7 @@ macro screen(name as ReferenceExpression):
     klass = [|
         class $(klassName) (Pantheon.Screen):
             def constructor():
-                pass
+                currentView = null
     |]
     konstructor = klass.GetConstructor(0)
     for statement in screen.Body.Statements:
@@ -27,20 +27,21 @@ macro screen(name as ReferenceExpression):
                         konstructor.Body.Add(addWidget)
     for widgetField in screen.Get("widget_fields"):
         klass.Members.Add(widgetField)
-    for viewContext as Block in screen.Get("view_contexts"):
-        konstructor.Body.Add(viewContext)
+    for viewContext as MacroStatement in screen.Get("view_contexts"):
+        for viewType as string in viewContext.Get("type"):
+            konstructor.Body.Add([| currentView = $(ReferenceExpression(viewType))() |])
+        for widgetField in viewContext.Get("widget_fields"):
+            klass.Members.Add(widgetField)
+        for widgetAdder as Block in viewContext.Get("widget_adders"):
+            konstructor.Body.Add(widgetAdder)
     for widgetAdder as Block in screen.Get("widget_adders"):
         konstructor.Body.Add(widgetAdder)
     yield klass
 
     macro view_context(viewName as ReferenceExpression):
         viewType = MakeViewType(viewName.Name)
-        viewInstance = ReferenceExpression(viewName.Name)
-        viewContext = [|
-            block:
-                $(viewInstance) = $(ReferenceExpression(viewType))()
-        |].Body
-        screen.Add("view_contexts", viewContext)
+        view_context.Add("type", viewType)
+        screen.Add("view_contexts", view_context)
         for statement in view_context.Body.Statements:
             match statement:
                 case [| $(ExpressionStatement(Expression: expression)) |]:
@@ -51,13 +52,13 @@ macro screen(name as ReferenceExpression):
                             field = [|
                                 public $(name) as $(type)
                             |]
-                            screen.Add("widget_fields", field)
+                            view_context.Add("widget_fields", field)
                             addWidget = [|
                                 $(name) = $(ReferenceExpression(type))()
-                                $(name).View = $(viewInstance)
+                                $(name).View = currentView
                                 Widgets.Add($(name))
                             |]
-                            screen.Add("widget_adders", addWidget)
+                            view_context.Add("widget_adders", addWidget)
 
 def WidgetAddersWithViewContextFromStatements(viewContext as string, statements as Statement*):
     for statement in statements:
