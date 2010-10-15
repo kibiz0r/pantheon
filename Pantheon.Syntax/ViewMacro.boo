@@ -2,7 +2,7 @@ macro view:
     case [| view $(ReferenceExpression(Name: name)) |]:
         viewType = MakeViewType(name)
         klass = [|
-            class $(viewType) (Pantheon.View[of Pantheon.World]):
+            class $(viewType) (Pantheon.View):
                 $(view.Body)
         |]
         yield klass
@@ -12,7 +12,8 @@ macro view:
         worldTypeName = (arguments[0] as ReferenceExpression).Name
         worldType = MakeWorldType(worldTypeName)
         klass = [|
-            class $(viewType) (Pantheon.View[of $(worldType)]):
+            [Pantheon.RequiresWorldAttribute($(ReferenceExpression(worldType)))]
+            class $(viewType) (Pantheon.View):
                 $(view.Body)
         |]
         yield klass

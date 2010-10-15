@@ -1,2 +1,4 @@
 world Game:
-    pass
+    when Game.Starts:
+        print "Game started"
+        create PacMan

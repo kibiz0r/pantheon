@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using AllegroSharp;
+using System.Collections.Generic;
 
 namespace Pantheon
 {
@@ -16,6 +17,12 @@ namespace Pantheon
             get;
             set;
         }
+        public static IWorld World
+        {
+            get;
+            set;
+        }
+        public static ICollection<IView> Views = new List<IView>();
 
         public static void AllegroMain()
         {
@@ -43,7 +50,7 @@ namespace Pantheon
                 EventQueue eventQueue = EventQueue.Create();
                 eventQueue.RegisterEventSource(Display.EventSource);
                 Console.WriteLine("Entry assembly is {0}", Assembly.GetEntryAssembly());
-                var startScreenType = Assembly.GetEntryAssembly().GetType("screen_Start");
+                var startScreenType = Assembly.GetEntryAssembly().GetType("StartScreen");
                 var startScreen = Activator.CreateInstance(startScreenType) as Screen;
                 Event @event = new Event();
                 while (true)

@@ -43,6 +43,10 @@
       <Project>{1359CA21-5EF2-46ED-A46E-8498DCC99334}</Project>
       <Name>Pantheon.Syntax</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pantheon.Sandbox\Pantheon.Sandbox.booproj">
+      <Project>{CAF2D36A-5E0A-4A75-81C2-C0540D2AF403}</Project>
+      <Name>Pantheon.Sandbox</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScreenMacroTest.boo" />

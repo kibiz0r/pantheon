@@ -42,7 +42,6 @@
     <Compile Include="WorldMacro.boo" />
     <Compile Include="MacroStatementExtensions.boo" />
     <Compile Include="ClassHelpers.boo" />
-    <Compile Include="ViewportMacro.boo" />
     <Compile Include="TypeHelpers.boo" />
     <Compile Include="WidgetMacro.boo" />
   </ItemGroup>

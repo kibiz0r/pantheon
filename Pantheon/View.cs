@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pantheon
 {
-    public class View<WorldType> : IView where WorldType : World
+    public class View : IView
     {
         public View()
         {

@@ -29,7 +29,7 @@ macro screen(name as ReferenceExpression):
         klass.Members.Add(widgetField)
     for viewContext as MacroStatement in screen.Get("view_contexts"):
         for viewType as string in viewContext.Get("type"):
-            konstructor.Body.Add([| currentView = $(ReferenceExpression(viewType))() |])
+            konstructor.Body.Add([| currentView = Pantheon.ViewFactory.CreateView[of $(ReferenceExpression(viewType))]() |])
         for widgetField in viewContext.Get("widget_fields"):
             klass.Members.Add(widgetField)
         for widgetAdder as Block in viewContext.Get("widget_adders"):
