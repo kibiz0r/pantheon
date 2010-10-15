@@ -53,6 +53,7 @@
     <Folder Include="Worlds\" />
     <Folder Include="Controllers\" />
     <Folder Include="Graphics\" />
+    <Folder Include="Sprites\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\PacMan.boo" />
@@ -72,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphics\Pac-Man.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Sprites\PacMan.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pantheon
 {
-    public interface IWorld
+    public interface IWorld : IMessageHandler
     {
         ICollection<Actor> Actors
         {

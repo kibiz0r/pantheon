@@ -55,6 +55,7 @@ namespace Pantheon
                 Event @event = new Event();
                 while (true)
                 {
+                    MessageManager.Update();
                     if (eventQueue.GetNextEvent(ref @event))
                     {
                         break;

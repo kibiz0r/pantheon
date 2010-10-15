@@ -7,7 +7,7 @@ namespace Pantheon
         {
             var world = new T();
             Application.World = world;
-            world.Starts();
+            MessageManager.Send(new Message("World.Starts"));
             return world;
         }
     }

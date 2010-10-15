@@ -10,6 +10,15 @@ namespace Pantheon
             Sprites = new List<ISprite>();
         }
 
-        public ICollection<ISprite> Sprites { get; set; }
+        public ICollection<ISprite> Sprites
+        {
+            get;
+            set;
+        }
+
+        public void HandleMessage(Message message)
+        {
+            
+        }
     }
 }

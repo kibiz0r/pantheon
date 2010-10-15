@@ -13,6 +13,14 @@ namespace Pantheon
         {
         }
 
+        public virtual void HandleMessage(Message message)
+        {
+            if (message.String == "World.Starts")
+            {
+                this.Starts();
+            }
+        }
+
         public ICollection<Actor> Actors
         {
             get;

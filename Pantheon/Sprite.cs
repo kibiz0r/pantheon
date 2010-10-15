@@ -15,7 +15,7 @@ namespace Pantheon
         public Sprite(Actor actor)
         {
             Actor = actor;
-            Bitmap = Image.LoadBitmap(String.Format("Sprites/{0}", actor.GetType()));
+            Bitmap = Image.LoadBitmap(String.Format("Sprites/{0}.png", actor.GetType()));
         }
 
         public void Render()

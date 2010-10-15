@@ -55,6 +55,7 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="WorldFactory.cs" />
     <Compile Include="MessageManager.cs" />
+    <Compile Include="IMessageHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
