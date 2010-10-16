@@ -54,6 +54,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Graphics\" />
     <Folder Include="Sprites\" />
+    <Folder Include="Players\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actors\PacMan.boo" />
@@ -64,6 +65,7 @@
     <Compile Include="Views\Human.boo" />
     <Compile Include="Screens\Play.boo" />
     <Compile Include="Worlds\Game.boo" />
+    <Compile Include="Players\Player.boo" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\AllegroSharp\AllegroSharp\AllegroSharp.dll.config">

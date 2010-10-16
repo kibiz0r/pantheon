@@ -3,7 +3,7 @@ import Boo.Lang.Compiler.Ast
 import Boo.Lang.PatternMatching
 
 macro controller(name as ReferenceExpression):
-    klassName = "controller_${name}"
+    klassName = MakeControllerType(name.Name)
     klass = [|
         class $(klassName) (Pantheon.Controller):
             pass

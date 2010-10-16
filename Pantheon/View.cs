@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pantheon
 {
-    public class View : IView
+    public class View : MessageHandler, IView
     {
         public View()
         {
@@ -16,7 +16,7 @@ namespace Pantheon
             set;
         }
 
-        public void HandleMessage(Message message)
+        public override void HandleMessage(Message message)
         {
             
         }

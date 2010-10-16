@@ -3,11 +3,14 @@ namespace Pantheon
 {
     public class Player
     {
-        private static Player me = new Player();
+        private static int nextId = 1;
 
-        public static Player Me
+        public int Id { get; set; }
+
+        public Player()
         {
-            get { return me; }
+            Id = nextId;
+            nextId++;
         }
     }
 }

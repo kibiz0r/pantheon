@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 namespace Pantheon
 {
-    public class World : IWorld
+    public class World : MessageHandler, IWorld
     {
         public World()
         {
@@ -13,7 +13,7 @@ namespace Pantheon
         {
         }
 
-        public virtual void HandleMessage(Message message)
+        public override void HandleMessage(Message message)
         {
             if (message.String == "World.Starts")
             {

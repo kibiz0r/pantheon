@@ -54,5 +54,7 @@
     <Compile Include="Widgets\Graphic.boo" />
     <Compile Include="Widgets\Label.boo" />
     <Compile Include="Widgets\Viewport.boo" />
+    <Compile Include="Controllers\World.boo" />
+    <Compile Include="Controllers\Player.boo" />
   </ItemGroup>
 </Project>

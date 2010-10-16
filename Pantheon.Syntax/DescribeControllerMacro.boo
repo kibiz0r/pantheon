@@ -2,7 +2,7 @@ import System.Linq.Enumerable
 
 macro describe_controller(name as ReferenceExpression):
     klassName = "describe_controller_${name}"
-    controllerName = "controller_${name}"
+    controllerName = MakeControllerType(name.Name)
     klass = [|
         [NUnit.Framework.TestFixture]
         class $(klassName) (Pantheon.ControllerTest[of $(controllerName)]):

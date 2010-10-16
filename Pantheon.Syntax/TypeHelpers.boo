@@ -9,3 +9,6 @@ def MakeScreenType(name as string):
 
 def MakeViewType(name as string):
     return "${name}View"
+
+def MakeControllerType(name as string):
+    return "${name}Controller"
