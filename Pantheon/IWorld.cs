@@ -10,6 +10,11 @@ namespace Pantheon
             get;
             set;
         }
+        ICollection<IPlayer> Players
+        {
+            get;
+            set;
+        }
         void Starts();
     }
 }

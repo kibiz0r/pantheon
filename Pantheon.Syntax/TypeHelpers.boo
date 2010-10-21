@@ -12,3 +12,6 @@ def MakeViewType(name as string):
 
 def MakeControllerType(name as string):
     return "${name}Controller"
+
+def MakePlayerType(name as string):
+    return "${name}Player"

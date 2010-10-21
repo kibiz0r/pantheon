@@ -7,6 +7,7 @@ namespace Pantheon
         public World()
         {
             Actors = new List<Actor>();
+            Players = new List<IPlayer>();
         }
 
         public virtual void Starts()
@@ -22,6 +23,12 @@ namespace Pantheon
         }
 
         public ICollection<Actor> Actors
+        {
+            get;
+            set;
+        }
+
+        public ICollection<IPlayer> Players
         {
             get;
             set;

@@ -1,3 +1,8 @@
 macro player:
     case [| player $(ReferenceExpression(Name: name)) |]:
-        pass
+        playerType = MakePlayerType(name)
+        klass = [|
+            class $(playerType) (Pantheon.Player):
+                pass
+        |]
+        yield klass

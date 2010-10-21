@@ -57,6 +57,9 @@
     <Compile Include="MessageManager.cs" />
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="MessageHandler.cs" />
+    <Compile Include="StartsPlayerAttribute.cs" />
+    <Compile Include="PlayerFactory.cs" />
+    <Compile Include="IPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,7 +1,8 @@
 using System;
+
 namespace Pantheon
 {
-    public class Player
+    public class Player : IPlayer
     {
         private static int nextId = 1;
 
@@ -14,4 +15,3 @@ namespace Pantheon
         }
     }
 }
-

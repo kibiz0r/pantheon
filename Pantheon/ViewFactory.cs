@@ -14,6 +14,13 @@ namespace Pantheon
                 var world = createWorld.Invoke(null, new object[0]) as IWorld;
                 Application.World = world;
             }
+            foreach (var startsPlayerAttribute in
+                typeof(T).GetCustomAttributes(typeof(StartsPlayerAttribute), true).Cast<StartsPlayerAttribute>())
+            {
+                var createPlayer = typeof(PlayerFactory).GetMethod("CreatePlayer").MakeGenericMethod(startsPlayerAttribute.PlayerType);
+                var player = createPlayer.Invoke(null, new object[0]) as IPlayer;
+                Application.World.Players.Add(player);
+            }
             var view = new T();
             Application.Views.Add(view);
             return view;
