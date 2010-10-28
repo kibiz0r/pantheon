@@ -16,7 +16,7 @@ namespace Pantheon
 
         public override void HandleMessage(Message message)
         {
-            if (message.String == "World.Starts")
+            if (message.Name == "World.Starts")
             {
                 this.Starts();
             }

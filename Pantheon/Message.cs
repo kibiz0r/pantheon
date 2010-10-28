@@ -4,11 +4,16 @@ namespace Pantheon
 {
     public class Message
     {
-        public string String { get; set; }
+        public string Name { get; set; }
 
-        public Message(string @string)
+        public Message()
         {
-            String = @string;
+            //
+        }
+
+        public Message(string name)
+        {
+            Name = name;
         }
     }
 }

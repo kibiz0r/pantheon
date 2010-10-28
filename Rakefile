@@ -224,6 +224,11 @@ namespace :test do
     sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll"
   end
 
+  desc 'Test units'
+  task :units do
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Boo.Test/bin/Debug/Pantheon.Boo.Test.dll"
+  end
+
   desc 'Test system'
   task :system do
     sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll"

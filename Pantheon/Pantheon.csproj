@@ -60,6 +60,7 @@
     <Compile Include="StartsPlayerAttribute.cs" />
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="Domain.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

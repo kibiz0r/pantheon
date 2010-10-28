@@ -15,3 +15,9 @@ def MakeControllerType(name as string):
 
 def MakePlayerType(name as string):
     return "${name}Player"
+
+def MakeDomainType(name as string):
+    return "${name}Domain"
+
+def MakeMessageType(name as string):
+    return "${name}Message"

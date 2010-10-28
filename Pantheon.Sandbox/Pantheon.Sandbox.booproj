@@ -67,8 +67,6 @@
     <Compile Include="Worlds\Game.boo" />
     <Compile Include="Players\Player.boo" />
     <Compile Include="Controllers\Awesome.boo" />
-    <Compile Include="Controllers\JusticeLeague.boo" />
-    <Compile Include="Controllers\InjusticeLeague.boo" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\AllegroSharp\AllegroSharp\AllegroSharp.dll.config">

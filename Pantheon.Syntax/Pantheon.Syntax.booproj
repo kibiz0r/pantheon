@@ -45,9 +45,12 @@
     <Compile Include="TypeHelpers.boo" />
     <Compile Include="WidgetMacro.boo" />
     <Compile Include="PlayerMacro.boo" />
+    <Compile Include="MessageMacro.boo" />
+    <Compile Include="DomainMacro.boo" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang.Compiler, Version=2.0.9.3, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
