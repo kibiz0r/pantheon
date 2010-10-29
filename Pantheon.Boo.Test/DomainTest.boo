@@ -11,8 +11,8 @@ class DomainTest:
         message DoStuff:
             send DoingStuff
 
-        message WithArgs:
-            WithArgsReceived(1, "hi")
+        message WithArgs(i as int, s as string):
+            WithArgsReceived(i, s)
 
         virtual def FooReceived():
             pass
@@ -44,7 +44,7 @@ class DomainTest:
     [Test]
     def CanSendMessages():
         mocks.ReplayAll()
-        
+
         msg = Message("DoStuff")
         dom.Receive(msg)
         Assert.That(dom.Outbox, Has.Some.With.Property("Name").EqualTo("DoingStuff"))

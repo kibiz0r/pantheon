@@ -18,9 +18,20 @@ macro domain:
             case [| message $(ReferenceExpression(Name: name)) |]:
                 messageName = MakeMessageType(name)
                 method = [|
-                    def $(messageName)(message as Pantheon.Message):
+                    def $(messageName)():
                         $(message.Body)
                 |]
+                domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
+                domain.Add("messages", domainMessage)
+
+            case [| message $(signature = MethodInvocationExpression()) |]:
+                targetName = NameFromSignature(signature)
+                messageName = MakeMessageType(targetName)
+                method = [|
+                    def $(messageName)():
+                        $(message.Body)
+                |]
+                method.Parameters.Extend(ParametersFromSignature(signature))
                 domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
                 domain.Add("messages", domainMessage)
 
