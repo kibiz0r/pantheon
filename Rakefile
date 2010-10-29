@@ -152,6 +152,11 @@ namespace :install do
     end
   end
 
+  desc 'Install Rhino.Mocks'
+  task :rhino_mocks do
+    Mono::install_assembly 'Dependencies/Rhino.Mocks/Rhino.Mocks.dll'
+  end
+
   namespace :monodevelop do
     desc 'Install MonoDevelop core assemblies'
     task :core => [:'build:monodevelop'] do

@@ -47,6 +47,7 @@
     <Compile Include="PlayerMacro.boo" />
     <Compile Include="MessageMacro.boo" />
     <Compile Include="DomainMacro.boo" />
+    <Compile Include="CreateDomainMacro.boo" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

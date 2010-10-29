@@ -23,3 +23,8 @@ macro domain:
                 |]
                 domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
                 domain.Add("messages", domainMessage)
+
+        macro send:
+            case [| send $(ReferenceExpression(Name: name)) |]:
+                statement = [| self.Send($(StringLiteralExpression(name))) |]
+                yield statement

@@ -1,23 +1,59 @@
 import NUnit.Framework
 import Pantheon
+import Rhino.Mocks
 
 [TestFixture]
 class DomainTest:
     domain MyDomain:
-        def constructor():
-            pass
-
-        public property Flag as bool = false
-
-        static def foo():
-            pass
-
         message Foo:
-            Flag = true
+            FooReceived()
+
+        message DoStuff:
+            send DoingStuff
+
+        message WithArgs:
+            WithArgsReceived(1, "hi")
+
+        virtual def FooReceived():
+            pass
+
+        virtual def WithArgsReceived(i as int, s as string):
+            pass
+
+    mocks as MockRepository
+    dom as MyDomainDomain
+
+    [SetUp]
+    def SetUp():
+        mocks = MockRepository()
+        dom = mocks.StrictMock[of MyDomainDomain]()
+
+    [TearDown]
+    def TearDown():
+        mocks.VerifyAll()
 
     [Test]
     def CanReceiveMessages():
-        dom = MyDomainDomain()
+        foo as Expect.Action = { dom.FooReceived() }
+        Expect.Call(foo)
+        mocks.ReplayAll()
+
         msg = Message("Foo")
         dom.Receive(msg)
-        Assert.That(dom.Flag, Is.True)
+
+    [Test]
+    def CanSendMessages():
+        mocks.ReplayAll()
+        
+        msg = Message("DoStuff")
+        dom.Receive(msg)
+        Assert.That(dom.Outbox, Has.Some.With.Property("Name").EqualTo("DoingStuff"))
+
+    [Test]
+    def CanReceiveMessagesWithArgs():
+        withArgs as Expect.Action = { dom.WithArgsReceived(1, "hi") }
+        Expect.Call(withArgs)
+        mocks.ReplayAll()
+
+        msg = Message("WithArgs", 1, "hi")
+        dom.Receive(msg)
