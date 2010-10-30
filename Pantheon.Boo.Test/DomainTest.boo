@@ -14,10 +14,16 @@ class DomainTest:
         message WithArgs(i as int, s as string):
             WithArgsReceived(i, s)
 
+        message Multi.Part.Message(i as int):
+            MultiPartMessageReceived(i)
+
         virtual def FooReceived():
             pass
 
         virtual def WithArgsReceived(i as int, s as string):
+            pass
+
+        virtual def MultiPartMessageReceived(i as int):
             pass
 
     mocks as MockRepository
@@ -56,4 +62,13 @@ class DomainTest:
         mocks.ReplayAll()
 
         msg = Message("WithArgs", 1, "hi")
+        dom.Receive(msg)
+
+    [Test]
+    def CanDefineMultiPartMessages():
+        multiPart as Expect.Action = { dom.MultiPartMessageReceived(3) }
+        Expect.Call(multiPart)
+        mocks.ReplayAll()
+
+        msg = Message("Multi.Part.Message", 3)
         dom.Receive(msg)

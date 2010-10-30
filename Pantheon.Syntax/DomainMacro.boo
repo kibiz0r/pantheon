@@ -2,6 +2,17 @@ class DomainMessage:
     property MessageDefinition as string
     property MessageHandler as Method
 
+def MakeName(root as Expression) as string:
+    match root:
+        case MethodInvocationExpression(Target: target):
+            return MakeName(target)
+
+        case MemberReferenceExpression(Target: target, Name: name):
+            return "${MakeName(target)}.${name}"
+
+        case ReferenceExpression(Name: name):
+            return name
+
 macro domain:
     case [| domain $(ReferenceExpression(Name: name)) |]:
         domainName = MakeDomainType(name)
@@ -25,8 +36,11 @@ macro domain:
                 domain.Add("messages", domainMessage)
 
             case [| message $(signature = MethodInvocationExpression()) |]:
-                targetName = NameFromSignature(signature)
-                messageName = MakeMessageType(targetName)
+                methodName = MakeName(signature)
+                arguments = List[of ParameterDeclaration]
+                #targetName = NameFromSignature(signature)
+                #messageName = MakeMessageType(targetName)
+                messageName = "${methodName}Message"
                 method = [|
                     def $(messageName)():
                         $(message.Body)
@@ -34,6 +48,10 @@ macro domain:
                 method.Parameters.Extend(ParametersFromSignature(signature))
                 domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
                 domain.Add("messages", domainMessage)
+
+            otherwise:
+                for arg in message.Arguments:
+                    print arg.GetType()
 
         macro send:
             case [| send $(ReferenceExpression(Name: name)) |]:
