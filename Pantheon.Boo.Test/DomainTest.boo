@@ -1,74 +1,62 @@
 import NUnit.Framework
 import Pantheon
-import Rhino.Mocks
+import Boo.Lang.Compiler.Ast
 
 [TestFixture]
 class DomainTest:
     domain MyDomain:
         message Foo:
-            FooReceived()
-
-        message DoStuff:
-            send DoingStuff
+            send FooReceived()
 
         message WithArgs(i as int, s as string):
-            WithArgsReceived(i, s)
+            send WithArgsReceived(i, s)
 
         message Multi.Part.Message(i as int):
-            MultiPartMessageReceived(i)
+            send Multi.Part.MessageReceived(i)
 
-        virtual def FooReceived():
+        message Split(a as int).Params(b as int, c as string):
             pass
+            //SplitParamsReceived(a, b, c)
 
-        virtual def WithArgsReceived(i as int, s as string):
-            pass
-
-        virtual def MultiPartMessageReceived(i as int):
-            pass
-
-    mocks as MockRepository
-    dom as MyDomainDomain
+    universe as Universe
 
     [SetUp]
     def SetUp():
-        mocks = MockRepository()
-        dom = mocks.StrictMock[of MyDomainDomain]()
+        universe = Universe()
 
     [TearDown]
     def TearDown():
-        mocks.VerifyAll()
+        universe.Dispose()
 
     [Test]
-    def CanReceiveMessages():
-        foo as Expect.Action = { dom.FooReceived() }
-        Expect.Call(foo)
-        mocks.ReplayAll()
-
-        msg = Message("Foo")
-        dom.Receive(msg)
+    def CanSendAndReceiveMessages():
+        domain MyDomain()
+        send Foo
+        receive msg = FooReceived
+        Assert.That(msg, Is.Not.Null)
 
     [Test]
-    def CanSendMessages():
-        mocks.ReplayAll()
-
-        msg = Message("DoStuff")
-        dom.Receive(msg)
-        Assert.That(dom.Outbox, Has.Some.With.Property("Name").EqualTo("DoingStuff"))
-
-    [Test]
-    def CanReceiveMessagesWithArgs():
-        withArgs as Expect.Action = { dom.WithArgsReceived(1, "hi") }
-        Expect.Call(withArgs)
-        mocks.ReplayAll()
-
-        msg = Message("WithArgs", 1, "hi")
-        dom.Receive(msg)
+    def CanSendAndReceiveMessagesWithArgs():
+        domain MyDomain()
+        send WithArgs(5, "hi")
+        receive msg = WithArgsReceived(i as int, s as string)
+        Assert.That(msg.i, Is.EqualTo(5))
+        Assert.That(msg.s, Is.EqualTo("hi"))
 
     [Test]
-    def CanDefineMultiPartMessages():
-        multiPart as Expect.Action = { dom.MultiPartMessageReceived(3) }
-        Expect.Call(multiPart)
-        mocks.ReplayAll()
+    def CanSendAndReceiveMultiPartMessages():
+        domain MyDomain()
+        send Multi.Part.Message(3)
+        receive msg = Multi.Part.Message.Received(i as int)
+        Assert.That(msg.i, Is.EqualTo(3))
 
-        msg = Message("Multi.Part.Message", 3)
-        dom.Receive(msg)
+    [Test]
+    def MakeParametersTest():
+        expected = [| Message(MessageComponent("Foo")) |]
+        actual = MessageExpression([| Foo |])
+        Assert.That(actual, Is.EqualTo(expected))
+
+    [Test]
+    [Ignore]
+    def CanDefineSplitParams():
+        pass

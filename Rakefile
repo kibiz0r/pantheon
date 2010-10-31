@@ -94,6 +94,11 @@ file MonoDevelop::BooBinding::Binary do
   Rake::Task[:'build:monodevelop:boo_binding'].invoke
 end
 
+desc 'Start a Boo console with Pantheon references'
+task :console do
+  system 'booish Pantheon/bin/Debug/Pantheon.dll Pantheon.Boo/bin/Debug/Pantheon.Boo.dll Pantheon.Boo.Test/bin/Debug/Pantheon.Boo.Test.dll Pantheon.Syntax/bin/Debug/Pantheon.Syntax.dll Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll Pantheon.Test/bin/Debug/Pantheon.Test.dll'
+end
+
 desc 'Build Pantheon'
 task :build do
   MonoDevelop::build 'Pantheon.sln', :configuration => 'release'

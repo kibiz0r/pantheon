@@ -2,10 +2,21 @@ class DomainMessage:
     property MessageDefinition as string
     property MessageHandler as Method
 
+def CountMethodInvocations(root as Expression) as int:
+    match root:
+        case MethodInvocationExpression(Target: target):
+            return CountMethodInvocations(target) + 1
+
+        case MemberReferenceExpression(Target: target, Name: name):
+            return CountMethodInvocations(target)
+
+        case ReferenceExpression(Name: name):
+            return 0
+
 def MakeName(root as Expression) as string:
     match root:
         case MethodInvocationExpression(Target: target):
-            return MakeName(target)
+            return "${MakeName(target)}{${CountMethodInvocations(target)}}"
 
         case MemberReferenceExpression(Target: target, Name: name):
             return "${MakeName(target)}.${name}"
@@ -13,7 +24,26 @@ def MakeName(root as Expression) as string:
         case ReferenceExpression(Name: name):
             return name
 
+def MakeParameters(root as Expression) as List[of ParameterDeclaration]:
+    match root:
+        case MethodInvocationExpression(Target: target, Arguments: arguments):
+            parameters = List[of ParameterDeclaration]()
+            for argument in arguments:
+                match argument:
+                    case [| $(ReferenceExpression(Name: name)) as $type |]:
+                        parameter = ParameterDeclaration(Name: name, Type: type)
+                        parameters.Add(parameter)
+            targetParameters = MakeParameters(target)
+            return targetParameters.Extend(parameters)
+
+        otherwise:
+            return List[of ParameterDeclaration]()
+
 macro domain:
+    case [| domain $(MethodInvocationExpression(Target: ReferenceExpression(Name: name))) |]:
+        domainName = MakeDomainType(name)
+        yield [| Pantheon.Universe.Current.Domains.Add($(ReferenceExpression(domainName))()) |]
+
     case [| domain $(ReferenceExpression(Name: name)) |]:
         domainName = MakeDomainType(name)
         klass = [|
@@ -37,7 +67,6 @@ macro domain:
 
             case [| message $(signature = MethodInvocationExpression()) |]:
                 methodName = MakeName(signature)
-                arguments = List[of ParameterDeclaration]
                 #targetName = NameFromSignature(signature)
                 #messageName = MakeMessageType(targetName)
                 messageName = "${methodName}Message"
@@ -45,15 +74,10 @@ macro domain:
                     def $(messageName)():
                         $(message.Body)
                 |]
-                method.Parameters.Extend(ParametersFromSignature(signature))
+                method.Parameters.Extend(MakeParameters(signature))
                 domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
                 domain.Add("messages", domainMessage)
 
             otherwise:
                 for arg in message.Arguments:
                     print arg.GetType()
-
-        macro send:
-            case [| send $(ReferenceExpression(Name: name)) |]:
-                statement = [| self.Send($(StringLiteralExpression(name))) |]
-                yield statement
