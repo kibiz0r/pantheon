@@ -1,6 +1,7 @@
 class DomainMessage:
-    property MessageDefinition as string
-    property MessageHandler as Method
+    property Expression as Expression
+    property Handler as ReferenceExpression
+    property Method as Method
 
 def CountMethodInvocations(root as Expression) as int:
     match root:
@@ -48,25 +49,39 @@ macro domain:
         domainName = MakeDomainType(name)
         klass = [|
             class $(domainName) (Pantheon.Domain):
+                def constructor():
+                    super()
+
                 $(domain.Body)
         |]
+        konstructor = klass.GetConstructor(0)
         for message as DomainMessage in domain.Get("messages"):
-            #klass.Members.Add(message.MessageDefinition)
-            klass.Members.Add(message.MessageHandler)
+            konstructor.Body.Statements.Add(Statement.Lift([| MessageMethods.Add($(MessageExpression(message.Expression)).Name, $(message.Handler)) |]))
+            klass.Members.Add(message.Method)
         yield klass
 
         macro message:
-            case [| message $(ReferenceExpression(Name: name)) |]:
+            case [| message $(expression = ReferenceExpression(Name: name)) |]:
                 messageName = MakeMessageType(name)
                 method = [|
                     def $(messageName)():
                         $(message.Body)
                 |]
-                domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
+                domainMessage = DomainMessage(Expression: expression, Handler: ReferenceExpression(messageName),
+                    Method: method)
                 domain.Add("messages", domainMessage)
 
-            case [| message $(signature = MethodInvocationExpression()) |]:
-                methodName = MakeName(signature)
+            case [| message $(expression2 = MethodInvocationExpression()) |]:
+                name = NameFromSignature(expression2)
+                messageName = MakeMessageType(name)
+                method = [|
+                    def $(messageName)():
+                        $(message.Body)
+                |]
+                domainMessage = DomainMessage(Expression: expression2, Handler: ReferenceExpression(messageName),
+                    Method: method)
+                domain.Add("messages", domainMessage)
+                /*methodName = MakeName(signature)
                 #targetName = NameFromSignature(signature)
                 #messageName = MakeMessageType(targetName)
                 messageName = "${methodName}Message"
@@ -75,8 +90,8 @@ macro domain:
                         $(message.Body)
                 |]
                 method.Parameters.Extend(MakeParameters(signature))
-                domainMessage = DomainMessage(MessageDefinition: messageName, MessageHandler: method)
-                domain.Add("messages", domainMessage)
+                domainMessage = DomainMessage(MessageDefinition: messageName, Handler: method)
+                domain.Add("messages", domainMessage)*/
 
             otherwise:
                 for arg in message.Arguments:

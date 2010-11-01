@@ -51,6 +51,7 @@
     <Compile Include="SendMacro.boo" />
     <Compile Include="ReceiveMacro.boo" />
     <Compile Include="MessageExpression.boo" />
+    <Compile Include="TickMacro.boo" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

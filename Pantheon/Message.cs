@@ -1,34 +1,24 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pantheon
 {
     public class Message
     {
+        public List<MessageComponent> Components = new List<MessageComponent>();
+
         public string Name
         {
-            get;
-            set;
-        }
-        public object[] Args
-        {
-            get;
-            set;
+            get
+            {
+                return String.Join(".", Components.Select(c => c.Name).ToArray());
+            }
         }
 
-        public Message()
+        public Message(params MessageComponent[] components)
         {
-            //
-        }
-
-        public Message(string name)
-        {
-            Name = name;
-        }
-
-        public Message(string name, params object[] args)
-        {
-            Name = name;
-            Args = args;
+            Components.AddRange(components);
         }
     }
 }

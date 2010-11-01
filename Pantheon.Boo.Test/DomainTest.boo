@@ -8,15 +8,15 @@ class DomainTest:
         message Foo:
             send FooReceived()
 
-        message WithArgs(i as int, s as string):
-            send WithArgsReceived(i, s)
+        /*message WithArgs(i as int, s as string):
+            #send WithArgsReceived(i, s)
 
         message Multi.Part.Message(i as int):
             send Multi.Part.MessageReceived(i)
 
         message Split(a as int).Params(b as int, c as string):
             pass
-            //SplitParamsReceived(a, b, c)
+            //SplitParamsReceived(a, b, c)*/
 
     universe as Universe
 
@@ -32,10 +32,12 @@ class DomainTest:
     def CanSendAndReceiveMessages():
         domain MyDomain()
         send Foo
+        tick
         receive msg = FooReceived
         Assert.That(msg, Is.Not.Null)
 
     [Test]
+    [Ignore]
     def CanSendAndReceiveMessagesWithArgs():
         domain MyDomain()
         send WithArgs(5, "hi")
@@ -44,17 +46,12 @@ class DomainTest:
         Assert.That(msg.s, Is.EqualTo("hi"))
 
     [Test]
+    [Ignore]
     def CanSendAndReceiveMultiPartMessages():
         domain MyDomain()
         send Multi.Part.Message(3)
         receive msg = Multi.Part.Message.Received(i as int)
         Assert.That(msg.i, Is.EqualTo(3))
-
-    [Test]
-    def MakeParametersTest():
-        expected = [| Message(MessageComponent("Foo")) |]
-        actual = MessageExpression([| Foo |])
-        Assert.That(actual, Is.EqualTo(expected))
 
     [Test]
     [Ignore]

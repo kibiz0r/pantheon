@@ -6,7 +6,13 @@ namespace Pantheon
 {
     public class Domain
     {
-        public IList<Message> Outbox { get; set; }
+        public IList<Message> Outbox
+        {
+            get;
+            set;
+        }
+
+        public Dictionary<string, Action> MessageMethods = new Dictionary<string, Action>();
 
         public Domain()
         {
@@ -15,13 +21,13 @@ namespace Pantheon
 
         public void Receive(Message message)
         {
-            var name = String.Format("{0}Message", message.Name);
-            this.GetType().InvokeMember(name, BindingFlags.InvokeMethod, Type.DefaultBinder, this, message.Args);
-        }
-
-        public void Send(string messageName)
-        {
-            Outbox.Add(new Message(messageName));
+            var component = message.Components[0];
+            Action method;
+            Console.WriteLine("Finding a handler for {0}", component.Name);
+            if (MessageMethods.TryGetValue(component.Name, out method))
+            {
+                method();
+            }
         }
     }
 }

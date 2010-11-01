@@ -1,10 +1,6 @@
 macro send:
-    case [| send $(ReferenceExpression(Name: name)) |]:
-        messageName = MakeMessageType(name)
-        yield [| Pantheon.Universe.Current.Send() |]
-
-    case [| send $(MethodInvocationExpression(Target: target)) |]:
-        yield [| Pantheon.Universe.Current.Send() |]
+    case [| send $message |]:
+        yield [| Pantheon.Universe.Current.Send($(MessageExpression(message))) |]
 
     otherwise:
         for argument in send.Arguments:

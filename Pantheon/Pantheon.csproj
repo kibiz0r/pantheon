@@ -62,6 +62,7 @@
     <Compile Include="IPlayer.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Universe.cs" />
+    <Compile Include="MessageComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

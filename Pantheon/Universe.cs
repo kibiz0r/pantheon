@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pantheon
 {
@@ -21,20 +22,34 @@ namespace Pantheon
         protected static Universe current = null;
 
         public List<Domain> Domains = new List<Domain>();
+        public List<Message> Messages = new List<Message>();
 
         public void Dispose()
         {
             current = null;
         }
 
-        public void Send()
+        public void Tick()
         {
-            //
+            var previousMessages = new List<Message>(Messages);
+            Messages.Clear();
+            foreach (var message in previousMessages)
+            {
+                foreach (var domain in Domains)
+                {
+                    domain.Receive(message);
+                }
+            }
+        }
+
+        public void Send(Message message)
+        {
+            Messages.Add(message);
         }
 
         public Message Receive()
         {
-            return null;
+            return Messages.FirstOrDefault();
         }
     }
 }
