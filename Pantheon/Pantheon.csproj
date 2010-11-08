@@ -63,6 +63,9 @@
     <Compile Include="Domain.cs" />
     <Compile Include="Universe.cs" />
     <Compile Include="MessageComponent.cs" />
+    <Compile Include="MessageArgument.cs" />
+    <Compile Include="MessageDefinition.cs" />
+    <Compile Include="MessageDefinitionComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -85,5 +88,6 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="System" />
+    <Reference Include="Boo.Lang, Version=2.0.9.3, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
   </ItemGroup>
 </Project>

@@ -36,8 +36,7 @@ class DomainTest:
         receive msg = FooReceived
         Assert.That(msg, Is.Not.Null)
 
-    [Test]
-    [Ignore]
+    /*[Test]
     def CanSendAndReceiveMessagesWithArgs():
         domain MyDomain()
         send WithArgs(5, "hi")
@@ -56,4 +55,9 @@ class DomainTest:
     [Test]
     [Ignore]
     def CanDefineSplitParams():
-        pass
+        domain MyDomain()
+        send Split(1).Params(2, "3")
+        receive msg = Split(a as int).Params(b as int, c as string)
+        Assert.That(msg.a, Is.EqualTo(1))
+        Assert.That(msg.b, Is.EqualTo(2))
+        Assert.That(msg.c, Is.EqualTo("3"))*/

@@ -23,7 +23,6 @@ namespace Pantheon
         {
             var component = message.Components[0];
             Action method;
-            Console.WriteLine("Finding a handler for {0}", component.Name);
             if (MessageMethods.TryGetValue(component.Name, out method))
             {
                 method();

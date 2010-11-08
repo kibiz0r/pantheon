@@ -8,16 +8,16 @@ namespace Pantheon
             get;
             private set;
         }
-        public object[] Args
+        public MessageArgument[] Arguments
         {
             get;
             private set;
         }
 
-        public MessageComponent(string name, params object[] args)
+        public MessageComponent(string name, params MessageArgument[] arguments)
         {
             Name = name;
-            Args = args;
+            Arguments = arguments;
         }
     }
 }

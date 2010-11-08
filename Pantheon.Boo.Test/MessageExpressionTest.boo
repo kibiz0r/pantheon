@@ -5,25 +5,37 @@ import Boo.Lang.Compiler.Ast
 [TestFixture]
 class MessageExpressionTest:
     [Test]
+    [Ignore]
     def SimpleMessageExpression():
-        expected = [| Message(MessageComponent("Foo")) |]
+        expected = [|
+            Messages.Foo.FooMessage()
+        |]
         actual = MessageExpression([| Foo |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
+    [Ignore]
     def TwoPartMessageExpression():
-        expected = [| Message(MessageComponent("Foo"), MessageComponent("Bar")) |]
+        expected = [|
+            Messages.Foo.Bar.FooBarMessage()
+        |]
         actual = MessageExpression([| Foo.Bar |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
+    [Ignore]
     def MessageWithArgs():
-        expected = [| Message(MessageComponent("Foo", 5, "hi")) |]
+        expected = [|
+            Messages.Foo.FooMessage(5, "hi")
+        |]
         actual = MessageExpression([| Foo(5, "hi") |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
+    [Ignore]
     def TwoPartMessageWithArgs():
-        expected = [| Message(MessageComponent("First", 1), MessageComponent("Second", 2)) |]
+        expected = [|
+            Messages.First.Second.FirstSecondMessage(1, 2)
+        |]
         actual = MessageExpression([| First(1).Second(2) |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))

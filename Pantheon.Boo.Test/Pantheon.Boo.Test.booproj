@@ -37,6 +37,7 @@
     <Compile Include="Controllers\PhysicsTest.boo" />
     <Compile Include="DomainTest.boo" />
     <Compile Include="MessageExpressionTest.boo" />
+    <Compile Include="MessageDefinitionTest.boo" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
