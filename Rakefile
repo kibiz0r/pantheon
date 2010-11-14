@@ -229,24 +229,24 @@ task :uninstall do
 end
 
 namespace :test do
-  desc 'Test syntax'
+  desc 'Run syntax tests'
   task :syntax do
-    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Syntax.Test/bin/Debug/Pantheon.Syntax.Test.dll"
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test.Syntax/bin/Debug/Pantheon.Test.Syntax.dll"
   end
 
-  desc 'Test units'
+  desc 'Run unit tests'
   task :units do
-    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Boo.Test/bin/Debug/Pantheon.Boo.Test.dll"
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test.Units/bin/Debug/Pantheon.Test.Units.dll"
   end
 
-  desc 'Test system'
-  task :system do
-    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test/bin/Debug/Pantheon.Test.dll"
+  desc 'Run functional tests'
+  task :functional do
+    sh "mono #{NUnit::Root}/nunit-console.exe Pantheon.Test.Functional/bin/Debug/Pantheon.Test.Functional.dll"
   end
 end
 
 desc 'Run all tests'
-task :test => [:'test:syntax', :'test:system']
+task :test => [:'test:syntax', :'test:units', :'test:functional']
 
 desc 'Generate a status report based on project data from Pivotal Tracker'
 task :status_report, :iteration do |t, args|

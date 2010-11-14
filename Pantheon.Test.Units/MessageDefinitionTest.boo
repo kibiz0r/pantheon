@@ -7,32 +7,41 @@ class MessageDefinitionTest:
     [Test]
     def SimpleMessageDefinition():
         expected = [|
-            namespace Messages.Foo
-            public class FooComponent(Pantheon.MessageComponent):
-                public def constructor():
-                    super("Foo")
             public class FooMessage(Pantheon.Message):
                 public def constructor():
-                    super(Foo = FooComponent())
-                public property Foo as FooComponent
+                    super("Foo")
+
+            public class FooMessage[of ChildMessageType(Pantheon.Message)](FooMessage):
+                public def constructor():
+                    super()
+
+                public property ChildMessage as ChildMessageType
         |]
         actual = MessageDefinitionExpression([| Foo |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
-    [Ignore]
     def TwoPartMessageExpression():
         expected = [|
-            namespace Messages.Foo.Bar
-            public class FooComponent(Pantheon.MessageComponent):
+            public class FooMessage(Pantheon.Message):
                 public def constructor():
                     super("Foo")
-            public class BarComponent(Pantheon.MessageComponent):
+
+            public class FooMessage[of ChildMessageType(Pantheon.Message)](FooMessage):
+                public def constructor():
+                    super()
+
+                public property ChildMessage as ChildMessageType
+
+            public class BarMessage(Pantheon.Message):
                 public def constructor():
                     super("Bar")
-            public class FooBarMessage(Pantheon.Message):
+
+            public class BarMessage[of ChildMessageType(Pantheon.Message)](BarMessage):
                 public def constructor():
-                    super(FooComponent(), BarComponent())
+                    super()
+
+                public property ChildMessage as ChildMessageType
         |]
         actual = MessageDefinitionExpression([| Foo.Bar |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))

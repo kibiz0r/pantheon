@@ -1,5 +1,26 @@
-def MessageExpression(root as Expression):
-    return MethodInvocationExpression(ReferenceExpression("Message"), *MessageComponents(root))
+def MessageExpressionFromName(name as string):
+    return [| $(ReferenceExpression("${name}Message"))() |]
+
+def ParentExpression(root as Expression, childGeneric as Expression, childInstantiation as Expression) as MethodInvocationExpression:
+    match root:
+        case MemberReferenceExpression(Target: target, Name: name):
+            myGeneric = [| $(ReferenceExpression("${name}Message"))[of $childGeneric] |]
+            myInstantiation = [| $(ReferenceExpression("${name}Message"))[of $childGeneric](ChildMessage: $childInstantiation) |]
+            return ParentExpression(target, myGeneric, myInstantiation)
+        case ReferenceExpression(Name: name):
+            return [| $(ReferenceExpression("${name}Message"))[of $childGeneric](ChildMessage: $childInstantiation) |]
+
+def MessageExpression(root as Expression) as MethodInvocationExpression:
+    match root:
+        case [| $(MemberReferenceExpression(Target: target, Name: name)) |]:
+            myGeneric = ReferenceExpression("${name}Message")
+            myInstantiation = [| $(myGeneric)() |]
+            return ParentExpression(target, myGeneric, myInstantiation)
+        case [| $(ReferenceExpression(Name: name)) |]:
+            return MessageExpressionFromName(name)
+
+def MessageWithChildExpression(root as Expression, child as Expression) as MethodInvocationExpression:
+    pass
 
 def MessageComponents(root as Expression) as (Expression):
     match root:

@@ -5,28 +5,34 @@ import Boo.Lang.Compiler.Ast
 [TestFixture]
 class MessageExpressionTest:
     [Test]
-    [Ignore]
     def SimpleMessageExpression():
         expected = [|
-            Messages.Foo.FooMessage()
+            FooMessage()
         |]
         actual = MessageExpression([| Foo |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
-    [Ignore]
     def TwoPartMessageExpression():
         expected = [|
-            Messages.Foo.Bar.FooBarMessage()
+            FooMessage[of BarMessage](ChildMessage: BarMessage())
         |]
         actual = MessageExpression([| Foo.Bar |])
+        Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
+
+    [Test]
+    def ThreePartMessageExpression():
+        expected = [|
+            FooMessage[of BarMessage[of BazMessage]](ChildMessage: BarMessage[of BazMessage](ChildMessage: BazMessage()))
+        |]
+        actual = MessageExpression([| Foo.Bar.Baz |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
     [Ignore]
     def MessageWithArgs():
         expected = [|
-            Messages.Foo.FooMessage(5, "hi")
+            Messages.Foo(5, "hi")
         |]
         actual = MessageExpression([| Foo(5, "hi") |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
@@ -35,7 +41,7 @@ class MessageExpressionTest:
     [Ignore]
     def TwoPartMessageWithArgs():
         expected = [|
-            Messages.First.Second.FirstSecondMessage(1, 2)
+            Messages.First[of Messages.Second](1, ChildMessage: Messages.Second(2))
         |]
         actual = MessageExpression([| First(1).Second(2) |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))

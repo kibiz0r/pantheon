@@ -1,12 +1,13 @@
 import NUnit.Framework
 import Pantheon
-import Boo.Lang.Compiler.Ast
 
 [TestFixture]
-class DomainTest:
-    domain MyDomain:
+class MessagingTest:
+    /*domain MyDomain:
+        message FooReceived
+
         message Foo:
-            send FooReceived()
+            send FooReceived()*/
 
         /*message WithArgs(i as int, s as string):
             #send WithArgsReceived(i, s)
@@ -28,13 +29,13 @@ class DomainTest:
     def TearDown():
         universe.Dispose()
 
-    [Test]
+    /*[Test]
     def CanSendAndReceiveMessages():
         domain MyDomain()
         send Foo
         tick
         receive msg = FooReceived
-        Assert.That(msg, Is.Not.Null)
+        Assert.That(msg, Is.Not.Null)*/
 
     /*[Test]
     def CanSendAndReceiveMessagesWithArgs():
