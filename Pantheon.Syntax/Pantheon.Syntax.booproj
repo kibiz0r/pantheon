@@ -52,7 +52,7 @@
     <Compile Include="ReceiveMacro.boo" />
     <Compile Include="MessageExpression.boo" />
     <Compile Include="TickMacro.boo" />
-    <Compile Include="MessageDefinition.boo" />
+    <Compile Include="MessageTransformer.boo" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

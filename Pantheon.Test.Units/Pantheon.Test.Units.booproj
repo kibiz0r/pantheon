@@ -37,8 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MessageExpressionTest.boo" />
-    <Compile Include="MessageDefinitionTest.boo" />
     <Compile Include="MessageDispatcherTest.boo" />
+    <Compile Include="MessageTransformerTest.boo" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pantheon\Pantheon.csproj">
