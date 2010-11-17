@@ -3,5 +3,4 @@ macro send:
         yield [| Pantheon.Universe.Current.Send($(MessageExpression(message))) |]
 
     otherwise:
-        for argument in send.Arguments:
-            print argument
+        raise "wat"

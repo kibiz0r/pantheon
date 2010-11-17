@@ -66,6 +66,7 @@
     <Compile Include="MessageArgument.cs" />
     <Compile Include="MessageDefinition.cs" />
     <Compile Include="MessageDefinitionComponent.cs" />
+    <Compile Include="MessageDispatcher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

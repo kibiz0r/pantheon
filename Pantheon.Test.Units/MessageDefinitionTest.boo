@@ -5,6 +5,7 @@ import Boo.Lang.Compiler.Ast
 [TestFixture]
 class MessageDefinitionTest:
     [Test]
+    [Ignore]
     def SimpleMessageDefinition():
         expected = [|
             public class FooMessage(Pantheon.Message):
@@ -21,6 +22,7 @@ class MessageDefinitionTest:
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))
 
     [Test]
+    [Ignore]
     def TwoPartMessageExpression():
         expected = [|
             public class FooMessage(Pantheon.Message):
@@ -50,8 +52,7 @@ class MessageDefinitionTest:
     [Ignore]
     def MessageWithArgs():
         expected = [|
-            namespace Messages.Foo
-            public class FooComponent(Pantheon.MessageComponent):
+            public class FooMessage(Pantheon.Message):
                 public def constructor(i as int, s as string):
                     super("Foo")
                     self.i = i
@@ -59,9 +60,12 @@ class MessageDefinitionTest:
 
                 public property i as int
                 public property s as string
-            public class FooMessage(Pantheon.Message):
+
+            public class FooMessage[of ChildMessageType(Pantheon.Message)](FooMessage):
                 public def constructor(i as int, s as string):
-                    super(FooComponent(i as int, s as string))
+                    super(i, s)
+
+                public property ChildMessage as ChildMessageType
         |]
         actual = MessageDefinitionExpression([| Foo(i as int, s as string) |])
         Assert.That(actual.ToCodeString(), Is.EqualTo(expected.ToCodeString()))

@@ -16,10 +16,10 @@ namespace Pantheon
 
         public override void HandleMessage(Message message)
         {
-            if (message.Components.Count > 0 && message.Components[0].Name == "World.Starts")
+            /*if (message.Components.Count > 0 && message.Components[0].Name == "World.Starts")
             {
                 this.Starts();
-            }
+            }*/
         }
 
         public ICollection<Actor> Actors

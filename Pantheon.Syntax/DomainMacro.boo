@@ -56,7 +56,7 @@ macro domain:
         |]
         konstructor = klass.GetConstructor(0)
         for message as DomainMessage in domain.Get("messages"):
-            konstructor.Body.Statements.Add(Statement.Lift([| MessageMethods.Add($(MessageExpression(message.Expression)).Name, $(message.Handler)) |]))
+            #konstructor.Body.Statements.Add(Statement.Lift([| MessageMethods.Add($(MessageExpression(message.Expression)).Name, $(message.Handler)) |]))
             klass.Members.Add(message.Method)
         yield klass
 
@@ -94,5 +94,4 @@ macro domain:
                 domain.Add("messages", domainMessage)*/
 
             otherwise:
-                for arg in message.Arguments:
-                    print arg.GetType()
+                raise "wat"

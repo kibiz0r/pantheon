@@ -21,12 +21,12 @@ namespace Pantheon
 
         public void Receive(Message message)
         {
-            var component = message.Components[0];
+            /*var component = message.Components[0];
             Action method;
             if (MessageMethods.TryGetValue(component.Name, out method))
             {
                 method();
-            }
+            }*/
         }
     }
 }

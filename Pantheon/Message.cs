@@ -9,14 +9,6 @@ namespace Pantheon
     {
         public object QuackGet(string name, object[] parameters)
         {
-            foreach (var component in Components)
-            {
-                var arg = component.Arguments.FirstOrDefault(a => a.Name == name);
-                if (arg != null)
-                {
-                    return arg.Value;
-                }
-            }
             return null;
         }
 
@@ -30,19 +22,16 @@ namespace Pantheon
             throw new NotImplementedException();
         }
 
-        public System.Collections.Generic.List<MessageComponent> Components = new System.Collections.Generic.List<MessageComponent>();
+        public readonly string MessageName = null;
+        public readonly Message ChildMessage = null;
 
-        public string Name
-        {
-            get
-            {
-                return String.Join(".", Components.Select(c => c.Name).ToArray());
-            }
-        }
+        public Message(string name) : this(name, null)
+        {}
 
-        public Message(params MessageComponent[] components)
+        public Message(string name, Message child)
         {
-            Components.AddRange(components);
+            this.MessageName = name;
+            this.ChildMessage = child;
         }
     }
 }
