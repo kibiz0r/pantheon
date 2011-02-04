@@ -1,2 +1,0 @@
-export ACLOCAL_FLAGS="-I /opt/local/share/aclocal"
-sudo ln -s /Library/Frameworks/Mono.framework/Versions/Current/lib/mono /usr/local/lib/mono
