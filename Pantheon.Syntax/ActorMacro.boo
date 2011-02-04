@@ -3,7 +3,8 @@ macro actor(name as ReferenceExpression):
         class $(name) (Pantheon.Actor):
             pass
     |]
-    klass.Members.Add(actor["method"])
+    for method in actor.Get("methods"):
+        klass.Members.Add(method)
     yield klass
 
     macro when:
@@ -12,6 +13,6 @@ macro actor(name as ReferenceExpression):
                 def when():
                     pass
             |]
-            actor["method"] = method
+            actor.Add("methods", method)
         otherwise:
             pass

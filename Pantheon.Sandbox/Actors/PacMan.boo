@@ -1,5 +1,5 @@
 actor PacMan:
     setting Speed as single
 
-    when Game.Starts:
-        pass
+    when (self).CollidesWith(ghost as Ghost):
+        send self.Dies

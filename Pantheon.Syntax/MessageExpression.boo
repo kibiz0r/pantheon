@@ -25,6 +25,9 @@ def ParentExpression(root as Expression, childInstantiation as Expression) as Me
         case ReferenceExpression(Name: name):
             return ParentExpression([| $(root)() |], childInstantiation)
 
+        otherwise:
+            pass
+
 def MessageExpression(root as Expression) as MethodInvocationExpression:
     match root:
         case MethodInvocationExpression(Target: MemberReferenceExpression(Target: target, Name: name), Arguments: arguments):
@@ -41,3 +44,6 @@ def MessageExpression(root as Expression) as MethodInvocationExpression:
 
         case ReferenceExpression(Name: name):
             return MessageExpression([| $(root)() |])
+
+        otherwise:
+            pass

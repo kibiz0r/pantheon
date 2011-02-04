@@ -3,11 +3,15 @@ import Pantheon
 
 [TestFixture]
 class MessagingTest:
-    /*domain MyDomain:
+    domain MyDomain:
+        /*message +MyDomain:
+            pass*/
+
         message FooReceived
 
         message Foo:
-            send FooReceived()*/
+            pass
+            #send FooReceived()
 
         /*message WithArgs(i as int, s as string):
             #send WithArgsReceived(i, s)
@@ -29,13 +33,13 @@ class MessagingTest:
     def TearDown():
         universe.Dispose()
 
-    /*[Test]
+    [Test]
     def CanSendAndReceiveMessages():
-        domain MyDomain()
-        send Foo
+        domain ~MyDomain()
+        #send Foo
         tick
         receive msg = FooReceived
-        Assert.That(msg, Is.Not.Null)*/
+        Assert.That(msg, Is.Not.Null)
 
     /*[Test]
     def CanSendAndReceiveMessagesWithArgs():

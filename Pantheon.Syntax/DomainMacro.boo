@@ -49,9 +49,6 @@ macro domain:
         domainName = MakeDomainType(name)
         klass = [|
             class $(domainName) (Pantheon.Domain):
-                def constructor():
-                    super()
-
                 $(domain.Body)
         |]
         konstructor = klass.GetConstructor(0)
@@ -59,6 +56,15 @@ macro domain:
             #konstructor.Body.Statements.Add(Statement.Lift([| MessageMethods.Add($(MessageExpression(message.Expression)).Name, $(message.Handler)) |]))
             klass.Members.Add(message.Method)
         yield klass
+
+    case [| domain $(UnaryExpression(Operator: operat0r, Operand: MethodInvocationExpression())) |]:
+        match operat0r:
+            case UnaryOperatorType.OnesComplement:
+                pass
+
+    otherwise:
+        for arg in domain.Arguments:
+            print arg.GetType()
 
         macro message:
             case [| message $(expression = ReferenceExpression(Name: name)) |]:

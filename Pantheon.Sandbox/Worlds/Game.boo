@@ -1,7 +1,7 @@
 world Game (Physics, Actor):
-    when Game.Starts:
-        print "Game started"
-        create PacMan
+    when (player as Player).Joins:
+        create player.PacMan
 
-    when PacMan.CollidesWith(ghost as Ghost):
-        pass
+    when (pacMan as PacMan).Dies:
+        send pacMan.Respawns
+        send Ghost.All.Reset
