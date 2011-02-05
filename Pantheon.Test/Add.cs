@@ -37,7 +37,7 @@ namespace Pantheon.Test
             Assert.That("1 + 2 + 3 + 4", Parses.To(1 + 2 + 3 + 4));
         }
 
-        [Test, Ignore]
+        [Test]
         public void AddMixedChained()
         {
             Assert.That("2.2f + 4 + 9.8 + 2 + 6.6", Parses.To(2.2f + 4 + 9.8 + 2 + 6.6));

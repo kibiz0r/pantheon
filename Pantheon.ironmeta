@@ -74,18 +74,43 @@ ironmeta Pantheon<char, Expression> : IronMeta.Matcher.CharMatcher<Expression, _
     // Multiply :type = type:left Whitespace* Asterisk Whitespace* Multiply(type):right -> { return Expression.MultiplyChecked(left, right); }
                    // | type;
 
-    Add :type = Multiply(type):left Whitespace* Plus Whitespace* Add(type):right -> { return Expression.Add(left, right); }
-              | Multiply(type):left Whitespace* Plus Whitespace* Multiply(type):right -> { return Expression.Add(left, right); };
-    Multiply :type = type:left Whitespace* Asterisk Whitespace* Multiply(type):right -> { return Expression.Multiply(left, right); }
-                   | type;
+    // Add :type = Multiply(type):left Whitespace* Plus Whitespace* Add(type):right -> { return Expression.Add(left, right); }
+              // | Multiply(type):left Whitespace* Plus Whitespace* Multiply(type):right -> { return Expression.Add(left, right); };
+    // Multiply :type = type:left Whitespace* Asterisk Whitespace* Multiply(type):right -> { return Expression.Multiply(left, right); }
+                   // | type;
 
-    IntegerExpr = IntegerLiteral;
-    LongExpr = LongLiteral
-             | IntegerLiteral:lit -> { return Expression.Convert(lit, typeof(long)); };
-    FloatExpr = FloatLiteral
-              | (IntegerLiteral | LongLiteral):lit -> { return Expression.Convert(lit, typeof(float)); };
-    DoubleExpr = DoubleLiteral
-               | (IntegerLiteral | LongLiteral | FloatLiteral):lit -> { return Expression.Convert(lit, typeof(double)); };
+    IntegerValue = IntegerLiteral;
+    LongValue = LongLiteral
+              | IntegerLiteral:lit -> { return Expression.Convert(lit, typeof(long)); };
+    FloatValue = FloatLiteral
+               | (IntegerLiteral | LongLiteral):lit -> { return Expression.Convert(lit, typeof(float)); };
+    DoubleValue = DoubleLiteral
+                | (IntegerLiteral | LongLiteral | FloatLiteral):lit -> { return Expression.Convert(lit, typeof(double)); };
 
-    Expr = Add(IntegerExpr) | Add(LongExpr) | Add(FloatExpr) | Add(DoubleExpr) | Multiply(IntegerExpr) | Literal;
+    Add = AddInteger | AddLong | AddFloat | AddDouble;
+    AddInteger = MultiplyInteger:left Whitespace* Plus Whitespace* AddInteger:right -> { return Expression.Add(left, right); }
+               | MultiplyInteger:left Whitespace* Plus Whitespace* MultiplyInteger:right -> { return Expression.Add(left, right); };
+    AddLong = MultiplyLong:left Whitespace* Plus Whitespace* AddLong:right -> { return Expression.Add(left, right); }
+               | MultiplyLong:left Whitespace* Plus Whitespace* MultiplyLong:right -> { return Expression.Add(left, right); };
+    AddFloat = MultiplyFloat:left Whitespace* Plus Whitespace* AddFloat:right -> { return Expression.Add(left, right); }
+             | MultiplyFloat:left Whitespace* Plus Whitespace* MultiplyFloat:right -> { return Expression.Add(left, right); };
+    AddDouble = MultiplyDouble:left Whitespace* Plus Whitespace* AddDouble:right -> { return Expression.Add(left, right); }
+              | MultiplyDouble:left Whitespace* Plus Whitespace* MultiplyDouble:right -> { return Expression.Add(left, right); };
+    Multiply = MultiplyInteger | MultiplyLong | MultiplyFloat | MultiplyDouble;
+    MultiplyInteger = IntegerValue:left Whitespace* Asterisk Whitespace* MultiplyInteger:right -> { return Expression.Multiply(left, right); }
+                    | IntegerValue;
+    MultiplyLong = LongValue:left Whitespace* Asterisk Whitespace* MultiplyLong:right -> { return Expression.Multiply(left, right); }
+                    | LongValue;
+    MultiplyFloat = FloatValue:left Whitespace* Asterisk Whitespace* MultiplyFloat:right -> { return Expression.Multiply(left, right); }
+                  | FloatValue;
+    MultiplyDouble = DoubleValue:left Whitespace* Asterisk Whitespace* MultiplyDouble:right -> { return Expression.Multiply(left, right); }
+                   | DoubleValue;
+
+    IntegerExpr = AddInteger | MultiplyInteger | IntegerValue;
+    LongExpr = AddLong | MultiplyLong | LongValue;
+    FloatExpr = AddFloat | MultiplyFloat | FloatValue;
+    DoubleExpr = AddDouble | MultiplyDouble | DoubleValue;
+
+    Expr = Add | Multiply | Literal;
+    // Expr = Add(IntegerExpr) | Add(LongExpr) | Add(FloatExpr) | Add(DoubleExpr) | Multiply(IntegerExpr) | Literal;
 }

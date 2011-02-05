@@ -1,5 +1,5 @@
 //
-// IronMeta Pantheon Parser; Generated 2/5/2011 8:04:16 PM UTC
+// IronMeta Pantheon Parser; Generated 2/5/2011 8:49:36 PM UTC
 //
 
 using System;
@@ -1337,606 +1337,7 @@ namespace Pantheon
         }
 
 
-        public void Add(int _index, _Pantheon_Args _args)
-        {
-
-            int _arg_index = 0;
-            int _arg_input_index = 0;
-
-            _Pantheon_Item type = null;
-            _Pantheon_Item left = null;
-            _Pantheon_Item right = null;
-
-            // ARGS 0
-            _arg_index = 0;
-            _arg_input_index = 0;
-
-            // ANY
-            _ParseAnyArgs(ref _arg_index, ref _arg_input_index, _args);
-
-            // BIND type
-            type = _arg_results.Peek();
-
-            if (_arg_results.Pop() == null)
-            {
-                _results.Push(null);
-                goto label0;
-            }
-
-            // OR 3
-            int _start_i3 = _index;
-
-            // AND 5
-            int _start_i5 = _index;
-
-            // AND 6
-            int _start_i6 = _index;
-
-            // AND 7
-            int _start_i7 = _index;
-
-            // AND 8
-            int _start_i8 = _index;
-
-            // CALL Multiply
-            var _start_i10 = _index;
-            _Pantheon_Item _r10;
-
-            _r10 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
-
-            if (_r10 != null) _index = _r10.NextIndex;
-
-            // BIND left
-            left = _results.Peek();
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label8; }
-
-            // STAR 11
-            int _start_i11 = _index;
-            var _res11 = Enumerable.Empty<Expression>();
-        label11:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r12;
-
-            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r12 != null) _index = _r12.NextIndex;
-
-            // STAR 11
-            var _r11 = _results.Pop();
-            if (_r11 != null)
-            {
-                _res11 = _res11.Concat(_r11.Results);
-                goto label11;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
-            }
-
-        label8: // AND
-            var _r8_2 = _results.Pop();
-            var _r8_1 = _results.Pop();
-
-            if (_r8_1 != null && _r8_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i8, _index, _input_enumerable, _r8_1.Results.Concat(_r8_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i8;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label7; }
-
-            // CALLORVAR Plus
-            _Pantheon_Item _r13;
-
-            _r13 = _MemoCall("Plus", _index, Plus, null);
-
-            if (_r13 != null) _index = _r13.NextIndex;
-
-        label7: // AND
-            var _r7_2 = _results.Pop();
-            var _r7_1 = _results.Pop();
-
-            if (_r7_1 != null && _r7_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i7, _index, _input_enumerable, _r7_1.Results.Concat(_r7_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i7;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label6; }
-
-            // STAR 14
-            int _start_i14 = _index;
-            var _res14 = Enumerable.Empty<Expression>();
-        label14:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r15;
-
-            _r15 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r15 != null) _index = _r15.NextIndex;
-
-            // STAR 14
-            var _r14 = _results.Pop();
-            if (_r14 != null)
-            {
-                _res14 = _res14.Concat(_r14.Results);
-                goto label14;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i14, _index, _input_enumerable, _res14.Where(_NON_NULL), true));
-            }
-
-        label6: // AND
-            var _r6_2 = _results.Pop();
-            var _r6_1 = _results.Pop();
-
-            if (_r6_1 != null && _r6_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i6, _index, _input_enumerable, _r6_1.Results.Concat(_r6_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i6;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label5; }
-
-            // CALL Add
-            var _start_i17 = _index;
-            _Pantheon_Item _r17;
-
-            _r17 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { type });
-
-            if (_r17 != null) _index = _r17.NextIndex;
-
-            // BIND right
-            right = _results.Peek();
-
-        label5: // AND
-            var _r5_2 = _results.Pop();
-            var _r5_1 = _results.Pop();
-
-            if (_r5_1 != null && _r5_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i5;
-            }
-
-            // ACT
-            var _r4 = _results.Peek();
-            if (_r4 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r4.StartIndex, _r4.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r4), true) );
-            }
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
-
-            // AND 19
-            int _start_i19 = _index;
-
-            // AND 20
-            int _start_i20 = _index;
-
-            // AND 21
-            int _start_i21 = _index;
-
-            // AND 22
-            int _start_i22 = _index;
-
-            // CALL Multiply
-            var _start_i24 = _index;
-            _Pantheon_Item _r24;
-
-            _r24 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
-
-            if (_r24 != null) _index = _r24.NextIndex;
-
-            // BIND left
-            left = _results.Peek();
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label22; }
-
-            // STAR 25
-            int _start_i25 = _index;
-            var _res25 = Enumerable.Empty<Expression>();
-        label25:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r26;
-
-            _r26 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r26 != null) _index = _r26.NextIndex;
-
-            // STAR 25
-            var _r25 = _results.Pop();
-            if (_r25 != null)
-            {
-                _res25 = _res25.Concat(_r25.Results);
-                goto label25;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i25, _index, _input_enumerable, _res25.Where(_NON_NULL), true));
-            }
-
-        label22: // AND
-            var _r22_2 = _results.Pop();
-            var _r22_1 = _results.Pop();
-
-            if (_r22_1 != null && _r22_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i22, _index, _input_enumerable, _r22_1.Results.Concat(_r22_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i22;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label21; }
-
-            // CALLORVAR Plus
-            _Pantheon_Item _r27;
-
-            _r27 = _MemoCall("Plus", _index, Plus, null);
-
-            if (_r27 != null) _index = _r27.NextIndex;
-
-        label21: // AND
-            var _r21_2 = _results.Pop();
-            var _r21_1 = _results.Pop();
-
-            if (_r21_1 != null && _r21_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i21, _index, _input_enumerable, _r21_1.Results.Concat(_r21_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i21;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label20; }
-
-            // STAR 28
-            int _start_i28 = _index;
-            var _res28 = Enumerable.Empty<Expression>();
-        label28:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r29;
-
-            _r29 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r29 != null) _index = _r29.NextIndex;
-
-            // STAR 28
-            var _r28 = _results.Pop();
-            if (_r28 != null)
-            {
-                _res28 = _res28.Concat(_r28.Results);
-                goto label28;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i28, _index, _input_enumerable, _res28.Where(_NON_NULL), true));
-            }
-
-        label20: // AND
-            var _r20_2 = _results.Pop();
-            var _r20_1 = _results.Pop();
-
-            if (_r20_1 != null && _r20_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i20, _index, _input_enumerable, _r20_1.Results.Concat(_r20_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i20;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label19; }
-
-            // CALL Multiply
-            var _start_i31 = _index;
-            _Pantheon_Item _r31;
-
-            _r31 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
-
-            if (_r31 != null) _index = _r31.NextIndex;
-
-            // BIND right
-            right = _results.Peek();
-
-        label19: // AND
-            var _r19_2 = _results.Pop();
-            var _r19_1 = _results.Pop();
-
-            if (_r19_1 != null && _r19_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i19, _index, _input_enumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i19;
-            }
-
-            // ACT
-            var _r18 = _results.Peek();
-            if (_r18 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r18.StartIndex, _r18.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r18), true) );
-            }
-
-        label3: // OR
-            int _dummy_i3 = _index; // no-op for label
-
-        label0: // ARGS 0
-            _arg_input_index = _arg_index; // no-op for label
-
-        }
-
-
-        public void Multiply(int _index, _Pantheon_Args _args)
-        {
-
-            int _arg_index = 0;
-            int _arg_input_index = 0;
-
-            _Pantheon_Item type = null;
-            _Pantheon_Item left = null;
-            _Pantheon_Item right = null;
-
-            // ARGS 0
-            _arg_index = 0;
-            _arg_input_index = 0;
-
-            // ANY
-            _ParseAnyArgs(ref _arg_index, ref _arg_input_index, _args);
-
-            // BIND type
-            type = _arg_results.Peek();
-
-            if (_arg_results.Pop() == null)
-            {
-                _results.Push(null);
-                goto label0;
-            }
-
-            // OR 3
-            int _start_i3 = _index;
-
-            // AND 5
-            int _start_i5 = _index;
-
-            // AND 6
-            int _start_i6 = _index;
-
-            // AND 7
-            int _start_i7 = _index;
-
-            // AND 8
-            int _start_i8 = _index;
-
-            // CALLORVAR type
-            _Pantheon_Item _r10;
-
-            if (type.Production != null)
-            {
-                var _p10 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r10 = _MemoCall(type.Production.Method.Name, _index, _p10, null);
-            }
-            else
-            {
-                _r10 = _ParseLiteralObj(ref _index, type.Inputs);
-            }
-
-            if (_r10 != null) _index = _r10.NextIndex;
-
-            // BIND left
-            left = _results.Peek();
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label8; }
-
-            // STAR 11
-            int _start_i11 = _index;
-            var _res11 = Enumerable.Empty<Expression>();
-        label11:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r12;
-
-            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r12 != null) _index = _r12.NextIndex;
-
-            // STAR 11
-            var _r11 = _results.Pop();
-            if (_r11 != null)
-            {
-                _res11 = _res11.Concat(_r11.Results);
-                goto label11;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
-            }
-
-        label8: // AND
-            var _r8_2 = _results.Pop();
-            var _r8_1 = _results.Pop();
-
-            if (_r8_1 != null && _r8_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i8, _index, _input_enumerable, _r8_1.Results.Concat(_r8_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i8;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label7; }
-
-            // CALLORVAR Asterisk
-            _Pantheon_Item _r13;
-
-            _r13 = _MemoCall("Asterisk", _index, Asterisk, null);
-
-            if (_r13 != null) _index = _r13.NextIndex;
-
-        label7: // AND
-            var _r7_2 = _results.Pop();
-            var _r7_1 = _results.Pop();
-
-            if (_r7_1 != null && _r7_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i7, _index, _input_enumerable, _r7_1.Results.Concat(_r7_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i7;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label6; }
-
-            // STAR 14
-            int _start_i14 = _index;
-            var _res14 = Enumerable.Empty<Expression>();
-        label14:
-
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r15;
-
-            _r15 = _MemoCall("Whitespace", _index, Whitespace, null);
-
-            if (_r15 != null) _index = _r15.NextIndex;
-
-            // STAR 14
-            var _r14 = _results.Pop();
-            if (_r14 != null)
-            {
-                _res14 = _res14.Concat(_r14.Results);
-                goto label14;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i14, _index, _input_enumerable, _res14.Where(_NON_NULL), true));
-            }
-
-        label6: // AND
-            var _r6_2 = _results.Pop();
-            var _r6_1 = _results.Pop();
-
-            if (_r6_1 != null && _r6_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i6, _index, _input_enumerable, _r6_1.Results.Concat(_r6_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i6;
-            }
-
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label5; }
-
-            // CALL Multiply
-            var _start_i17 = _index;
-            _Pantheon_Item _r17;
-
-            _r17 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
-
-            if (_r17 != null) _index = _r17.NextIndex;
-
-            // BIND right
-            right = _results.Peek();
-
-        label5: // AND
-            var _r5_2 = _results.Pop();
-            var _r5_1 = _results.Pop();
-
-            if (_r5_1 != null && _r5_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i5;
-            }
-
-            // ACT
-            var _r4 = _results.Peek();
-            if (_r4 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r4.StartIndex, _r4.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r4), true) );
-            }
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
-
-            // CALLORVAR type
-            _Pantheon_Item _r18;
-
-            if (type.Production != null)
-            {
-                var _p18 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r18 = _MemoCall(type.Production.Method.Name, _index, _p18, null);
-            }
-            else
-            {
-                _r18 = _ParseLiteralObj(ref _index, type.Inputs);
-            }
-
-            if (_r18 != null) _index = _r18.NextIndex;
-
-        label3: // OR
-            int _dummy_i3 = _index; // no-op for label
-
-        label0: // ARGS 0
-            _arg_input_index = _arg_index; // no-op for label
-
-        }
-
-
-        public void IntegerExpr(int _index, _Pantheon_Args _args)
+        public void IntegerValue(int _index, _Pantheon_Args _args)
         {
 
             // CALLORVAR IntegerLiteral
@@ -1949,7 +1350,7 @@ namespace Pantheon
         }
 
 
-        public void LongExpr(int _index, _Pantheon_Args _args)
+        public void LongValue(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item lit = null;
@@ -1991,7 +1392,7 @@ namespace Pantheon
         }
 
 
-        public void FloatExpr(int _index, _Pantheon_Args _args)
+        public void FloatValue(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item lit = null;
@@ -2049,7 +1450,7 @@ namespace Pantheon
         }
 
 
-        public void DoubleExpr(int _index, _Pantheon_Args _args)
+        public void DoubleValue(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item lit = null;
@@ -2123,7 +1524,7 @@ namespace Pantheon
         }
 
 
-        public void Expr(int _index, _Pantheon_Args _args)
+        public void Add(int _index, _Pantheon_Args _args)
         {
 
             // OR 0
@@ -2135,58 +1536,22 @@ namespace Pantheon
             // OR 2
             int _start_i2 = _index;
 
-            // OR 3
-            int _start_i3 = _index;
+            // CALLORVAR AddInteger
+            _Pantheon_Item _r3;
 
-            // OR 4
-            int _start_i4 = _index;
+            _r3 = _MemoCall("AddInteger", _index, AddInteger, null);
 
-            // CALL Add
-            var _start_i5 = _index;
-            _Pantheon_Item _r5;
-
-            _r5 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
-
-            if (_r5 != null) _index = _r5.NextIndex;
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i4; } else goto label4;
-
-            // CALL Add
-            var _start_i6 = _index;
-            _Pantheon_Item _r6;
-
-            _r6 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(LongExpr) });
-
-            if (_r6 != null) _index = _r6.NextIndex;
-
-        label4: // OR
-            int _dummy_i4 = _index; // no-op for label
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
-
-            // CALL Add
-            var _start_i7 = _index;
-            _Pantheon_Item _r7;
-
-            _r7 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(FloatExpr) });
-
-            if (_r7 != null) _index = _r7.NextIndex;
-
-        label3: // OR
-            int _dummy_i3 = _index; // no-op for label
+            if (_r3 != null) _index = _r3.NextIndex;
 
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i2; } else goto label2;
 
-            // CALL Add
-            var _start_i8 = _index;
-            _Pantheon_Item _r8;
+            // CALLORVAR AddLong
+            _Pantheon_Item _r4;
 
-            _r8 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(DoubleExpr) });
+            _r4 = _MemoCall("AddLong", _index, AddLong, null);
 
-            if (_r8 != null) _index = _r8.NextIndex;
+            if (_r4 != null) _index = _r4.NextIndex;
 
         label2: // OR
             int _dummy_i2 = _index; // no-op for label
@@ -2194,13 +1559,2426 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
 
-            // CALL Multiply
-            var _start_i9 = _index;
+            // CALLORVAR AddFloat
+            _Pantheon_Item _r5;
+
+            _r5 = _MemoCall("AddFloat", _index, AddFloat, null);
+
+            if (_r5 != null) _index = _r5.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR AddDouble
+            _Pantheon_Item _r6;
+
+            _r6 = _MemoCall("AddDouble", _index, AddDouble, null);
+
+            if (_r6 != null) _index = _r6.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void AddInteger(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
             _Pantheon_Item _r9;
 
-            _r9 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
 
             if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR AddInteger
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("AddInteger", _index, AddInteger, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // AND 16
+            int _start_i16 = _index;
+
+            // AND 17
+            int _start_i17 = _index;
+
+            // AND 18
+            int _start_i18 = _index;
+
+            // AND 19
+            int _start_i19 = _index;
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r21;
+
+            _r21 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r21 != null) _index = _r21.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label19; }
+
+            // STAR 22
+            int _start_i22 = _index;
+            var _res22 = Enumerable.Empty<Expression>();
+        label22:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r23;
+
+            _r23 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r23 != null) _index = _r23.NextIndex;
+
+            // STAR 22
+            var _r22 = _results.Pop();
+            if (_r22 != null)
+            {
+                _res22 = _res22.Concat(_r22.Results);
+                goto label22;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i22, _index, _input_enumerable, _res22.Where(_NON_NULL), true));
+            }
+
+        label19: // AND
+            var _r19_2 = _results.Pop();
+            var _r19_1 = _results.Pop();
+
+            if (_r19_1 != null && _r19_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i19, _index, _input_enumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i19;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label18; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r24;
+
+            _r24 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r24 != null) _index = _r24.NextIndex;
+
+        label18: // AND
+            var _r18_2 = _results.Pop();
+            var _r18_1 = _results.Pop();
+
+            if (_r18_1 != null && _r18_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i18, _index, _input_enumerable, _r18_1.Results.Concat(_r18_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i18;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label17; }
+
+            // STAR 25
+            int _start_i25 = _index;
+            var _res25 = Enumerable.Empty<Expression>();
+        label25:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r26;
+
+            _r26 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r26 != null) _index = _r26.NextIndex;
+
+            // STAR 25
+            var _r25 = _results.Pop();
+            if (_r25 != null)
+            {
+                _res25 = _res25.Concat(_r25.Results);
+                goto label25;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i25, _index, _input_enumerable, _res25.Where(_NON_NULL), true));
+            }
+
+        label17: // AND
+            var _r17_2 = _results.Pop();
+            var _r17_1 = _results.Pop();
+
+            if (_r17_1 != null && _r17_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i17, _index, _input_enumerable, _r17_1.Results.Concat(_r17_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i17;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label16; }
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r28;
+
+            _r28 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r28 != null) _index = _r28.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label16: // AND
+            var _r16_2 = _results.Pop();
+            var _r16_1 = _results.Pop();
+
+            if (_r16_1 != null && _r16_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i16, _index, _input_enumerable, _r16_1.Results.Concat(_r16_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i16;
+            }
+
+            // ACT
+            var _r15 = _results.Peek();
+            if (_r15 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r15.StartIndex, _r15.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r15), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void AddLong(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR AddLong
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("AddLong", _index, AddLong, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // AND 16
+            int _start_i16 = _index;
+
+            // AND 17
+            int _start_i17 = _index;
+
+            // AND 18
+            int _start_i18 = _index;
+
+            // AND 19
+            int _start_i19 = _index;
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r21;
+
+            _r21 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r21 != null) _index = _r21.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label19; }
+
+            // STAR 22
+            int _start_i22 = _index;
+            var _res22 = Enumerable.Empty<Expression>();
+        label22:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r23;
+
+            _r23 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r23 != null) _index = _r23.NextIndex;
+
+            // STAR 22
+            var _r22 = _results.Pop();
+            if (_r22 != null)
+            {
+                _res22 = _res22.Concat(_r22.Results);
+                goto label22;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i22, _index, _input_enumerable, _res22.Where(_NON_NULL), true));
+            }
+
+        label19: // AND
+            var _r19_2 = _results.Pop();
+            var _r19_1 = _results.Pop();
+
+            if (_r19_1 != null && _r19_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i19, _index, _input_enumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i19;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label18; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r24;
+
+            _r24 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r24 != null) _index = _r24.NextIndex;
+
+        label18: // AND
+            var _r18_2 = _results.Pop();
+            var _r18_1 = _results.Pop();
+
+            if (_r18_1 != null && _r18_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i18, _index, _input_enumerable, _r18_1.Results.Concat(_r18_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i18;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label17; }
+
+            // STAR 25
+            int _start_i25 = _index;
+            var _res25 = Enumerable.Empty<Expression>();
+        label25:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r26;
+
+            _r26 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r26 != null) _index = _r26.NextIndex;
+
+            // STAR 25
+            var _r25 = _results.Pop();
+            if (_r25 != null)
+            {
+                _res25 = _res25.Concat(_r25.Results);
+                goto label25;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i25, _index, _input_enumerable, _res25.Where(_NON_NULL), true));
+            }
+
+        label17: // AND
+            var _r17_2 = _results.Pop();
+            var _r17_1 = _results.Pop();
+
+            if (_r17_1 != null && _r17_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i17, _index, _input_enumerable, _r17_1.Results.Concat(_r17_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i17;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label16; }
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r28;
+
+            _r28 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r28 != null) _index = _r28.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label16: // AND
+            var _r16_2 = _results.Pop();
+            var _r16_1 = _results.Pop();
+
+            if (_r16_1 != null && _r16_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i16, _index, _input_enumerable, _r16_1.Results.Concat(_r16_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i16;
+            }
+
+            // ACT
+            var _r15 = _results.Peek();
+            if (_r15 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r15.StartIndex, _r15.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r15), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void AddFloat(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR AddFloat
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("AddFloat", _index, AddFloat, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // AND 16
+            int _start_i16 = _index;
+
+            // AND 17
+            int _start_i17 = _index;
+
+            // AND 18
+            int _start_i18 = _index;
+
+            // AND 19
+            int _start_i19 = _index;
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r21;
+
+            _r21 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r21 != null) _index = _r21.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label19; }
+
+            // STAR 22
+            int _start_i22 = _index;
+            var _res22 = Enumerable.Empty<Expression>();
+        label22:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r23;
+
+            _r23 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r23 != null) _index = _r23.NextIndex;
+
+            // STAR 22
+            var _r22 = _results.Pop();
+            if (_r22 != null)
+            {
+                _res22 = _res22.Concat(_r22.Results);
+                goto label22;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i22, _index, _input_enumerable, _res22.Where(_NON_NULL), true));
+            }
+
+        label19: // AND
+            var _r19_2 = _results.Pop();
+            var _r19_1 = _results.Pop();
+
+            if (_r19_1 != null && _r19_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i19, _index, _input_enumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i19;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label18; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r24;
+
+            _r24 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r24 != null) _index = _r24.NextIndex;
+
+        label18: // AND
+            var _r18_2 = _results.Pop();
+            var _r18_1 = _results.Pop();
+
+            if (_r18_1 != null && _r18_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i18, _index, _input_enumerable, _r18_1.Results.Concat(_r18_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i18;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label17; }
+
+            // STAR 25
+            int _start_i25 = _index;
+            var _res25 = Enumerable.Empty<Expression>();
+        label25:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r26;
+
+            _r26 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r26 != null) _index = _r26.NextIndex;
+
+            // STAR 25
+            var _r25 = _results.Pop();
+            if (_r25 != null)
+            {
+                _res25 = _res25.Concat(_r25.Results);
+                goto label25;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i25, _index, _input_enumerable, _res25.Where(_NON_NULL), true));
+            }
+
+        label17: // AND
+            var _r17_2 = _results.Pop();
+            var _r17_1 = _results.Pop();
+
+            if (_r17_1 != null && _r17_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i17, _index, _input_enumerable, _r17_1.Results.Concat(_r17_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i17;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label16; }
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r28;
+
+            _r28 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r28 != null) _index = _r28.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label16: // AND
+            var _r16_2 = _results.Pop();
+            var _r16_1 = _results.Pop();
+
+            if (_r16_1 != null && _r16_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i16, _index, _input_enumerable, _r16_1.Results.Concat(_r16_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i16;
+            }
+
+            // ACT
+            var _r15 = _results.Peek();
+            if (_r15 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r15.StartIndex, _r15.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r15), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void AddDouble(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR AddDouble
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("AddDouble", _index, AddDouble, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // AND 16
+            int _start_i16 = _index;
+
+            // AND 17
+            int _start_i17 = _index;
+
+            // AND 18
+            int _start_i18 = _index;
+
+            // AND 19
+            int _start_i19 = _index;
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r21;
+
+            _r21 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r21 != null) _index = _r21.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label19; }
+
+            // STAR 22
+            int _start_i22 = _index;
+            var _res22 = Enumerable.Empty<Expression>();
+        label22:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r23;
+
+            _r23 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r23 != null) _index = _r23.NextIndex;
+
+            // STAR 22
+            var _r22 = _results.Pop();
+            if (_r22 != null)
+            {
+                _res22 = _res22.Concat(_r22.Results);
+                goto label22;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i22, _index, _input_enumerable, _res22.Where(_NON_NULL), true));
+            }
+
+        label19: // AND
+            var _r19_2 = _results.Pop();
+            var _r19_1 = _results.Pop();
+
+            if (_r19_1 != null && _r19_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i19, _index, _input_enumerable, _r19_1.Results.Concat(_r19_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i19;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label18; }
+
+            // CALLORVAR Plus
+            _Pantheon_Item _r24;
+
+            _r24 = _MemoCall("Plus", _index, Plus, null);
+
+            if (_r24 != null) _index = _r24.NextIndex;
+
+        label18: // AND
+            var _r18_2 = _results.Pop();
+            var _r18_1 = _results.Pop();
+
+            if (_r18_1 != null && _r18_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i18, _index, _input_enumerable, _r18_1.Results.Concat(_r18_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i18;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label17; }
+
+            // STAR 25
+            int _start_i25 = _index;
+            var _res25 = Enumerable.Empty<Expression>();
+        label25:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r26;
+
+            _r26 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r26 != null) _index = _r26.NextIndex;
+
+            // STAR 25
+            var _r25 = _results.Pop();
+            if (_r25 != null)
+            {
+                _res25 = _res25.Concat(_r25.Results);
+                goto label25;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i25, _index, _input_enumerable, _res25.Where(_NON_NULL), true));
+            }
+
+        label17: // AND
+            var _r17_2 = _results.Pop();
+            var _r17_1 = _results.Pop();
+
+            if (_r17_1 != null && _r17_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i17, _index, _input_enumerable, _r17_1.Results.Concat(_r17_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i17;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label16; }
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r28;
+
+            _r28 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r28 != null) _index = _r28.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label16: // AND
+            var _r16_2 = _results.Pop();
+            var _r16_1 = _results.Pop();
+
+            if (_r16_1 != null && _r16_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i16, _index, _input_enumerable, _r16_1.Results.Concat(_r16_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i16;
+            }
+
+            // ACT
+            var _r15 = _results.Peek();
+            if (_r15 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r15.StartIndex, _r15.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r15), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void Multiply(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // OR 2
+            int _start_i2 = _index;
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i2; } else goto label2;
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+        label2: // OR
+            int _dummy_i2 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r5;
+
+            _r5 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r5 != null) _index = _r5.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r6;
+
+            _r6 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r6 != null) _index = _r6.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void MultiplyInteger(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR IntegerValue
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("IntegerValue", _index, IntegerValue, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Asterisk
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Asterisk", _index, Asterisk, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR IntegerValue
+            _Pantheon_Item _r15;
+
+            _r15 = _MemoCall("IntegerValue", _index, IntegerValue, null);
+
+            if (_r15 != null) _index = _r15.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void MultiplyLong(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR LongValue
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("LongValue", _index, LongValue, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Asterisk
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Asterisk", _index, Asterisk, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR LongValue
+            _Pantheon_Item _r15;
+
+            _r15 = _MemoCall("LongValue", _index, LongValue, null);
+
+            if (_r15 != null) _index = _r15.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void MultiplyFloat(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR FloatValue
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("FloatValue", _index, FloatValue, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Asterisk
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Asterisk", _index, Asterisk, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR FloatValue
+            _Pantheon_Item _r15;
+
+            _r15 = _MemoCall("FloatValue", _index, FloatValue, null);
+
+            if (_r15 != null) _index = _r15.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void MultiplyDouble(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item left = null;
+            _Pantheon_Item right = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // AND 2
+            int _start_i2 = _index;
+
+            // AND 3
+            int _start_i3 = _index;
+
+            // AND 4
+            int _start_i4 = _index;
+
+            // AND 5
+            int _start_i5 = _index;
+
+            // CALLORVAR DoubleValue
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("DoubleValue", _index, DoubleValue, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+            // BIND left
+            left = _results.Peek();
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label5; }
+
+            // STAR 8
+            int _start_i8 = _index;
+            var _res8 = Enumerable.Empty<Expression>();
+        label8:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r9;
+
+            _r9 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r9 != null) _index = _r9.NextIndex;
+
+            // STAR 8
+            var _r8 = _results.Pop();
+            if (_r8 != null)
+            {
+                _res8 = _res8.Concat(_r8.Results);
+                goto label8;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i8, _index, _input_enumerable, _res8.Where(_NON_NULL), true));
+            }
+
+        label5: // AND
+            var _r5_2 = _results.Pop();
+            var _r5_1 = _results.Pop();
+
+            if (_r5_1 != null && _r5_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i5, _index, _input_enumerable, _r5_1.Results.Concat(_r5_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i5;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+
+            // CALLORVAR Asterisk
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Asterisk", _index, Asterisk, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label4: // AND
+            var _r4_2 = _results.Pop();
+            var _r4_1 = _results.Pop();
+
+            if (_r4_1 != null && _r4_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i4;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label3; }
+
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
+
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r12;
+
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r12 != null) _index = _r12.NextIndex;
+
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
+            {
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
+            }
+
+        label3: // AND
+            var _r3_2 = _results.Pop();
+            var _r3_1 = _results.Pop();
+
+            if (_r3_1 != null && _r3_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i3, _index, _input_enumerable, _r3_1.Results.Concat(_r3_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i3;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label2; }
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r14;
+
+            _r14 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r14 != null) _index = _r14.NextIndex;
+
+            // BIND right
+            right = _results.Peek();
+
+        label2: // AND
+            var _r2_2 = _results.Pop();
+            var _r2_1 = _results.Pop();
+
+            if (_r2_1 != null && _r2_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i2, _index, _input_enumerable, _r2_1.Results.Concat(_r2_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i2;
+            }
+
+            // ACT
+            var _r1 = _results.Peek();
+            if (_r1 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r1), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR DoubleValue
+            _Pantheon_Item _r15;
+
+            _r15 = _MemoCall("DoubleValue", _index, DoubleValue, null);
+
+            if (_r15 != null) _index = _r15.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void IntegerExpr(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // CALLORVAR AddInteger
+            _Pantheon_Item _r2;
+
+            _r2 = _MemoCall("AddInteger", _index, AddInteger, null);
+
+            if (_r2 != null) _index = _r2.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR MultiplyInteger
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("MultiplyInteger", _index, MultiplyInteger, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR IntegerValue
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("IntegerValue", _index, IntegerValue, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void LongExpr(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // CALLORVAR AddLong
+            _Pantheon_Item _r2;
+
+            _r2 = _MemoCall("AddLong", _index, AddLong, null);
+
+            if (_r2 != null) _index = _r2.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR MultiplyLong
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("MultiplyLong", _index, MultiplyLong, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR LongValue
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("LongValue", _index, LongValue, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void FloatExpr(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // CALLORVAR AddFloat
+            _Pantheon_Item _r2;
+
+            _r2 = _MemoCall("AddFloat", _index, AddFloat, null);
+
+            if (_r2 != null) _index = _r2.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR MultiplyFloat
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("MultiplyFloat", _index, MultiplyFloat, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR FloatValue
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("FloatValue", _index, FloatValue, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void DoubleExpr(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // CALLORVAR AddDouble
+            _Pantheon_Item _r2;
+
+            _r2 = _MemoCall("AddDouble", _index, AddDouble, null);
+
+            if (_r2 != null) _index = _r2.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR MultiplyDouble
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("MultiplyDouble", _index, MultiplyDouble, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
+
+        label1: // OR
+            int _dummy_i1 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR DoubleValue
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("DoubleValue", _index, DoubleValue, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void Expr(int _index, _Pantheon_Args _args)
+        {
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // OR 1
+            int _start_i1 = _index;
+
+            // CALLORVAR Add
+            _Pantheon_Item _r2;
+
+            _r2 = _MemoCall("Add", _index, Add, null);
+
+            if (_r2 != null) _index = _r2.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
+
+            // CALLORVAR Multiply
+            _Pantheon_Item _r3;
+
+            _r3 = _MemoCall("Multiply", _index, Multiply, null);
+
+            if (_r3 != null) _index = _r3.NextIndex;
 
         label1: // OR
             int _dummy_i1 = _index; // no-op for label
@@ -2209,11 +3987,11 @@ namespace Pantheon
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
 
             // CALLORVAR Literal
-            _Pantheon_Item _r10;
+            _Pantheon_Item _r4;
 
-            _r10 = _MemoCall("Literal", _index, Literal, null);
+            _r4 = _MemoCall("Literal", _index, Literal, null);
 
-            if (_r10 != null) _index = _r10.NextIndex;
+            if (_r4 != null) _index = _r4.NextIndex;
 
         label0: // OR
             int _dummy_i0 = _index; // no-op for label
