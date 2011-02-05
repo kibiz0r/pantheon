@@ -25,7 +25,7 @@ namespace Pantheon.Test
         public void PromotesFloatToDouble()
         {
             Assert.That("5f", Parses.To(5.0).WithRule(p => p.DoubleExpr));
-            Assert.That("5f+7f", Parses.To(12.0).WithRule(p => p.DoubleExpr));
+            Assert.That("5f+7f", Parses.To(12.0).WithRule(p => p.Add));
         }
     }
 }

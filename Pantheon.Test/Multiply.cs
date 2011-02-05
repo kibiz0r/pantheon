@@ -8,9 +8,15 @@ namespace Pantheon.Test
     public class Multiply
     {
         [Test]
-        public void MultipliesIntegers()
+        public void MultiplyIntegers()
         {
             Assert.That("5 * 3", Parses.To(3 * 5));
+        }
+
+        [Test]
+        public void MultiplyChained()
+        {
+            Assert.That("3 * 5 * 9", Parses.To(3 * 5 * 9));
         }
     }
 }

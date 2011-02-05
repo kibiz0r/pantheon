@@ -1,5 +1,5 @@
 //
-// IronMeta Pantheon Parser; Generated 2/4/2011 2:49:01 AM UTC
+// IronMeta Pantheon Parser; Generated 2/5/2011 8:04:16 PM UTC
 //
 
 using System;
@@ -452,7 +452,7 @@ namespace Pantheon
         }
 
 
-        public void Integer(int _index, _Pantheon_Args _args)
+        public void IntegerLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -513,7 +513,7 @@ namespace Pantheon
         }
 
 
-        public void Long(int _index, _Pantheon_Args _args)
+        public void LongLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -601,7 +601,7 @@ namespace Pantheon
         }
 
 
-        public void Float(int _index, _Pantheon_Args _args)
+        public void FloatLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -689,7 +689,7 @@ namespace Pantheon
         }
 
 
-        public void Double(int _index, _Pantheon_Args _args)
+        public void DoubleLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -762,20 +762,20 @@ namespace Pantheon
             // OR 2
             int _start_i2 = _index;
 
-            // CALLORVAR Integer
+            // CALLORVAR IntegerLiteral
             _Pantheon_Item _r3;
 
-            _r3 = _MemoCall("Integer", _index, Integer, null);
+            _r3 = _MemoCall("IntegerLiteral", _index, IntegerLiteral, null);
 
             if (_r3 != null) _index = _r3.NextIndex;
 
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i2; } else goto label2;
 
-            // CALLORVAR Long
+            // CALLORVAR LongLiteral
             _Pantheon_Item _r4;
 
-            _r4 = _MemoCall("Long", _index, Long, null);
+            _r4 = _MemoCall("LongLiteral", _index, LongLiteral, null);
 
             if (_r4 != null) _index = _r4.NextIndex;
 
@@ -785,10 +785,10 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
 
-            // CALLORVAR Float
+            // CALLORVAR FloatLiteral
             _Pantheon_Item _r5;
 
-            _r5 = _MemoCall("Float", _index, Float, null);
+            _r5 = _MemoCall("FloatLiteral", _index, FloatLiteral, null);
 
             if (_r5 != null) _index = _r5.NextIndex;
 
@@ -798,10 +798,10 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
 
-            // CALLORVAR Double
+            // CALLORVAR DoubleLiteral
             _Pantheon_Item _r6;
 
-            _r6 = _MemoCall("Double", _index, Double, null);
+            _r6 = _MemoCall("DoubleLiteral", _index, DoubleLiteral, null);
 
             if (_r6 != null) _index = _r6.NextIndex;
 
@@ -895,7 +895,7 @@ namespace Pantheon
         }
 
 
-        public void Days(int _index, _Pantheon_Args _args)
+        public void DaysLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -983,7 +983,7 @@ namespace Pantheon
         }
 
 
-        public void Minutes(int _index, _Pantheon_Args _args)
+        public void MinutesLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -1071,7 +1071,7 @@ namespace Pantheon
         }
 
 
-        public void Seconds(int _index, _Pantheon_Args _args)
+        public void SecondsLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -1159,7 +1159,7 @@ namespace Pantheon
         }
 
 
-        public void Milliseconds(int _index, _Pantheon_Args _args)
+        public void MillisecondsLiteral(int _index, _Pantheon_Args _args)
         {
 
             _Pantheon_Item n = null;
@@ -1259,20 +1259,20 @@ namespace Pantheon
             // OR 2
             int _start_i2 = _index;
 
-            // CALLORVAR Days
+            // CALLORVAR DaysLiteral
             _Pantheon_Item _r3;
 
-            _r3 = _MemoCall("Days", _index, Days, null);
+            _r3 = _MemoCall("DaysLiteral", _index, DaysLiteral, null);
 
             if (_r3 != null) _index = _r3.NextIndex;
 
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i2; } else goto label2;
 
-            // CALLORVAR Minutes
+            // CALLORVAR MinutesLiteral
             _Pantheon_Item _r4;
 
-            _r4 = _MemoCall("Minutes", _index, Minutes, null);
+            _r4 = _MemoCall("MinutesLiteral", _index, MinutesLiteral, null);
 
             if (_r4 != null) _index = _r4.NextIndex;
 
@@ -1282,10 +1282,10 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
 
-            // CALLORVAR Seconds
+            // CALLORVAR SecondsLiteral
             _Pantheon_Item _r5;
 
-            _r5 = _MemoCall("Seconds", _index, Seconds, null);
+            _r5 = _MemoCall("SecondsLiteral", _index, SecondsLiteral, null);
 
             if (_r5 != null) _index = _r5.NextIndex;
 
@@ -1295,10 +1295,10 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
 
-            // CALLORVAR Milliseconds
+            // CALLORVAR MillisecondsLiteral
             _Pantheon_Item _r6;
 
-            _r6 = _MemoCall("Milliseconds", _index, Milliseconds, null);
+            _r6 = _MemoCall("MillisecondsLiteral", _index, MillisecondsLiteral, null);
 
             if (_r6 != null) _index = _r6.NextIndex;
 
@@ -1337,168 +1337,6 @@ namespace Pantheon
         }
 
 
-        public void IntegerExpr(int _index, _Pantheon_Args _args)
-        {
-
-            _Pantheon_Item expr = null;
-
-            // COND 0
-            int _start_i0 = _index;
-
-            // CALLORVAR Expr
-            _Pantheon_Item _r2;
-
-            _r2 = _MemoCall("Expr", _index, Expr, null);
-
-            if (_r2 != null) _index = _r2.NextIndex;
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // COND
-            if (!(expr != null && expr.IsExpressionOf<int>())) { _results.Pop(); _results.Push(null); _index = _start_i0; }
-        }
-
-
-        public void FloatExpr(int _index, _Pantheon_Args _args)
-        {
-
-            _Pantheon_Item expr = null;
-
-            // OR 0
-            int _start_i0 = _index;
-
-            // CALLORVAR IntegerExpr
-            _Pantheon_Item _r3;
-
-            _r3 = _MemoCall("IntegerExpr", _index, IntegerExpr, null);
-
-            if (_r3 != null) _index = _r3.NextIndex;
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // ACT
-            var _r1 = _results.Peek();
-            if (_r1 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Convert(expr, typeof(float)); }, _r1), true) );
-            }
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
-
-            // COND 4
-            int _start_i4 = _index;
-
-            // CALLORVAR Expr
-            _Pantheon_Item _r6;
-
-            _r6 = _MemoCall("Expr", _index, Expr, null);
-
-            if (_r6 != null) _index = _r6.NextIndex;
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // COND
-            if (!(expr != null && expr.IsExpressionOf<float>())) { _results.Pop(); _results.Push(null); _index = _start_i4; }
-        label0: // OR
-            int _dummy_i0 = _index; // no-op for label
-
-        }
-
-
-        public void DoubleExpr(int _index, _Pantheon_Args _args)
-        {
-
-            _Pantheon_Item expr = null;
-
-            // OR 0
-            int _start_i0 = _index;
-
-            // OR 3
-            int _start_i3 = _index;
-
-            // CALLORVAR IntegerExpr
-            _Pantheon_Item _r4;
-
-            _r4 = _MemoCall("IntegerExpr", _index, IntegerExpr, null);
-
-            if (_r4 != null) _index = _r4.NextIndex;
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
-
-            // CALLORVAR FloatExpr
-            _Pantheon_Item _r5;
-
-            _r5 = _MemoCall("FloatExpr", _index, FloatExpr, null);
-
-            if (_r5 != null) _index = _r5.NextIndex;
-
-        label3: // OR
-            int _dummy_i3 = _index; // no-op for label
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // ACT
-            var _r1 = _results.Peek();
-            if (_r1 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r1.StartIndex, _r1.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Convert(expr, typeof(double)); }, _r1), true) );
-            }
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
-
-            // COND 6
-            int _start_i6 = _index;
-
-            // CALLORVAR Expr
-            _Pantheon_Item _r8;
-
-            _r8 = _MemoCall("Expr", _index, Expr, null);
-
-            if (_r8 != null) _index = _r8.NextIndex;
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // COND
-            if (!(expr != null && expr.IsExpressionOf<double>())) { _results.Pop(); _results.Push(null); _index = _start_i6; }
-        label0: // OR
-            int _dummy_i0 = _index; // no-op for label
-
-        }
-
-
-        public void TimeSpanExpr(int _index, _Pantheon_Args _args)
-        {
-
-            _Pantheon_Item expr = null;
-
-            // COND 0
-            int _start_i0 = _index;
-
-            // CALLORVAR Expr
-            _Pantheon_Item _r2;
-
-            _r2 = _MemoCall("Expr", _index, Expr, null);
-
-            if (_r2 != null) _index = _r2.NextIndex;
-
-            // BIND expr
-            expr = _results.Peek();
-
-            // COND
-            if (!(expr != null && expr.IsExpressionOf<TimeSpan>())) { _results.Pop(); _results.Push(null); _index = _start_i0; }
-        }
-
-
         public void Add(int _index, _Pantheon_Args _args)
         {
 
@@ -1509,10 +1347,7 @@ namespace Pantheon
             _Pantheon_Item left = null;
             _Pantheon_Item right = null;
 
-            // OR 0
-            int _start_i0 = _index;
-
-            // ARGS 1
+            // ARGS 0
             _arg_index = 0;
             _arg_input_index = 0;
 
@@ -1525,8 +1360,11 @@ namespace Pantheon
             if (_arg_results.Pop() == null)
             {
                 _results.Push(null);
-                goto label1;
+                goto label0;
             }
+
+            // OR 3
+            int _start_i3 = _index;
 
             // AND 5
             int _start_i5 = _index;
@@ -1540,18 +1378,11 @@ namespace Pantheon
             // AND 8
             int _start_i8 = _index;
 
-            // CALLORVAR type
+            // CALL Multiply
+            var _start_i10 = _index;
             _Pantheon_Item _r10;
 
-            if (type.Production != null)
-            {
-                var _p10 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r10 = _MemoCall(type.Production.Method.Name, _index, _p10, null);
-            }
-            else
-            {
-                _r10 = _ParseLiteralObj(ref _index, type.Inputs);
-            }
+            _r10 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
 
             if (_r10 != null) _index = _r10.NextIndex;
 
@@ -1667,18 +1498,11 @@ namespace Pantheon
             // AND shortcut
             if (_results.Peek() == null) { _results.Push(null); goto label5; }
 
-            // CALLORVAR type
+            // CALL Add
+            var _start_i17 = _index;
             _Pantheon_Item _r17;
 
-            if (type.Production != null)
-            {
-                var _p17 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r17 = _MemoCall(type.Production.Method.Name, _index, _p17, null);
-            }
-            else
-            {
-                _r17 = _ParseLiteralObj(ref _index, type.Inputs);
-            }
+            _r17 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { type });
 
             if (_r17 != null) _index = _r17.NextIndex;
 
@@ -1704,14 +1528,11 @@ namespace Pantheon
             if (_r4 != null)
             {
                 _results.Pop();
-                _results.Push( new _Pantheon_Item(_r4.StartIndex, _r4.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.AddChecked(left, right); }, _r4), true) );
+                _results.Push( new _Pantheon_Item(_r4.StartIndex, _r4.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r4), true) );
             }
 
-        label1: // ARGS 1
-            _arg_input_index = _arg_index; // no-op for label
-
             // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
 
             // AND 19
             int _start_i19 = _index;
@@ -1725,10 +1546,11 @@ namespace Pantheon
             // AND 22
             int _start_i22 = _index;
 
-            // CALLORVAR Expr
+            // CALL Multiply
+            var _start_i24 = _index;
             _Pantheon_Item _r24;
 
-            _r24 = _MemoCall("Expr", _index, Expr, null);
+            _r24 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
 
             if (_r24 != null) _index = _r24.NextIndex;
 
@@ -1844,21 +1666,17 @@ namespace Pantheon
             // AND shortcut
             if (_results.Peek() == null) { _results.Push(null); goto label19; }
 
-            // COND 30
-            int _start_i30 = _index;
+            // CALL Multiply
+            var _start_i31 = _index;
+            _Pantheon_Item _r31;
 
-            // CALLORVAR Expr
-            _Pantheon_Item _r32;
+            _r31 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
 
-            _r32 = _MemoCall("Expr", _index, Expr, null);
-
-            if (_r32 != null) _index = _r32.NextIndex;
+            if (_r31 != null) _index = _r31.NextIndex;
 
             // BIND right
             right = _results.Peek();
 
-            // COND
-            if (!(left.Expression().Type == right.Expression().Type)) { _results.Pop(); _results.Push(null); _index = _start_i30; }
         label19: // AND
             var _r19_2 = _results.Pop();
             var _r19_1 = _results.Pop();
@@ -1878,11 +1696,14 @@ namespace Pantheon
             if (_r18 != null)
             {
                 _results.Pop();
-                _results.Push( new _Pantheon_Item(_r18.StartIndex, _r18.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.AddChecked(left, right); }, _r18), true) );
+                _results.Push( new _Pantheon_Item(_r18.StartIndex, _r18.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Add(left, right); }, _r18), true) );
             }
 
-        label0: // OR
-            int _dummy_i0 = _index; // no-op for label
+        label3: // OR
+            int _dummy_i3 = _index; // no-op for label
+
+        label0: // ARGS 0
+            _arg_input_index = _arg_index; // no-op for label
 
         }
 
@@ -1913,8 +1734,8 @@ namespace Pantheon
                 goto label0;
             }
 
-            // AND 4
-            int _start_i4 = _index;
+            // OR 3
+            int _start_i3 = _index;
 
             // AND 5
             int _start_i5 = _index;
@@ -1925,50 +1746,77 @@ namespace Pantheon
             // AND 7
             int _start_i7 = _index;
 
+            // AND 8
+            int _start_i8 = _index;
+
             // CALLORVAR type
-            _Pantheon_Item _r9;
+            _Pantheon_Item _r10;
 
             if (type.Production != null)
             {
-                var _p9 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r9 = _MemoCall(type.Production.Method.Name, _index, _p9, null);
+                var _p10 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
+                _r10 = _MemoCall(type.Production.Method.Name, _index, _p10, null);
             }
             else
             {
-                _r9 = _ParseLiteralObj(ref _index, type.Inputs);
+                _r10 = _ParseLiteralObj(ref _index, type.Inputs);
             }
 
-            if (_r9 != null) _index = _r9.NextIndex;
+            if (_r10 != null) _index = _r10.NextIndex;
 
             // BIND left
             left = _results.Peek();
 
             // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label7; }
+            if (_results.Peek() == null) { _results.Push(null); goto label8; }
 
-            // STAR 10
-            int _start_i10 = _index;
-            var _res10 = Enumerable.Empty<Expression>();
-        label10:
+            // STAR 11
+            int _start_i11 = _index;
+            var _res11 = Enumerable.Empty<Expression>();
+        label11:
 
             // CALLORVAR Whitespace
-            _Pantheon_Item _r11;
+            _Pantheon_Item _r12;
 
-            _r11 = _MemoCall("Whitespace", _index, Whitespace, null);
+            _r12 = _MemoCall("Whitespace", _index, Whitespace, null);
 
-            if (_r11 != null) _index = _r11.NextIndex;
+            if (_r12 != null) _index = _r12.NextIndex;
 
-            // STAR 10
-            var _r10 = _results.Pop();
-            if (_r10 != null)
+            // STAR 11
+            var _r11 = _results.Pop();
+            if (_r11 != null)
             {
-                _res10 = _res10.Concat(_r10.Results);
-                goto label10;
+                _res11 = _res11.Concat(_r11.Results);
+                goto label11;
             }
             else
             {
-                _results.Push(new _Pantheon_Item(_start_i10, _index, _input_enumerable, _res10.Where(_NON_NULL), true));
+                _results.Push(new _Pantheon_Item(_start_i11, _index, _input_enumerable, _res11.Where(_NON_NULL), true));
             }
+
+        label8: // AND
+            var _r8_2 = _results.Pop();
+            var _r8_1 = _results.Pop();
+
+            if (_r8_1 != null && _r8_2 != null)
+            {
+                _results.Push( new _Pantheon_Item(_start_i8, _index, _input_enumerable, _r8_1.Results.Concat(_r8_2.Results).Where(_NON_NULL), true) );
+            }
+            else
+            {
+                _results.Push(null);
+                _index = _start_i8;
+            }
+
+            // AND shortcut
+            if (_results.Peek() == null) { _results.Push(null); goto label7; }
+
+            // CALLORVAR Asterisk
+            _Pantheon_Item _r13;
+
+            _r13 = _MemoCall("Asterisk", _index, Asterisk, null);
+
+            if (_r13 != null) _index = _r13.NextIndex;
 
         label7: // AND
             var _r7_2 = _results.Pop();
@@ -1987,12 +1835,29 @@ namespace Pantheon
             // AND shortcut
             if (_results.Peek() == null) { _results.Push(null); goto label6; }
 
-            // CALLORVAR Asterisk
-            _Pantheon_Item _r12;
+            // STAR 14
+            int _start_i14 = _index;
+            var _res14 = Enumerable.Empty<Expression>();
+        label14:
 
-            _r12 = _MemoCall("Asterisk", _index, Asterisk, null);
+            // CALLORVAR Whitespace
+            _Pantheon_Item _r15;
 
-            if (_r12 != null) _index = _r12.NextIndex;
+            _r15 = _MemoCall("Whitespace", _index, Whitespace, null);
+
+            if (_r15 != null) _index = _r15.NextIndex;
+
+            // STAR 14
+            var _r14 = _results.Pop();
+            if (_r14 != null)
+            {
+                _res14 = _res14.Concat(_r14.Results);
+                goto label14;
+            }
+            else
+            {
+                _results.Push(new _Pantheon_Item(_start_i14, _index, _input_enumerable, _res14.Where(_NON_NULL), true));
+            }
 
         label6: // AND
             var _r6_2 = _results.Pop();
@@ -2011,29 +1876,16 @@ namespace Pantheon
             // AND shortcut
             if (_results.Peek() == null) { _results.Push(null); goto label5; }
 
-            // STAR 13
-            int _start_i13 = _index;
-            var _res13 = Enumerable.Empty<Expression>();
-        label13:
+            // CALL Multiply
+            var _start_i17 = _index;
+            _Pantheon_Item _r17;
 
-            // CALLORVAR Whitespace
-            _Pantheon_Item _r14;
+            _r17 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { type });
 
-            _r14 = _MemoCall("Whitespace", _index, Whitespace, null);
+            if (_r17 != null) _index = _r17.NextIndex;
 
-            if (_r14 != null) _index = _r14.NextIndex;
-
-            // STAR 13
-            var _r13 = _results.Pop();
-            if (_r13 != null)
-            {
-                _res13 = _res13.Concat(_r13.Results);
-                goto label13;
-            }
-            else
-            {
-                _results.Push(new _Pantheon_Item(_start_i13, _index, _input_enumerable, _res13.Where(_NON_NULL), true));
-            }
+            // BIND right
+            right = _results.Peek();
 
         label5: // AND
             var _r5_2 = _results.Pop();
@@ -2049,48 +1901,34 @@ namespace Pantheon
                 _index = _start_i5;
             }
 
-            // AND shortcut
-            if (_results.Peek() == null) { _results.Push(null); goto label4; }
+            // ACT
+            var _r4 = _results.Peek();
+            if (_r4 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r4.StartIndex, _r4.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Multiply(left, right); }, _r4), true) );
+            }
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
 
             // CALLORVAR type
-            _Pantheon_Item _r16;
+            _Pantheon_Item _r18;
 
             if (type.Production != null)
             {
-                var _p16 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
-                _r16 = _MemoCall(type.Production.Method.Name, _index, _p16, null);
+                var _p18 = (System.Action<int, IEnumerable<_Pantheon_Item>>)(object)type.Production; // what type safety?
+                _r18 = _MemoCall(type.Production.Method.Name, _index, _p18, null);
             }
             else
             {
-                _r16 = _ParseLiteralObj(ref _index, type.Inputs);
+                _r18 = _ParseLiteralObj(ref _index, type.Inputs);
             }
 
-            if (_r16 != null) _index = _r16.NextIndex;
+            if (_r18 != null) _index = _r18.NextIndex;
 
-            // BIND right
-            right = _results.Peek();
-
-        label4: // AND
-            var _r4_2 = _results.Pop();
-            var _r4_1 = _results.Pop();
-
-            if (_r4_1 != null && _r4_2 != null)
-            {
-                _results.Push( new _Pantheon_Item(_start_i4, _index, _input_enumerable, _r4_1.Results.Concat(_r4_2.Results).Where(_NON_NULL), true) );
-            }
-            else
-            {
-                _results.Push(null);
-                _index = _start_i4;
-            }
-
-            // ACT
-            var _r3 = _results.Peek();
-            if (_r3 != null)
-            {
-                _results.Pop();
-                _results.Push( new _Pantheon_Item(_r3.StartIndex, _r3.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.MultiplyChecked(left, right); }, _r3), true) );
-            }
+        label3: // OR
+            int _dummy_i3 = _index; // no-op for label
 
         label0: // ARGS 0
             _arg_input_index = _arg_index; // no-op for label
@@ -2098,10 +1936,198 @@ namespace Pantheon
         }
 
 
+        public void IntegerExpr(int _index, _Pantheon_Args _args)
+        {
+
+            // CALLORVAR IntegerLiteral
+            _Pantheon_Item _r0;
+
+            _r0 = _MemoCall("IntegerLiteral", _index, IntegerLiteral, null);
+
+            if (_r0 != null) _index = _r0.NextIndex;
+
+        }
+
+
+        public void LongExpr(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item lit = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // CALLORVAR LongLiteral
+            _Pantheon_Item _r1;
+
+            _r1 = _MemoCall("LongLiteral", _index, LongLiteral, null);
+
+            if (_r1 != null) _index = _r1.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR IntegerLiteral
+            _Pantheon_Item _r4;
+
+            _r4 = _MemoCall("IntegerLiteral", _index, IntegerLiteral, null);
+
+            if (_r4 != null) _index = _r4.NextIndex;
+
+            // BIND lit
+            lit = _results.Peek();
+
+            // ACT
+            var _r2 = _results.Peek();
+            if (_r2 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r2.StartIndex, _r2.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Convert(lit, typeof(long)); }, _r2), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void FloatExpr(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item lit = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // CALLORVAR FloatLiteral
+            _Pantheon_Item _r1;
+
+            _r1 = _MemoCall("FloatLiteral", _index, FloatLiteral, null);
+
+            if (_r1 != null) _index = _r1.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // OR 4
+            int _start_i4 = _index;
+
+            // CALLORVAR IntegerLiteral
+            _Pantheon_Item _r5;
+
+            _r5 = _MemoCall("IntegerLiteral", _index, IntegerLiteral, null);
+
+            if (_r5 != null) _index = _r5.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i4; } else goto label4;
+
+            // CALLORVAR LongLiteral
+            _Pantheon_Item _r6;
+
+            _r6 = _MemoCall("LongLiteral", _index, LongLiteral, null);
+
+            if (_r6 != null) _index = _r6.NextIndex;
+
+        label4: // OR
+            int _dummy_i4 = _index; // no-op for label
+
+            // BIND lit
+            lit = _results.Peek();
+
+            // ACT
+            var _r2 = _results.Peek();
+            if (_r2 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r2.StartIndex, _r2.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Convert(lit, typeof(float)); }, _r2), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
+        public void DoubleExpr(int _index, _Pantheon_Args _args)
+        {
+
+            _Pantheon_Item lit = null;
+
+            // OR 0
+            int _start_i0 = _index;
+
+            // CALLORVAR DoubleLiteral
+            _Pantheon_Item _r1;
+
+            _r1 = _MemoCall("DoubleLiteral", _index, DoubleLiteral, null);
+
+            if (_r1 != null) _index = _r1.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // OR 4
+            int _start_i4 = _index;
+
+            // OR 5
+            int _start_i5 = _index;
+
+            // CALLORVAR IntegerLiteral
+            _Pantheon_Item _r6;
+
+            _r6 = _MemoCall("IntegerLiteral", _index, IntegerLiteral, null);
+
+            if (_r6 != null) _index = _r6.NextIndex;
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i5; } else goto label5;
+
+            // CALLORVAR LongLiteral
+            _Pantheon_Item _r7;
+
+            _r7 = _MemoCall("LongLiteral", _index, LongLiteral, null);
+
+            if (_r7 != null) _index = _r7.NextIndex;
+
+        label5: // OR
+            int _dummy_i5 = _index; // no-op for label
+
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i4; } else goto label4;
+
+            // CALLORVAR FloatLiteral
+            _Pantheon_Item _r8;
+
+            _r8 = _MemoCall("FloatLiteral", _index, FloatLiteral, null);
+
+            if (_r8 != null) _index = _r8.NextIndex;
+
+        label4: // OR
+            int _dummy_i4 = _index; // no-op for label
+
+            // BIND lit
+            lit = _results.Peek();
+
+            // ACT
+            var _r2 = _results.Peek();
+            if (_r2 != null)
+            {
+                _results.Pop();
+                _results.Push( new _Pantheon_Item(_r2.StartIndex, _r2.NextIndex, _input_enumerable, _Thunk(_IM_Result => { return Expression.Convert(lit, typeof(double)); }, _r2), true) );
+            }
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
+
+        }
+
+
         public void Expr(int _index, _Pantheon_Args _args)
         {
 
-            _Pantheon_Item expr = null;
+            // OR 0
+            int _start_i0 = _index;
 
             // OR 1
             int _start_i1 = _index;
@@ -2115,41 +2141,24 @@ namespace Pantheon
             // OR 4
             int _start_i4 = _index;
 
-            // OR 5
-            int _start_i5 = _index;
-
-            // CALL Multiply
-            var _start_i6 = _index;
-            _Pantheon_Item _r6;
-
-            _r6 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
-
-            if (_r6 != null) _index = _r6.NextIndex;
-
-            // OR shortcut
-            if (_results.Peek() == null) { _results.Pop(); _index = _start_i5; } else goto label5;
-
             // CALL Add
-            var _start_i7 = _index;
-            _Pantheon_Item _r7;
+            var _start_i5 = _index;
+            _Pantheon_Item _r5;
 
-            _r7 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
+            _r5 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
 
-            if (_r7 != null) _index = _r7.NextIndex;
-
-        label5: // OR
-            int _dummy_i5 = _index; // no-op for label
+            if (_r5 != null) _index = _r5.NextIndex;
 
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i4; } else goto label4;
 
             // CALL Add
-            var _start_i8 = _index;
-            _Pantheon_Item _r8;
+            var _start_i6 = _index;
+            _Pantheon_Item _r6;
 
-            _r8 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(FloatExpr) });
+            _r6 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(LongExpr) });
 
-            if (_r8 != null) _index = _r8.NextIndex;
+            if (_r6 != null) _index = _r6.NextIndex;
 
         label4: // OR
             int _dummy_i4 = _index; // no-op for label
@@ -2158,12 +2167,12 @@ namespace Pantheon
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i3; } else goto label3;
 
             // CALL Add
-            var _start_i9 = _index;
-            _Pantheon_Item _r9;
+            var _start_i7 = _index;
+            _Pantheon_Item _r7;
 
-            _r9 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(DoubleExpr) });
+            _r7 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(FloatExpr) });
 
-            if (_r9 != null) _index = _r9.NextIndex;
+            if (_r7 != null) _index = _r7.NextIndex;
 
         label3: // OR
             int _dummy_i3 = _index; // no-op for label
@@ -2172,12 +2181,12 @@ namespace Pantheon
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i2; } else goto label2;
 
             // CALL Add
-            var _start_i10 = _index;
-            _Pantheon_Item _r10;
+            var _start_i8 = _index;
+            _Pantheon_Item _r8;
 
-            _r10 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(TimeSpanExpr) });
+            _r8 = _MemoCall("Add", _index, Add, new _Pantheon_Item[] { new _Pantheon_Item(DoubleExpr) });
 
-            if (_r10 != null) _index = _r10.NextIndex;
+            if (_r8 != null) _index = _r8.NextIndex;
 
         label2: // OR
             int _dummy_i2 = _index; // no-op for label
@@ -2185,18 +2194,29 @@ namespace Pantheon
             // OR shortcut
             if (_results.Peek() == null) { _results.Pop(); _index = _start_i1; } else goto label1;
 
-            // CALLORVAR Literal
-            _Pantheon_Item _r11;
+            // CALL Multiply
+            var _start_i9 = _index;
+            _Pantheon_Item _r9;
 
-            _r11 = _MemoCall("Literal", _index, Literal, null);
+            _r9 = _MemoCall("Multiply", _index, Multiply, new _Pantheon_Item[] { new _Pantheon_Item(IntegerExpr) });
 
-            if (_r11 != null) _index = _r11.NextIndex;
+            if (_r9 != null) _index = _r9.NextIndex;
 
         label1: // OR
             int _dummy_i1 = _index; // no-op for label
 
-            // BIND expr
-            expr = _results.Peek();
+            // OR shortcut
+            if (_results.Peek() == null) { _results.Pop(); _index = _start_i0; } else goto label0;
+
+            // CALLORVAR Literal
+            _Pantheon_Item _r10;
+
+            _r10 = _MemoCall("Literal", _index, Literal, null);
+
+            if (_r10 != null) _index = _r10.NextIndex;
+
+        label0: // OR
+            int _dummy_i0 = _index; // no-op for label
 
         }
 

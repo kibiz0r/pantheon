@@ -21,12 +21,12 @@ ironmeta Pantheon<char, Expression> : IronMeta.Matcher.CharMatcher<Expression, _
     LongSuffix = 'l' | 'L';
     FloatSuffix = 'f' | 'F';
 
-    Integer = WholeNumber:n &Terminal -> { return Expression.Constant(int.Parse(n.Text())); };
-    Long = WholeNumber:n LongSuffix &Terminal -> { return Expression.Constant(long.Parse(n.Text())); };
-    Float = Number:n FloatSuffix &Terminal -> { return Expression.Constant(float.Parse(n.Text())); };
-    Double = NumberWithDecimal:n &Terminal -> { return Expression.Constant(double.Parse(n.Text())); };
+    IntegerLiteral = WholeNumber:n &Terminal -> { return Expression.Constant(int.Parse(n.Text())); };
+    LongLiteral = WholeNumber:n LongSuffix &Terminal -> { return Expression.Constant(long.Parse(n.Text())); };
+    FloatLiteral = Number:n FloatSuffix &Terminal -> { return Expression.Constant(float.Parse(n.Text())); };
+    DoubleLiteral = NumberWithDecimal:n &Terminal -> { return Expression.Constant(double.Parse(n.Text())); };
 
-    NumericLiteral = Integer | Long | Float | Double;
+    NumericLiteral = IntegerLiteral | LongLiteral | FloatLiteral | DoubleLiteral;
 
     // TimeSpan Literals
     DaysSuffix = 'd' | 'D';
@@ -34,26 +34,58 @@ ironmeta Pantheon<char, Expression> : IronMeta.Matcher.CharMatcher<Expression, _
     SecondsSuffix = 's' | 'S';
     MillisecondsSuffix = "ms" | "MS";
 
-    Days = Number:n DaysSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromDays(double.Parse(n.Text()))); };
-    Minutes = Number:n MinutesSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromMinutes(double.Parse(n.Text()))); };
-    Seconds = Number:n SecondsSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromSeconds(double.Parse(n.Text()))); };
-    Milliseconds = Number:n MillisecondsSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromMilliseconds(double.Parse(n.Text()))); };
+    DaysLiteral = Number:n DaysSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromDays(double.Parse(n.Text()))); };
+    MinutesLiteral = Number:n MinutesSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromMinutes(double.Parse(n.Text()))); };
+    SecondsLiteral = Number:n SecondsSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromSeconds(double.Parse(n.Text()))); };
+    MillisecondsLiteral = Number:n MillisecondsSuffix &Terminal -> { return Expression.Constant(TimeSpan.FromMilliseconds(double.Parse(n.Text()))); };
 
-    TimeSpanLiteral = Days | Minutes | Seconds | Milliseconds;
+    TimeSpanLiteral = DaysLiteral | MinutesLiteral | SecondsLiteral | MillisecondsLiteral;
 
     Literal = NumericLiteral | TimeSpanLiteral;
 
-    IntegerExpr = Expr:expr ?(expr != null && expr.IsExpressionOf<int>());
-    FloatExpr = IntegerExpr:expr -> { return Expression.Convert(expr, typeof(float)); }
-              | Expr:expr ?(expr != null && expr.IsExpressionOf<float>());
-    DoubleExpr = (IntegerExpr | FloatExpr):expr -> { return Expression.Convert(expr, typeof(double)); }
-               | Expr:expr ?(expr != null && expr.IsExpressionOf<double>());
-    TimeSpanExpr = Expr:expr ?(expr != null && expr.IsExpressionOf<TimeSpan>());
+    // IntegerExpr :type = type:expr ?(expr != null && expr.IsExpressionOf<int>())
+                      // | IntegerLiteral;
+    // LongExpr = IntegerExpr:expr -> { return Expression.Convert(expr, typeof(long)); }
+             // | LongLiteral;
+    // FloatExpr = (IntegerExpr | LongExpr):expr -> { return Expression.Convert(expr, typeof(float)); }
+              // | Expr:expr ?(expr != null && expr.IsExpressionOf<float>())
+              // | FloatLiteral;
+    // DoubleExpr = (IntegerExpr | FloatExpr):expr -> { return Expression.Convert(expr, typeof(double)); }
+               // | Expr:expr ?(expr != null && expr.IsExpressionOf<double>())
+               // | DoubleLiteral;
+    // TimeSpanExpr = Expr:expr ?(expr != null && expr.IsExpressionOf<TimeSpan>())
+                 // | TimeSpanLiteral;
 
     // Binary Expressions
-    Add :type = type:left Whitespace* Plus Whitespace* type:right -> { return Expression.AddChecked(left, right); };
-    Add = Expr:left Whitespace* Plus Whitespace* Expr:right ?(left.Expression().Type == right.Expression().Type) -> { return Expression.AddChecked(left, right); };
-    Multiply :type = type:left Whitespace* Asterisk Whitespace* type:right -> { return Expression.MultiplyChecked(left, right); };
+    // Add :type = type:left Whitespace* Plus Whitespace* type:right -> { return Expression.AddChecked(left, right); };
+    // Add = Expr:left Whitespace* Plus Whitespace* Expr:right ?(left.Expression().Type == right.Expression().Type) -> { return Expression.AddChecked(left, right); };
+    // Add = (Add | Multiply):left Whitespace* Plus Whitespace* (Add | Multiply):right ?(left.Expression().Type == right.Expression().Type) -> { return Expression.AddChecked(left, right); };
+    // Add = Add(IntegerLiteral):left Whitespace* Plus Whitespace* Add(IntegerLiteral):right -> { return Expression.AddChecked(left, right); }
+        // | Add(LongLiteral):left Whitespace* Plus Whitespace* Add(LongLiteral):right -> { return Expression.AddChecked(left, right); }
+        // | Add(FloatLiteral):left Whitespace* Plus Whitespace* Add(FloatLiteral):right -> { return Expression.AddChecked(left, right); }
+        // | Add(DoubleLiteral):left Whitespace* Plus Whitespace* Add(DoubleLiteral):right -> { return Expression.AddChecked(left, right); };
+    // Add :type = Multiply(type):left Whitespace* Plus Whitespace* Add(type):right -> { return Expression.AddChecked(left, right); }
+              // | Multiply(type);
 
-    Expr = (Multiply(IntegerExpr) | Add(IntegerExpr) | Add(FloatExpr) | Add(DoubleExpr) | Add(TimeSpanExpr) | Literal):expr;
+    // Multiply = Multiply(IntegerExpr):left Whitespace* Asterisk Whitespace* Multiply(IntegerExpr):right -> { return Expression.MultiplyChecked(left, right); }
+             // | Multiply(LongExpr):left Whitespace* Asterisk Whitespace* Multiply(LongExpr):right -> { return Expression.MultiplyChecked(left, right); }
+             // | Multiply(FloatExpr):left Whitespace* Asterisk Whitespace* Multiply(FloatExpr):right -> { return Expression.MultiplyChecked(left, right); }
+             // | Multiply(DoubleExpr):left Whitespace* Asterisk Whitespace* Multiply(DoubleExpr):right -> { return Expression.MultiplyChecked(left, right); };
+    // Multiply :type = type:left Whitespace* Asterisk Whitespace* Multiply(type):right -> { return Expression.MultiplyChecked(left, right); }
+                   // | type;
+
+    Add :type = Multiply(type):left Whitespace* Plus Whitespace* Add(type):right -> { return Expression.Add(left, right); }
+              | Multiply(type):left Whitespace* Plus Whitespace* Multiply(type):right -> { return Expression.Add(left, right); };
+    Multiply :type = type:left Whitespace* Asterisk Whitespace* Multiply(type):right -> { return Expression.Multiply(left, right); }
+                   | type;
+
+    IntegerExpr = IntegerLiteral;
+    LongExpr = LongLiteral
+             | IntegerLiteral:lit -> { return Expression.Convert(lit, typeof(long)); };
+    FloatExpr = FloatLiteral
+              | (IntegerLiteral | LongLiteral):lit -> { return Expression.Convert(lit, typeof(float)); };
+    DoubleExpr = DoubleLiteral
+               | (IntegerLiteral | LongLiteral | FloatLiteral):lit -> { return Expression.Convert(lit, typeof(double)); };
+
+    Expr = Add(IntegerExpr) | Add(LongExpr) | Add(FloatExpr) | Add(DoubleExpr) | Multiply(IntegerExpr) | Literal;
 }
