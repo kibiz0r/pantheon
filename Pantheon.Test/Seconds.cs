@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System.Linq.Expressions;
 
 namespace Pantheon.Test
 {
@@ -10,7 +11,7 @@ namespace Pantheon.Test
         [Test]
         public void Parses7_8s()
         {
-            Assert.That("7.8s", Parses.To(TimeSpan.FromSeconds(7.8)));
+            Assert.That("7.8s", Parses.To(Expression.Constant(TimeSpan.FromSeconds(7.8))));
         }
     }
 }

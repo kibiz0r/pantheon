@@ -1,59 +1,50 @@
 using System;
 using NUnit.Framework.Constraints;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using PantheonRule = System.Func<Pantheon.Pantheon, System.Action<int, System.Collections.Generic.IEnumerable<Pantheon._Pantheon_Item>>>;
+using System.Text.RegularExpressions;
 
 namespace Pantheon.Test
 {
-    public static class Parses
+    public class Evaluates
     {
-        public class ParsesToConstraint : Constraint
+        public class EvaluatesToConstraint<T> : Constraint
         {
-            public ParsesToConstraint(Expression expected)
+            public EvaluatesToConstraint(T expected)
             {
                 this.expected = expected;
             }
 
-            protected Expression expected;
+            protected T expected;
             protected string source;
-
-            protected Expression actualExpression
-            {
-                get { return (Expression)actual; }
-            }
 
             public override bool Matches(object _source)
             {
                 this.source = (string)_source;
-                actual = Pantheon.Parse(source);
-                return expected.EqualsExpression(actualExpression);
-            }
-
-            public override void WriteActualValueTo(MessageWriter writer)
-            {
-                writer.WriteActualValue(actualExpression.ToLongString());
+                actual = Pantheon.Evaluate(source);
+                return expected.Equals(actual);
             }
 
             public override void WriteDescriptionTo(MessageWriter writer)
             {
-                writer.WritePredicate(string.Format("{0} parses to {1}", source, expected.ToLongString()));
+                writer.WritePredicate(string.Format("{0} evaluates to {1}", source, expected));
             }
 
-            public virtual ParsesToWithRuleConstraint WithRule(PantheonRule rule)
+            public virtual EvaluatesToWithRuleConstraint<T> WithRule(PantheonRule rule)
             {
-                return new ParsesToWithRuleConstraint(expected, rule);
+                return new EvaluatesToWithRuleConstraint<T>(expected, rule);
             }
         }
 
-        public class ParsesToWithRuleConstraint : ParsesToConstraint
+        public class EvaluatesToWithRuleConstraint<T> : Constraint
         {
-            public ParsesToWithRuleConstraint(Expression expected, PantheonRule rule) : base(expected)
+            public EvaluatesToWithRuleConstraint(T expected, PantheonRule rule)
             {
+                this.expected = expected;
                 this.rule = rule;
             }
 
+            protected T expected;
+            protected string source;
             protected PantheonRule rule;
             protected Exception exception;
 
@@ -62,8 +53,8 @@ namespace Pantheon.Test
                 this.source = (string)_source;
                 try
                 {
-                    actual = Pantheon.Parse(source, rule);
-                    return expected.EqualsExpression(actualExpression);
+                    actual = Pantheon.Evaluate(source, rule);
+                    return expected.Equals(actual);
                 }
                 catch (Exception ex)
                 {
@@ -74,7 +65,7 @@ namespace Pantheon.Test
 
             public override void WriteDescriptionTo(MessageWriter writer)
             {
-                writer.WritePredicate(string.Format("{0} to parse to {1} ({2})", source, expected, expected.GetType()));
+                writer.WritePredicate(string.Format("{0} to evaluate to {1} ({2})", source, expected, expected.GetType()));
             }
 
             public override void WriteActualValueTo(MessageWriter writer)
@@ -83,6 +74,7 @@ namespace Pantheon.Test
                 {
                     writer.WriteActualValue(string.Format("{0}", exception.Message));
                 }
+
                 else
                 {
                     writer.WriteActualValue(string.Format("{0} ({1})", actual, actual.GetType()));
@@ -90,11 +82,13 @@ namespace Pantheon.Test
             }
         }
 
-        public class ParsesThrowingConstraint<T> : Constraint where T : Exception
+        public class EvaluatesThrowingConstraint<T> : Constraint where T : Exception
         {
-            public ParsesThrowingConstraint(){}
+            public EvaluatesThrowingConstraint()
+            {
+            }
 
-            public ParsesThrowingConstraint(string message)
+            public EvaluatesThrowingConstraint(string message)
             {
                 this.message = message;
             }
@@ -125,24 +119,18 @@ namespace Pantheon.Test
 
             public override void WriteDescriptionTo(MessageWriter writer)
             {
-                writer.WritePredicate(string.Format("{0} fails to parse with {1}", source, typeof(T)));
+                writer.WritePredicate(string.Format("{0} fails to evaluate with {1}", source, typeof(T)));
             }
         }
 
-        public static ParsesToConstraint To(Expression expected)
+        public static EvaluatesToConstraint<T> To<T>(T expected)
         {
-            return new ParsesToConstraint(expected);
+            return new EvaluatesToConstraint<T>(expected);
         }
 
-        /* Doesn't quite work because of C# compiler optimizations.
-        public static ParsesToConstraint To<T>(Expression<Func<T>> expected)
+        public static EvaluatesThrowingConstraint<T> Throwing<T>() where T : Exception
         {
-            return new ParsesToConstraint(expected.Body);
-        }*/
-
-        public static ParsesThrowingConstraint<T> Throwing<T>() where T : Exception
-        {
-            return new ParsesThrowingConstraint<T>();
+            return new EvaluatesThrowingConstraint<T>();
         }
     }
 }

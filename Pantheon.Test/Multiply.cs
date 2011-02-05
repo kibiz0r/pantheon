@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System.Linq.Expressions;
 
 namespace Pantheon.Test
 {
@@ -10,13 +11,13 @@ namespace Pantheon.Test
         [Test]
         public void MultiplyIntegers()
         {
-            Assert.That("5 * 3", Parses.To(3 * 5));
+            Assert.That("5 * 3", Parses.To(5.Multiply(3)));
         }
 
         [Test]
         public void MultiplyChained()
         {
-            Assert.That("3 * 5 * 9", Parses.To(3 * 5 * 9));
+            Assert.That("3 * 5 * 9", Parses.To(3.Multiply(5).Multiply(9)));
         }
     }
 }

@@ -43,6 +43,9 @@
     <Reference Include="System.Core">
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920">
+      <Package>/Users/kibiyama/MonoAssemblies/Moq.dll</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -60,6 +63,9 @@
     <Compile Include="NumericPromotion.cs" />
     <Compile Include="Multiply.cs" />
     <Compile Include="OperatorPrecedence.cs" />
+    <Compile Include="Evaluates.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
+    <Compile Include="ObjectExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

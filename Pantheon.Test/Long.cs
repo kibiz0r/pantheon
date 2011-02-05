@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System.Linq.Expressions;
 
 namespace Pantheon.Test
 {
@@ -10,13 +11,13 @@ namespace Pantheon.Test
         [Test]
         public void Parses63l()
         {
-            Assert.That("63l", Parses.To(63L));
+            Assert.That("63l", Parses.To(Expression.Constant(63L)));
         }
 
         [Test]
         public void Parses63L()
         {
-            Assert.That("63L", Parses.To(63L));
+            Assert.That("63L", Parses.To(Expression.Constant(63L)));
         }
     }
 }
