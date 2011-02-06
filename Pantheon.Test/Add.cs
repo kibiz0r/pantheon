@@ -42,6 +42,7 @@ namespace Pantheon.Test
         public void AddMixedChained()
         {
             Assert.That("2.2f + 4 + 9.8 + 2 + 6.6", Parses.To(2.2f.Add(4.Convert<float>()).Convert<double>().Add(9.8).Add(2.Convert<double>()).Add(6.6)));
+            Assert.That("2.2f + 4 + 9.8 + 2 + 6.6", Evaluates.ToApproximately(2.2f + 4 + 9.8 + 2 + 6.6));
         }
     }
 }

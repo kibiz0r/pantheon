@@ -35,6 +35,31 @@ namespace Pantheon.Test
             }
         }
 
+        public class EvaluatesToApproximatelyConstraint : EvaluatesToConstraint<double>
+        {
+            public EvaluatesToApproximatelyConstraint(double expected) : base(expected)
+            {
+            }
+
+            protected const double Epsilon = 1E-8;
+
+            protected double Diff { get { return Epsilon * expected; } }
+
+            public override void WriteDescriptionTo(MessageWriter writer)
+            {
+                var min = expected - Diff;
+                var max = expected + Diff;
+                writer.WritePredicate(string.Format("{0} evaluates to between {1} and {2}", source, min , max));
+            }
+
+            public override bool Matches(object _source)
+            {
+                this.source = (string)_source;
+                actual = Pantheon.Evaluate(source);
+                return Math.Abs(expected - (double)actual) < Diff;
+            }
+        }
+
         public class EvaluatesToWithRuleConstraint<T> : Constraint
         {
             public EvaluatesToWithRuleConstraint(T expected, PantheonRule rule)
@@ -126,6 +151,11 @@ namespace Pantheon.Test
         public static EvaluatesToConstraint<T> To<T>(T expected)
         {
             return new EvaluatesToConstraint<T>(expected);
+        }
+
+        public static EvaluatesToApproximatelyConstraint ToApproximately(double expected)
+        {
+            return new EvaluatesToApproximatelyConstraint(expected);
         }
 
         public static EvaluatesThrowingConstraint<T> Throwing<T>() where T : Exception
