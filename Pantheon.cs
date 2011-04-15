@@ -39,7 +39,7 @@ namespace Pantheon
                 var error = pantheon.GetLastError();
                 var message = error.Message;
                 var pos = error.Pos;
-                var around = source.Substring(pos - 5, 10);
+                var around = source.Substring(Math.Max(0, pos - 5), Math.Max(0, Math.Min(10, source.Length - pos - 5)));
                 throw new Exception(string.Format("{0} around {1}\ngot {2}", message, around, got));
             }
             if (match.NextIndex < source.Length)
